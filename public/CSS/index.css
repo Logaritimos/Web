@@ -1,0 +1,244 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+/* AREA DO HEADER */
+
+Header {
+    width: 100%;
+    height: 100px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+Header img {
+    width: 100px;
+    
+ 
+}
+
+Header ul {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    list-style: none;
+}
+
+.header_botao {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown {
+    display: none;
+}
+
+
+
+
+
+/* AREA MAIN */
+
+
+main {
+    width: 100%;
+    background-color: aquamarine;
+}
+
+
+.Sobre {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Sobre_container {
+    background-color: rgb(230, 21, 21);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 105rem;
+}
+
+.Sobre_Conteudo {
+    background-color: rgb(255, 255, 255);
+    min-height: 400px;
+    display: flex;
+    width: 100%;
+}
+
+.Texto_Sobre {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Texto_Sobre img {
+    width: 500px;
+}
+
+.Imagem_sistema {
+    background-color: rgb(161, 185, 55);
+    width: 50%;
+    border-radius: 40% 0px 0px 40%;
+}
+
+/*  */
+
+
+
+.Contato {
+    width: 100%;
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Contato_container h1 {
+    align-self: center;
+    padding: 0px 0px 20px 0px;
+}
+
+.Contato_container {
+    background-color: rosybrown;
+    width: 100%;
+}
+
+.Sessao_direita {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+    gap: 20px;
+}
+
+.Contato_conteudo {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+}
+
+.Sessao_direita input {
+    background-color: #ACA0A0;
+    border: none;
+    height: 150px;
+}
+
+.Sessao_direita div {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.Sessao_direita button {
+    width: 200px;
+    height: 80px;
+}
+
+.Sessao_direita div input {
+height: 80px;
+width: 100%;
+}
+
+/* AREA DO FOOTER */
+
+Footer {
+     width: 100%;
+    height: 100px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+/* RESPONSIVIDADE */
+
+
+@media (max-width: 780px) {
+    Footer div h1 {
+        font-size: 16px;
+        text-align: center;
+        
+    }
+
+    .Sobre_container {
+        width: 100%;
+    }
+
+    .Sobre_Conteudo {
+        flex-direction: column;
+    }
+
+    .Contato_conteudo{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .Sessao_direita {
+        justify-content: center;
+    width: 90%;
+}
+
+.Sessao_esquerda {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.Sessao_esquerda img {
+    width: 90%;
+    
+}
+
+.links {
+    display: none;
+}
+
+.dropdown {
+    display: block;
+    background-color: transparent;
+    width: 50px;
+    
+}
+
+.dropdown_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+}
+
+
+
+.Img_dropdown {
+    width: 30px;
+}
+
+.Texto_Sobre img {
+    width: 100%;
+}
+}
