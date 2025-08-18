@@ -19,6 +19,6 @@ bairro VARCHAR(150) NOT NULL,
 cidade VARCHAR(150) NOT NULL,
 estado CHAR(2) NOT NULL,
 cep CHAR(8) NOT NULL,
-fkEmpresa INT NOT NULL,
+fkEmpresa INT NOT NULL UNIQUE,
 FOREIGN KEY(fkEmpresa) REFERENCES empresa(idEmpresa)
 )auto_increment = 100;
