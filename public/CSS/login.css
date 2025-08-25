@@ -1,0 +1,175 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+/* AREA DO HEADER */
+
+Header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+Header img {
+    width: 80px;
+}
+
+Header ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    font-size: large;
+}
+
+.header_botao {
+    color: black;
+    text-decoration: none;
+}
+
+.login{
+    background-color: #c4c1c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 70vh;
+}
+
+.container{
+    display: flex;
+    background-color: #D9D9D9;
+    height: 75%;
+    width: 70%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.parte1{
+    background-color: #858484;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.parte1 h2{
+    color: black;
+    padding-top: 65px;
+}
+
+.parte1 p{
+    padding-top: 20px;
+    color:rgb(60, 58, 58) ;
+    font-size: 20px;
+    padding-bottom: 40px;
+}
+
+.parte1 button{
+   width: 20%;
+   height: 8%;
+   border-radius: 14px;
+   border: 2px solid white;
+   background-color: #858484;
+   color: #FFFFFF;
+   font-size: 17px;
+}
+
+.parte1 button a{
+color:white;
+  text-decoration: none;
+  outline: none;}
+
+.card-login{
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-login h1{
+    color: #000;
+    padding-top: 65px;
+    padding-bottom: 10px;
+}
+
+.formulario{
+    padding-top: 20px;
+    background-color: #FFFFFF;
+    height: 55%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.campo{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 20%;
+    flex-direction: row;
+
+}
+
+.campo img{
+
+
+}
+
+.campo input{
+    width: 90%;
+    height: 100%;
+    background-color: #c4c1c1;
+    border: none;
+}
+
+.campo input::placeholder{
+    color: #000000;
+    font-weight: bold;
+    font-size: 17px;
+    padding-left: 10px;
+}
+
+.formulario button{
+    width: 30%;
+   height: 15%;
+   border-radius: 14px;
+   border: 2px solid #858484;
+   background-color: white;
+   color: #858484;
+   font-size: 15px;
+}
+#div_erros_login{
+ background-color: #000000;
+ width:90%;
+ height: 30%;
+ margin-bottom: 20px;
+}
+
+Footer {
+    width: 100vw;
+    height: 20vh;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
