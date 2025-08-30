@@ -85,13 +85,16 @@ Header ul {
    border: 2px solid white;
    background-color: #858484;
    color: #FFFFFF;
-   font-size: 17px;
+    display: flex;
+     align-items: center;
+     justify-content: center;
 }
 
 .parte1 button a{
-color:white;
+  color:white;
   text-decoration: none;
-  outline: none;}
+  outline: none;
+}
 
 .card-login{
     background-color: #FFFFFF;
@@ -124,12 +127,6 @@ color:white;
     width: 100%;
     height: 20%;
     flex-direction: row;
-
-}
-
-.campo img{
-
-
 }
 
 .campo input{
@@ -155,12 +152,12 @@ color:white;
    color: #858484;
    font-size: 15px;
 }
-#div_erros_login{
+/* #div_erros_login{
  background-color: #000000;
  width:90%;
  height: 30%;
  margin-bottom: 20px;
-}
+} */
 
 Footer {
     width: 100vw;
@@ -171,5 +168,276 @@ Footer {
     align-items: center;
 }
 
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
 
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+/* AREA DO HEADER */
+header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+
+header img {
+    width: 80px;
+}
+
+header ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    font-size: large;
+}
+
+.header_botao {
+    color: black;
+    text-decoration: none;
+}
+
+/* AREA DO LOGIN */
+.login {
+    background-color: #c4c1c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 70vh;
+}
+
+.container {
+    display: flex;
+    background-color: #D9D9D9;
+    height: 75%;
+    width: 70%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.parte1 {
+    background-color: #858484;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.parte1 h2 {
+    color: black;
+    padding-top: 65px;
+}
+
+.parte1 p {
+    padding-top: 20px;
+    color: rgb(60, 58, 58);
+  font-size: clamp(12px, 2.5vw, 17px); /* mínimo 12px, 2.5 tamanho dinâmico, máximo 17px */
+    padding-bottom: 40px;
+}
+
+.parte1 button {
+   width: 40%;
+   height: 8%;
+   border-radius: 14px;
+   border: 2px solid white;
+   background-color: #858484;
+   color: #FFFFFF;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+}
+
+.parte1 button a {
+  color:white;
+  text-decoration: none;
+}
+
+.card-login {
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-login h1 {
+    color: #000;
+    padding-top: 65px;
+    padding-bottom: 10px;
+}
+
+.formulario {
+    padding-top: 20px;
+    background-color: #FFFFFF;
+    height: 55%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.campo {
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 20%;
+    flex-direction: row;
+}
+
+.campo input {
+    width: 90%;
+    height: 100%;
+    background-color: #c4c1c1;
+    border: none;
+    padding-left: 10px;
+}
+
+.campo input::placeholder {
+    color: #000000;
+    font-weight: bold;
+    font-size: clamp(14px, 2vw, 17px); /* responsivo */
+}
+
+.formulario button {
+    width: 50%;
+    height: 15%;
+    border-radius: 14px;
+    border: 2px solid #858484;
+    background-color: white;
+    color: #858484;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+footer {
+    width: 100vw;
+    height: 20vh;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        width: 90%;
+        height: 90%;
+    }
+
+    .parte1, .card-login {
+        width: 50%;
+        padding: 20px;
+    }
+
+    .formulario {
+        width: 80%;
+    }
+
+    .formulario button {
+        width: 70%;
+    }
+}
+
+/* Celular */
+@media (max-width: 768px) {
+
+   header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  header ul {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+    .container {
+        flex-direction: column;
+        width: 95%;
+        height: 90%;
+    }
+
+    .parte1 {
+        width: 100%;
+        height: 40%;
+        padding: 20px;
+    }
+
+    .card-login {
+        width: 100%;
+        height: 60%;
+        padding: 20px;
+    }
+
+    .parte1 h2 {
+        padding-top: 5px;
+    }
+
+    .parte1 p {
+    padding-top: 5px;
+    padding-bottom: -5px;
+    }
+
+    .parte1 button {
+        width: 40%;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .card-login h1 {
+        padding-top: 5px;
+    }
+
+    .formulario {
+        width: 70%;
+        height: 100%;
+        gap: 10px;
+    }
+
+    .campo{
+        padding-left: 2px;
+    }
+
+    .campo input {
+        width: 95%;
+        height: 100%;
+        font-size: 14px;
+        
+    }
+
+    .formulario button {
+        width: 60%;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    footer {
+        height: 15vh;
+       
+    }
+
+    footer h1{
+        font-size:25px;
+    }
+}
 
