@@ -2,6 +2,8 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    
+      font-family: "Inter", sans-serif;
 }
 
 body {
@@ -15,28 +17,36 @@ body {
 Header {
     width: 100%;
     height: 100px;
-    background-color: #D9D9D9;
+    background-color: #00AEFF;
     display: flex;
     justify-content: space-between;
     padding: 20px;
     align-items: center;
+    font-size: 30px;
 }
 
 Header img {
-    width: 100px;
+    width: 300px;
     
  
 }
 
+
 Header ul {
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 40px;
     list-style: none;
+
+}
+
+#ativo {
+    border-right: 2px solid white;
+    padding-right: 35px;
 }
 
 .header_botao {
-    color: black;
+    color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
@@ -53,8 +63,127 @@ Header ul {
 
 main {
     width: 100%;
-    background-color: aquamarine;
 }
+
+/* AREA MAIN: BANNER */
+
+
+.Banner {
+   
+    width: 100%;
+    height: 420px;
+          background-image: url("../assets/imagem/banner.png");
+           background-size: cover;   
+  background-position: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.Banner_container {
+    width: 1500px;
+    display: flex;
+}
+
+
+.Banner_container div {
+    width: 500px;
+    color: white;
+    font-size: 40px;
+}
+
+.Banner_container p {
+    text-align: justify;
+}
+
+
+/* AREA MAIN: PROJETOS */
+
+
+.projetos {
+   
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 900px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.projetos_div {
+     display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.projetos_container {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    text-align: justify;
+    height: 700px;
+    border-radius: 20px;
+    border: 2px solid #80DBFF;
+}
+
+.projetos h2 {
+    align-self: center;
+    
+}
+
+
+
+.projetos img {
+    width: 100%;
+    height: 100%;
+        border-radius: 19px 0px 0px 19px;
+}
+
+.projetos_imagem {
+    width: 50%;
+}
+
+.projetos_textos {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 40px;
+    gap: 50px;
+    justify-content: center;
+    
+}
+
+.projetos h1 {
+    color: #454545;
+    padding-bottom: 30px ;
+}
+
+.projetos_textos h2 {
+    font-size: 35px;
+}
+
+
+.projetos_textos p {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* AREA MAIN: EQUIPE */
+
+.Equipe {
+    width: 100%;
+    height: 500px;
+    background-color: black;
+}
+
+
+
+
+/* AREA MAIN: SOBRE */
 
 
 .Sobre {
@@ -67,31 +196,47 @@ main {
 }
 
 .Sobre_container {
-    background-color: rgb(230, 21, 21);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 105rem;
+    width: 100rem;
+}
+
+.Sobre_container h1 {
+    padding-bottom: 44px;
+    color: #454545;
+    font-size: 42px;
 }
 
 .Sobre_Conteudo {
     background-color: rgb(255, 255, 255);
-    min-height: 400px;
+    min-height: 480px;
     display: flex;
     width: 100%;
+    gap: 60px;
+    justify-content: center;
 }
 
 .Texto_Sobre {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
+    background-color: #2DBDFF;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    gap: 30px;
+   text-align: justify;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+     box-shadow:3px 7px 4px rgba(0, 0, 0, 0.15);
 }
 
 .Texto_Sobre img {
-    width: 500px;
+    width: 200px;
 }
 
 .Imagem_sistema {
@@ -106,12 +251,20 @@ main {
 
 .Contato {
     width: 100%;
-    background-color: #D9D9D9;
+    background-color: #08B1FF;
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
     justify-content: center;
     align-items: center;
+}
+
+.Contato h1 {
+    color: #FFFFFF;
+}
+
+.Contato img {
+    width: 400px;
 }
 
 .Contato_container h1 {
@@ -136,13 +289,33 @@ main {
     display: flex;
     gap: 100px;
     justify-content: center;
+    padding-top: 30px;
 }
 
-.Sessao_direita input {
-    background-color: #ACA0A0;
-    border: none;
+.Sessao_esquerda p {
+    font-size: 28px;
+    text-align: center;
+    color: white;
+}
+
+.Sessao_direita textarea {
+    background-color: #B6E6F7;
+    border: 1.5px solid #5D80C5;
+    border-radius: 10px;
     height: 150px;
 }
+
+textarea[type="text"] {
+
+    resize: none;
+    padding: 5px 5px;
+}
+
+textarea:focus {
+  outline: none;   /* remove a borda azul */
+  box-shadow: none; /* remove qualquer sombra de foco */
+}
+
 
 .Sessao_direita div {
     display: flex;
@@ -151,12 +324,18 @@ main {
 }
 
 .Sessao_direita button {
-    width: 200px;
-    height: 80px;
+    width: 140px;
+    height: 50px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: #58C9FB;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
 }
 
-.Sessao_direita div input {
-height: 80px;
+.Sessao_direita div textarea {
+height: 60px;
 width: 100%;
 }
 
@@ -165,14 +344,83 @@ width: 100%;
 Footer {
      width: 100%;
     height: 100px;
-    background-color: #D9D9D9;
+    background-color: #00B7FF;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
 }
 
+Footer div h1 {
+    color: white;
+}
+
 /* RESPONSIVIDADE */
+
+
+
+
+@media (max-width: 1400px)  {
+    .Texto_Sobre {
+        width: 60%;
+        padding: 10px 15px;
+    }   
+
+    .Sobre_Conteudo {
+           padding: 0px 10px;
+    }
+
+    .Sessao_esquerda {
+        display: none;
+    }
+    
+    .projetos_textos {
+        gap: 20px;
+        
+    }
+}
+
+
+@media (max-width: 1000px) {
+     
+     .projetos_textos h2 {
+       font-size: 25px;
+        
+
+    }
+
+     .projetos_textos p {
+        font-size: 18px;
+        
+    }
+}
+
+
+@media (max-width: 850px)  {
+    .Texto_Sobre {
+        width: 60%;
+    }   
+
+    .Sobre_Conteudo {
+           gap: 20px;
+           padding: 0px 10px;
+    }
+
+    .projetos_imagem {
+        display: none;
+    }
+
+    .projetos_container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .projetos_textos {
+        width: 85%;
+    }
+}
+
+
 
 
 @media (max-width: 780px) {
@@ -186,8 +434,19 @@ Footer {
         width: 100%;
     }
 
+    .Sobre {
+        margin-bottom: 400px;
+    }
+
+    .projetos {
+            margin-bottom: 440px;
+    }
+
     .Sobre_Conteudo {
         flex-direction: column;
+        display: flex;
+    justify-content: center;
+    align-items: center;
     }
 
     .Contato_conteudo{
@@ -238,7 +497,50 @@ Footer {
     width: 30px;
 }
 
+
 .Texto_Sobre img {
-    width: 100%;
+    width: 60%;
+}
+
+.Texto_Sobre {
+    width: 90%;
+}
+
+.Contato img {
+    display: none;
+}
+
+.projetos_textos h2 {
+       font-size: 22px;
+
+    }
+
+     .projetos_textos p {
+        font-size: 16px;
+        
+    }
+
+  .projetos_textos {
+        width: 90%;
+    }
+
+
+    .Banner_container div {
+    width: 500px;
+    color: white;
+    font-size: 20px;
 }
 }
+
+
+@media (max-width: 500px) {
+
+    
+    .Sobre {
+        margin-bottom: 280px;
+    }
+
+    .projetos {
+            margin-bottom: 200px;
+    }
+ }
