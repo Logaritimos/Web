@@ -12,75 +12,81 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./CSS/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 </head>
 
 <body>
     <!--Header-->
 
-   <header>
-      <div>
-        <img src="./assets/imagem/logo.png" alt="">
-      </div>
-      <div class="links">
-        <ul>
-          <li><a id="ativo" class="header_botao" href="index.html">Home</a></li>
-            <li >|</li>
-          <li><a class="header_botao" href="cadastro.html">Cadastro</a></li>
-          <li><a class="header_botao" href="login.html">Entrar</a></li>
-        </ul>
-      </div>
+    <header>
+        <div>
+            <img src="./assets/imagem/logo.png" alt="">
+        </div>
+        <div class="links">
+            <ul>
+                <li><a id="ativo" class="header_botao" href="index.html">Home</a></li>
+                <li>|</li>
+                <li><a class="header_botao" href="cadastro.html">Cadastro</a></li>
+                <li><a class="header_botao" href="login.html">Entrar</a></li>
+            </ul>
+        </div>
     </header>
 
     <div class="login">
-        <!-- <div class="alerta_erro">
+        <div class="alerta_erro">
             <div class="card_erro" id="cardErro">
                 <span id="mensagem_erro"></span>
             </div>
-        </div> -->
+        </div>
         <div class="container">
-            
+
             <div class="parte1">
                 <h2>Bem vindo(a) de volta!</h2>
-                <p>Cadastre-se mantenha-se 
+                <p>Cadastre-se mantenha-se
                     conectado conosco</p>
-                    <button ><a href="cadastro.html">Cadastro</a>
-                        
-                    </button>
+                <button><a href="cadastro.html">Cadastro</a>
+
+                </button>
             </div>
 
             <div class="card-login">
                 <h1>Entrar</h1>
-                
+
                 <div class="formulario">
 
                     <div class="campo">
                         <img src="" alt="">
-                        <input id="email_input" type="text" placeholder="Email">
+                        <input id="email_input" type="text" placeholder="Email"> <br>
+                        <span id="erro_email" style="color: red; font-size: 14px;"></span>
+
                     </div>
 
-                    <div class="campo">
-                        <img src="" alt="">                        
+                    <div class="campo" style="position: relative;">
                         <input id="senha_input" type="password" placeholder="Senha">
+                        <i id="toggleSenha" class="fa-solid fa-eye-slash" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+                         cursor: pointer; font-size: 18px; color: #555;"></i> <br>
+                        <span id="erro_senha" style="color: red; font-size: 14px;"></span>
                     </div>
 
                     <button class="botao" onclick="entrar()">Login</button>
 
                 </div>
 
-                <div id="div_erros_login">MENSAGEM DE ERRO</div>
+                <!--  <div id="div_erros_login">MENSAGEM DE ERRO</div> -->
             </div>
         </div>
     </div>
 
     <!--footer inicio-->
-     <footer>
+    <footer>
         <div>
             <h1>Logaritmo 2025 - TODOS OS DIREITOS RESERVADOS</h1>
         </div>
     </footer>
-  </body>
-    <!--footer fim-->
+</body>
+<!--footer fim-->
 
 </body>
 
@@ -92,17 +98,28 @@
     function entrar() {
         aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = email_input.value.trim();
+        var senhaVar = senha_input.value.trim();
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        // Limpar mensagens antigas
+        document.getElementById("erro_email").innerText = "";
+        document.getElementById("erro_senha").innerText = "";
+
+        let temErro = false;
+
+        // Validação de campos vazios
+        if (emailVar === "") {
+            document.getElementById("erro_email").innerText = "Email inválido, por favor insira um email!";
+            temErro = true;
+        }
+        if (senhaVar === "") {
+            document.getElementById("erro_senha").innerText = "Senha inválida, por favor insira uma senha!";
+            temErro = true;
+        }
+
+        if (temErro) {
             finalizarAguardar();
             return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -121,29 +138,31 @@
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
-                console.log(resposta);
-
                 resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios);
 
                     setTimeout(function () {
                         window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
+                    }, 1000);
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+
+                    // Aqui validamos se foi problema de email ou senha
+                    if (texto.includes("email")) {
+                        document.getElementById("erro_email").innerText = "Email inválido! Email não cadastrado!";
+                    } else if (texto.includes("senha")) {
+                        document.getElementById("erro_senha").innerText = "Senha inválida! Verifique se inseriu corretamente";
+                    }
+
+                    finalizarAguardar();
                 });
             }
 
@@ -154,8 +173,20 @@
         return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+    // Esconder e aparecer senha
+    const senhaInput = document.getElementById("senha_input");
+    const toggleSenha = document.getElementById("toggleSenha");
+
+    toggleSenha.addEventListener("click", () => {
+        if (senhaInput.type === "password") {
+            senhaInput.type = "text";
+            toggleSenha.classList.remove("fa-eye-slash");
+            toggleSenha.classList.add("fa-eye");
+        } else {
+            senhaInput.type = "password";
+            toggleSenha.classList.remove("fa-eye");
+            toggleSenha.classList.add("fa-eye-slash");
+        }
+    });
 
 </script>
