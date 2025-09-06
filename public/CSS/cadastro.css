@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
 * {
   padding: 0;
   margin: 0;
@@ -8,21 +11,33 @@ body {
   width: 100%;
   height: 100vh;
   background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  
 }
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; 
+}
+
+p, a, span, input, button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; 
+}
+
  /* começo header */
 header {
   width: 100vw;
   height: 10vh;
-  background-color: #D9D9D9;
+  background-color: #00283a;
   display: flex;
   justify-content: space-between;
   padding: 20px;
   align-items: center;
 }
 
-
 header img {
-  width: 80px;
+  width: 100px;
 }
 
 header ul {
@@ -31,6 +46,11 @@ header ul {
   gap: 20px;
   list-style: none;
   font-size: large;
+  color: #ffffff;
+}
+
+.links a{
+  color: #ffffff;
 }
 
 .header_botao {
@@ -42,12 +62,12 @@ header ul {
 
 /* Área de cadastro */
 .cadastro {
-  background-color: #bab4b4;
+  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 70vh;
+  height: 75vh;
 }
 
 .container {
@@ -57,26 +77,30 @@ header ul {
   width: 70%;
   border-radius: 15px;
   overflow: hidden;
+  border: 2px solid #000;
 }
 
  /* lado esquerdo container */
 .parte1 {
-  background-color: #858484;
+  background-color: #00283a;
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-right: 2px solid #000;
+  border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .parte1 h2 {
-  color: black;
+  color: #ffffff;
   padding-top: 65px;
 }
 
 .parte1 p {
   padding-top: 20px;
-  color: rgb(60, 58, 58);
+  color:#ffffff;
   font-size: clamp(12px, 2.5vw, 17px);
   padding-bottom: 40px;
 }
@@ -85,8 +109,8 @@ header ul {
   width: 40%;
   height: 8%;
   border-radius: 14px;
-  border: 2px solid white;
-  background-color: #858484;
+  border: 2px solid #ffffff;
+  background-color: #00283a;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -99,13 +123,16 @@ header ul {
   text-decoration: none;
   outline: none;
 }
+.parte1 button:hover {
+    background-color: #004466;
+}
 
 /* final lado esquerdo container */
 
 /* começo lado direito com formulario */
 
 .card-cadastro {
-  background-color: #FFFFFF;
+  background-color: #f0f0f0;
   height: 100%;
   width: 50%;
   display: flex;
@@ -115,52 +142,63 @@ header ul {
 
 .card-cadastro h2 {
   color: #000;
-  padding-top: 30px;
+  padding-top: 20px;
+  font-weight: bold;
 }
 
 /* inicio do formulario */
 
 .formulario{
   padding-top: 8px;
-  background-color: #FFFFFF;
+  background-color: #f0f0f0;
   height: 75%;
-  width: 90%;
+  width: 95%;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-
 .campo{
-  background-color: #FFFFFF;
+  background-color: #f0f0f0;
   width: 100%;
-  height: 20%;
-  margin-bottom: 4%;
+  height: 15%;
+  margin-bottom: 2%;
   display: flex;
-  gap: 2%;
-  
+  flex-direction: column;
 }
 
-.campo input{
-  background-color: #c4c1c1;
+.campo3{
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 15%;
+  margin-bottom: 4%;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo2{
+  background-color: #a12020;
+  width: 100%;
+  height: 15%;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo input, .campo3 input{
+  background-color: #00283a;
   border: none;
   font-weight: bold;
-  color: #000;
+  color: #FFFFFF;
   padding-left: 10px;
   font-size: clamp(12px, 2.5vw, 17px);
   width: 100%;
+  height: 70%;
+  border-radius: 5px;
 }
 
-.campo select {
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    font-size: clamp(12px, 2.5vw, 17px);
-    font-weight: bold;
-    background-color: #c4c1c1;
-    border: none;
-    border-radius: 6px;
-    color: #000;
+.campo input::placeholder, .campo3 input::placeholder{
+  color: #FFFFFF;
 }
 
 
@@ -168,46 +206,176 @@ header ul {
 .indicador {
   display: flex;
   align-items: center;
-  color: #c4c1c1;
+  color: #00283a;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+}
+
+.indicador p{
+  font-size: 15px;
+  margin-right: 15px;
 }
 
 .botaoGeral {
   width: 30%;
-  height: 40px;
+  height: 30px;
   border-radius: 14px;
   border: 2px solid ; 
-  background-color: white;
-  color: #858484;
-  font-size: 15px;
+  background-color: #ffffff;
+  border: 2px solid #00283a;
+  color:#00283a;
+  font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
   transition: transform 0.1s; 
+}
+
+.formulario button {
+  border-radius: 14px;
+}
+
+.formulario button:hover {
+    background-color: #00283a;
+    color: #fff;
 }
 
 .cadastro1{
     display: flex;
     height: 100%;
     width: 78%;
-    background-color: #FFFFFF;
+    background-color: #f0f0f0;
     flex-direction: column;
-    
 }
 
-#cadastro2{
- display: flex;
- height: 90%;
- width: 100%;
- background-color: #890f0f;
- flex-direction: column;
- 
+.cadastro2{
+    display: flex;
+    height: 100%;
+    width: 78%;
+    background-color: #f0f0f0;
+    flex-direction: column;
 }
 
 /* Footer */
 footer {
   width: 100vw;
-  height: 20vh;
-  background-color: #D9D9D9;
+  height: 15vh;
+  background-color: #00283a;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+footer h1 {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+
+/* Bordas de erro */
+.campo input.erro {
+  border: 2px solid red;
+}
+
+/* Mensagem de erro */
+.msg-erro {
+  font-size: 12px;
+  color: red;
+  display: none; 
+  width: 100%;
+  height: 40%;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+
+  body{
+    overflow: hidden;
+  }
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    header ul {
+        gap: 10px;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    .cadastro{
+      height: 85%;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 85%;
+        height: 85%;
+    }
+
+    .parte1 {
+        border-right: none;
+        border-bottom: 3px solid #000;
+        width: 100%;
+        height: 40%;
+    }
+
+    .parte1 button {
+        width: 40%;
+        height: 15%;
+    }
+
+    .card-cadastro {
+        width: 100%;
+
+    }
+
+    .card-cadastro h1 {
+        margin-top: 10px; 
+        padding-top: 0;  
+    }
+
+    .parte1 h2 {
+        margin-top: 15px; 
+        padding-top: 0;
+    }
+
+    .parte1 p {
+        margin-top: 10px;
+        padding-top: 0;
+    }
+
+    
+    footer{
+      height: 8%;
+    }
+}
+
+.linha-campos {
+  display: flex;
+  gap: 10px; 
+  width: 100%;
+}
+
+.linha-campos .campo {
+  flex: 1; 
+}
+
+.campo input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  background-color: #00283a;
+  border: none;
+  color: #fff;
+}
+
+.botao-final {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+ 
