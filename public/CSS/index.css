@@ -5,7 +5,6 @@
     margin: 0px;
     box-sizing: border-box;
     
-      font-family: "Inter", sans-serif;
 }
 
 body {
@@ -41,7 +40,7 @@ Header {
 
 
 Header img {
-    width: 300px;
+    width: 100px;
 }
 
 Header ul {
@@ -138,7 +137,7 @@ main {
     text-align: justify;
     height: 700px;
     border-radius: 20px;
-    border: 2px solid #80DBFF;
+    border: 2px solid #00283a;
 }
 
 .projetos h2 {
@@ -231,7 +230,7 @@ main {
 }
 
 .Texto_Sobre {
-    background-color: #2DBDFF;
+    background-color: #00283a;
     width: 400px;
     display: flex;
     justify-content: center;
@@ -263,7 +262,7 @@ main {
 
 .Contato {
     width: 100%;
-    background-color: #08B1FF;
+    background-color: #00283a;
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
@@ -312,7 +311,7 @@ main {
 
 .Sessao_direita textarea {
     background-color: #B6E6F7;
-    border: 1.5px solid #5D80C5;
+    border: 1.5px solid;
     border-radius: 10px;
     height: 150px;
 }
@@ -341,7 +340,7 @@ textarea:focus {
     color: white;
     font-size: 22px;
     font-weight: bold;
-    background-color: #58C9FB;
+    background-color: #00283a;
     border: 3px solid #FFFFFF;
     border-radius: 10px;
 }
@@ -356,7 +355,7 @@ width: 100%;
 Footer {
      width: 100%;
     height: 100px;
-    background-color: #00B7FF;
+    background-color: #00283a;
     display: flex;
     justify-content: center;
     align-items: center;
