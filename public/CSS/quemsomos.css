@@ -117,3 +117,19 @@
     transition-delay: 0.7s;
 }
 
+
+@media (max-width: 780px) {
+
+    .quemsomos {
+        margin-bottom: 500px;
+    }
+}
+
+
+
+@media (max-width: 650px) {
+
+    .quemsomos {
+        margin-bottom: 400px;
+    }
+}

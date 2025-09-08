@@ -40,7 +40,7 @@
       <div class="parte1">
         <h2>Bem vindo(a)!</h2>
         <p>Entre e desfrute de nossa solução</p>
-        <button><a href="login.html">Login</a></button>
+       <button onclick="window.location.href='login.html'">Login</button>
       </div>
 
       <div class=" card-cadastro">
@@ -49,36 +49,51 @@
         <div class="formulario">
 
           <!-- CADASTRO 1 -->
-          <div class="cadastro1">
-            <div class="campo">
+          <div id="cadastro1" class="cadastro1" >
+            <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/boneco.png" alt="">
+              </div>
               <input id="razaoSocial" type="text" placeholder="Razão Social" />
               <span id="erro-razao" class="msg-erro">Informe a razão social</span>
             </div>
 
-            <div class="campo">
+            <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/cnpj.png" alt="">
+              </div>
               <input id="cnpj" type="text" placeholder="CNPJ" />
               <span id="erro-cnpj" class="msg-erro">CNPJ inválido</span>
             </div>
 
-            <div class="campo">
+            <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/email.png" alt="">
+              </div>
               <input id="email_input" type="text" placeholder="Email" />
               <span id="erro-email" class="msg-erro">Digite um email válido</span>
             </div>
 
             <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/cadeado.png" alt="">
+              </div>
               <input id="senha_input" type="password" placeholder="Senha" />
-              <i id="toggleSenha" class="fa-solid fa-eye-slash" style="position: absolute; right: 5px; top: 45%; transform: translateY(-50%);
-                         cursor: pointer; font-size: 18px; color: #555;"></i>
+              <i id="toggleSenha" class="fa-solid fa-eye-slash" style="position: absolute; right: 10px; top: 45%; transform: translateY(-50%);
+                         cursor: pointer; font-size: 18px; color: #ffffff;"></i>
               <span id="erro-senha" class="msg-erro">
-                A senha deve ter 8+ caracteres, maiúscula, minúscula, número e símbolo
+                deve ter 8+ caracteres, maiúscula, minúscula, número e símbolo
               </span>
             </div>
 
             <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/cadeado.png" alt="">
+              </div>
                  <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha" />
                  <i id="toggleConfirmacao" class="fa-solid fa-eye-slash" 
-                   style="position: absolute; right: 5px; top: 45%; transform: translateY(-50%);
-                    cursor: pointer; font-size: 18px; color: #555;">
+                   style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+                    cursor: pointer; font-size: 18px; color: #f4f4f4;">
                  </i>
               
               <span id="erro-confirmar" class="msg-erro">As senhas não coincidem</span>
@@ -92,7 +107,7 @@
 
           </div>
           <!-- CADASTRO 2 -->
-          <div class="cadastro2" style="display:none; width: 100%; flex-direction: column;">
+          <div class="cadastro2" style="display:none; width: 100%; flex-direction: column; gap: 10px;">
   
   <div class="voltar" style="margin-bottom: 10px; cursor: pointer;"></div>
 
@@ -289,11 +304,14 @@
   function irParaCadastro2() {
     if (validarFormularioEtapa1()) {
       document.querySelector(".cadastro1").style.display = "none";
-      document.querySelector(".cadastro2").style.display = "block";
+      document.querySelector(".cadastro2").style.display = "flex";
 
       document.querySelector(".voltar").style.display = "block";
     }
   }
+
+  const cadastro1 = document.getElementById("cadastro1");
+
 
 
   // Esconder e aparecer senha 

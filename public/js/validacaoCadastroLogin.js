@@ -73,6 +73,7 @@ function validarFormularioEtapa1() {
   if (!validarSenha(senha_input.value)) {
     mostrarErro("senha_input", "erro-senha");
     valido = false;
+    
   } else {
     removerErro("senha_input", "erro-senha");
   }
@@ -137,6 +138,7 @@ function validarFormularioEtapa2() {
     valido = false;
   } else {
     numero.classList.remove("erro");
+    
   }
 
   return valido;
@@ -155,3 +157,4 @@ document.getElementById("uf").addEventListener("input", function() {
 document.getElementById("numero").addEventListener("input", function() {
   aplicarMascaraNumero(this);
 });
+

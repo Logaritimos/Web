@@ -87,11 +87,8 @@ header ul {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     padding: 20px;
-    border-right: 3px solid #000;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .parte1 h2 {
@@ -131,25 +128,47 @@ header ul {
 
 /* CARD LOGIN */
 .card-login {
-    background-color: #FFFFFF;
+    background-color: #F1EFEF;
     flex: 1 1 300px;
     min-height: 300px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
-    padding: 20px;
+    padding: 40px;
 }
 
 .card-login h1 {
     color: #000;
     margin: 20px 0 10px 0;
-    text-align: center;
+    align-self: center;
+}
+
+.desenho {
+  background-color: #001a27;
+  position: absolute;
+  width: 51px;
+  height: 40px;
+  left: -45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.desenho img {
+  width: 25px;
+  height: 25px;
+}
+
+input:focus {
+  outline: none;
+  border: none; 
 }
 
 .formulario {
     margin-top: 15px;
-    background-color: #FFFFFF;
-    width: 100%;
+    background-color: #F1EFEF;
+    width: 90%;
     max-width: 350px;
     display: flex;
     flex-direction: column;
@@ -173,14 +192,14 @@ header ul {
     border: none;
     font-size: 15px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #f8f8f8;
     padding-left: 10px;
     border-radius: 8px;
 }
 
 .campo input::placeholder {
-    color: #FFFFFF;
-    font-weight: bold;
+    color: #ffffffcc;
+    font-weight: normal;
     font-size: 15px;
 }
 
@@ -260,6 +279,12 @@ footer h1 {
 
     .card-login {
         width: 100%;
+          align-items: center;
+          padding: 20px
+    }
+    
+    .campo input {
+        width: 120%;
     }
 
     .card-login h1 {
@@ -272,6 +297,8 @@ footer h1 {
         padding-top: 0;
     }
 
+   
+
     .parte1 p {
         margin-top: 10px;
         padding-top: 0;
@@ -283,4 +310,15 @@ footer h1 {
     footer{
         height: 10vh;
     }
+}
+
+
+@media (max-width: 768px) {
+      .campo input {
+        width: 100%;
+    }
+
+  .card-login {
+    margin-left: 20px;
+  }
 }

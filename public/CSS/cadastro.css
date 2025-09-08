@@ -37,7 +37,7 @@ header {
 }
 
 header img {
-  width: 100px;
+  width: 130px;
 }
 
 header ul {
@@ -87,26 +87,23 @@ header ul {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  border-right: 2px solid #000;
-  border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+
 }
 
 .parte1 h2 {
   color: #ffffff;
-  padding-top: 65px;
 }
 
 .parte1 p {
-  padding-top: 20px;
   color:#ffffff;
   font-size: clamp(12px, 2.5vw, 17px);
-  padding-bottom: 40px;
+  padding-bottom: 10px;
 }
 
 .parte1 button {
-  width: 40%;
+  width: 100px;
   height: 8%;
   border-radius: 14px;
   border: 2px solid #ffffff;
@@ -116,6 +113,7 @@ header ul {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all ease-in-out 0.2s;
 }
 
 .parte1 button a {
@@ -123,8 +121,10 @@ header ul {
   text-decoration: none;
   outline: none;
 }
+
 .parte1 button:hover {
-    background-color: #004466;
+  background-color: #ffffff96;
+  color: black;
 }
 
 /* final lado esquerdo container */
@@ -141,28 +141,49 @@ header ul {
 }
 
 .card-cadastro h2 {
-  color: #000;
-  padding-top: 20px;
+  color: #3a3a3a;
+  padding-top: 10px;
   font-weight: bold;
 }
 
 /* inicio do formulario */
 
 .formulario{
-  padding-top: 8px;
+  padding-top: 4px;
   background-color: #f0f0f0;
   height: 75%;
   width: 95%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: column;
+}
+
+input:focus {
+  outline: none;
+  border: none; 
+}
+
+.desenho {
+  background-color: #001a27;
+  position: absolute;
+  width: 50px;
+  height: 40px;
+  left: -45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.desenho img {
+  width: 25px;
+  height: 25px;
 }
 
 .campo{
   background-color: #f0f0f0;
   width: 100%;
-  height: 15%;
-  margin-bottom: 2%;
+
   display: flex;
   flex-direction: column;
 }
@@ -170,8 +191,7 @@ header ul {
 .campo3{
   background-color: #f0f0f0;
   width: 100%;
-  height: 15%;
-  margin-bottom: 4%;
+
   display: flex;
   flex-direction: column;
 }
@@ -179,8 +199,6 @@ header ul {
 .campo2{
   background-color: #a12020;
   width: 100%;
-  height: 15%;
-  margin-bottom: 2%;
   display: flex;
   flex-direction: column;
 }
@@ -188,17 +206,18 @@ header ul {
 .campo input, .campo3 input{
   background-color: #00283a;
   border: none;
-  font-weight: bold;
+  font-weight: normal;
   color: #FFFFFF;
   padding-left: 10px;
   font-size: clamp(12px, 2.5vw, 17px);
   width: 100%;
   height: 70%;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 .campo input::placeholder, .campo3 input::placeholder{
-  color: #FFFFFF;
+  color: rgb(213, 213, 213);
 }
 
 
@@ -228,7 +247,7 @@ header ul {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-  transition: transform 0.1s; 
+  transition: all ease-in-out 0.2s;
 }
 
 .formulario button {
@@ -243,9 +262,11 @@ header ul {
 .cadastro1{
     display: flex;
     height: 100%;
-    width: 78%;
+    width:90%;
+    gap: 15px;
     background-color: #f0f0f0;
     flex-direction: column;
+    padding: 0px 20px
 }
 
 .cadastro2{
@@ -273,8 +294,21 @@ footer h1 {
 
 
 /* Bordas de erro */
-.campo input.erro {
-  border: 2px solid red;
+.campo input {
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.campo input.erro  {
+  border: 1px solid red;
+}
+
+.desenho.erro {
+    border: 1px solid red;
+}
+
+.desenho.erro {
+  border: 1px solid red !important;
 }
 
 /* Mensagem de erro */
@@ -282,8 +316,10 @@ footer h1 {
   font-size: 12px;
   color: red;
   display: none; 
-  width: 100%;
   height: 40%;
+  left: 5px;
+  position: absolute;
+  bottom: -13px;
 }
 
 /* RESPONSIVIDADE */
@@ -322,13 +358,13 @@ footer h1 {
     }
 
     .parte1 button {
-        width: 40%;
-        height: 15%;
+        width: 100px;
+        height: 30px;
     }
 
     .card-cadastro {
         width: 100%;
-
+      padding-bottom: 20px;
     }
 
     .card-cadastro h1 {
@@ -336,16 +372,13 @@ footer h1 {
         padding-top: 0;  
     }
 
-    .parte1 h2 {
-        margin-top: 15px; 
-        padding-top: 0;
+    .card-cadastro h2 {
+      padding: 0px;
     }
 
-    .parte1 p {
-        margin-top: 10px;
-        padding-top: 0;
-    }
+    
 
+   
     
     footer{
       height: 8%;
