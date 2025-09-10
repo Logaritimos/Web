@@ -23,6 +23,16 @@
           <li><a class="header_botao" href="login.html">Entrar</a></li>
         </ul>
       </div>
+       <div class="dropdown">
+  <div class="hamburger_container" onclick="clicado()">
+    <img src="./assets/imagem/hamburger.png"  id="hamburger_img" alt="Hamburger">
+    <ul id="Dropdown_cont">
+      <li class="header_botao_mobile"><a class="header_botao_mobile" href="">Home</a></li>
+      <li class="header_botao_mobile"><a class="header_botao_mobile" href="cadastro.html">Cadastro</a></li>
+      <li class="header_botao_mobile"><a class="header_botao_mobile" href="login.html">Entrar</a></li>
+    </ul>
+  </div>
+</div>
     </header>
     
 
@@ -211,3 +221,17 @@
     </footer>
   </body>
 </html>
+<script>
+    function clicado(){
+        const hamburger = document.getElementById('hamburger_img');
+const dropdown = document.getElementById('Dropdown_cont');
+
+hamburger.addEventListener('click', () => {
+  if (dropdown.style.display === 'flex') {
+    dropdown.style.display = 'none';
+  } else {
+    dropdown.style.display = 'flex';
+  }
+});
+    }
+</script>

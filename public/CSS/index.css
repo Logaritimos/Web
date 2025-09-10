@@ -187,6 +187,7 @@ main {
 /* AREA MAIN: SOBRE */
 
 
+
 .Sobre {
     background-color: rgb(255, 255, 255);
     width: 100%;
@@ -498,12 +499,59 @@ Footer div h1 {
     display: none;
 }
 
+
+
 .dropdown {
-    display: block;
-    background-color: transparent;
-    width: 50px;
+    display: flex;
     
+    
+   
 }
+
+
+
+.hamburger_container {
+    position: relative;
+}
+
+.hamburger_container img {
+    width: 25px;
+    cursor: pointer;
+}
+
+
+
+.dropdown ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: -55px;
+    background-color: white;
+    width: 85px;
+    height: 100px;
+    border-radius: 5px;
+    border: 2px solid #00283A;
+    gap: 15px;
+     
+}
+
+.dropdown ul a {
+    color: black;
+       transition: all ease-in-out 0.2s;
+       margin: 10px 5px;
+       width: 100%;
+}
+
+
+.header_botao_mobile {
+    text-decoration:none ;
+  
+    width: 100%;
+    transition: all ease-in-out 0.2s;
+}
+
+
+
 
 .dropdown_container {
     display: flex;
@@ -514,8 +562,13 @@ Footer div h1 {
 
 
 
+
 .Img_dropdown {
     width: 30px;
+}
+
+.hamburger_container ul {
+    display: none;
 }
 
 
@@ -575,6 +628,10 @@ Footer div h1 {
 
     .projetos {
             margin-bottom: 0px;
+    }
+
+    .Sobre_container h1 {
+        align-self: center;
     }
 
     .projetos_textos {
