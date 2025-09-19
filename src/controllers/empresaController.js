@@ -38,42 +38,34 @@ function cadastrarComEndereco(req, res) {
         });
 }
 
-function autenticar(req, res) {
+function login(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else {
-
-        empresaModel.autenticar(email, senha)
-            .then(
-                function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-
-                    if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-                    } else if (resultadoAutenticar.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
-                    } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                    }
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
+    if (!email || !senha) {
+        res.status(400).send("Email e senha são obrigatórios.");
+        return;
     }
 
+    empresaModel.login(email, senha)
+        .then((resultado) => {
+            if (resultado.length === 1) {
+                res.status(200).json({
+                    idEmpresa: resultado[0].idEmpresa,
+                    razaoSocial: resultado[0].razaoSocial,
+                    email: resultado[0].email
+                });
+            } else {
+                res.status(403).json({ erro: "Email ou senha inválidos!" });
+            }
+        })
+        .catch((erro) => {
+            console.log("Erro no login:", erro);
+            res.status(500).json({ erro: erro.message });
+        });
 }
 
 module.exports = {
-    autenticar,
-    cadastrarComEndereco
+    cadastrarComEndereco,
+    login
 }
