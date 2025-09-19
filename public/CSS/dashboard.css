@@ -1,10 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    overflow-y: hidden;
-}
+
 
 .chart,
 .table-container {
@@ -43,13 +37,6 @@
     font-size: 13px;
 }
 
-.dashboard-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
 .dashboard-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -59,13 +46,7 @@
     gap: 20px;
 }
 
-header {
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    padding: 10px 0;
-    color: #fff;
-}
+
 
 .top-cards {
     display: flex;
@@ -112,20 +93,7 @@ header {
     gap: 15px;
 }
 
-header {
-    text-align: left;
-    font-size: 28px;
-    font-weight: 700;
-    padding: 15px 0;
-    color: #fff;
-    background-color: #001A27;
-    margin-bottom: 10px;
 
-}
-
-header span {
-    margin-left: 10px;
-}
 
 .charts-container {
     flex: 1;
@@ -158,35 +126,7 @@ table td {
     background-color: #4f4f4f;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 70px;
-    background-color: #001A27;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-}
 
-.sidebar i {
-    font-size: 30px;
-    margin: 12px 0;
-    cursor: pointer;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 100%;
-}
-
-.sidebar i.active {
-    background-color: #004F73;
-    font-size: 30px;
-}
 
 .fundo {
     background-color: #3d6e85;

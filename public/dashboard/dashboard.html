@@ -6,6 +6,7 @@
 <title>Dashboard | Logaritmos</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../CSS/dashboard.css">
+<link rel="stylesheet" href="../CSS/util.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
 </header>
 
 
-<div class="dashboard-title">DASHBOARD</div>
+<div class="title">DASHBOARD</div>
 <div class="fundo">
 
 <div class="dashboard-container">
@@ -99,16 +100,21 @@
 </div>
 
 <div class="sidebar">
-    <i class="fa-solid fa-user"></i>
+    <i class="fa-solid fa-user" onclick="window.location.href='../../info.html'"></i>
     <i class="fa-solid fa-clock active"></i>
-    <i class="fa-solid fa-envelope"></i>
-    <i class="fa-solid fa-file-lines"></i>
-    <i class="fa-solid fa-gear"></i>
-    <i class="fa-solid fa-right-from-bracket"></i>
+    <i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i>
+    <i class="fa-solid fa-file-lines" onclick="window.location.href='../../comparativos.html'"></i>
+    <i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i>
+    <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    function logout() {
+        sessionStorage.clear();
+        window.location.href = '../../login.html';
+    }
+
     // --- Gráficos ---
     const ctxLine = document.getElementById('lineChart').getContext('2d');
     new Chart(ctxLine, {
