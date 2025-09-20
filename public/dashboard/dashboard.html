@@ -10,12 +10,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-<header>
-    <span>LOGARITMOS</span>
-</header>
+ <!--Header-->
+    <header>
+        <div>
+            <img src="../assets/imagem/logo.png" alt="">
+        </div>   
+    </header>
+
+    <!--Sidebar-->
+    <div class="sidebar">
+        <a href="#"><i class="fa-solid fa-user"></i></a>
+        <a href="#"  class="active"><i class="fa-solid fa-clock"></i></a>
+        <a href="#"><i class="fa-solid fa-envelope"  onclick="window.location.href='../../mensagem.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-file-lines" onclick="window.location.href='../comparativo.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+    </div>
 
 
-<div class="title">DASHBOARD</div>
+<h2>DASHBOARD</h2>
 <div class="fundo">
 
 <div class="dashboard-container">
@@ -97,15 +110,6 @@
 
 
 </div>
-</div>
-
-<div class="sidebar">
-    <i class="fa-solid fa-user" onclick="window.location.href='../../info.html'"></i>
-    <i class="fa-solid fa-clock active"></i>
-    <i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i>
-    <i class="fa-solid fa-file-lines" onclick="window.location.href='../../comparativos.html'"></i>
-    <i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i>
-    <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
