@@ -21,11 +21,10 @@ header {
   justify-content: space-between;
   padding: 20px;
   align-items: center;
-  border-bottom: 1px solid white;
 }
 
 header img {
-  width: 160px;
+  width: 150px;
 }
 
 .container{
@@ -160,8 +159,11 @@ hr {
 
 /* SIDEBAR */
   .sidebar {
-    width: 8%;
-    height: 100%;
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    width: 10vh;
+    height: 90vh;
     background-color: #00283a;
     display: flex;
     flex-direction: column;
@@ -182,8 +184,12 @@ hr {
     padding: 10px 0;
     text-decoration: none;
     transition: background 0.3s;
-    border-bottom: 1px solid white;
     margin-top: -5px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #005b7a; 
 }
 
 .sidebar a:hover {
