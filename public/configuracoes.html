@@ -1,34 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/util.css">
+    <link rel="stylesheet" href="./CSS/util.css">
+    <link rel="stylesheet" href="./CSS/configuracoes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Document</title>
+    <title>Logaritmos</title>
 </head>
+
 <body>
     <header>
-    <span>LOGARITMOS</span>
-</header>
+        <span>LOGARITMOS</span>
+    </header>
+    <div class="main-content">
+    <div class="title">Configurações</div>
+    <details open>
+        <summary><span>Redefinição de email</span></summary>
+        <div style="border-top: 3px solid #ccc;"></div>
+        <div class="inputs">
+            <input type="email" placeholder="Email atual">
+            <input type="email" placeholder="Email novo">
+        </div>
+        <button class="action">Atualizar</button>
+    </details>
 
+    <!-- Redefinição de senha -->
+    <details>
+        <summary><span>Redefinição de senha</span></summary>
+        <div style="border-top: 3px solid #ccc;"></div>
 
-<div class="title">Configuracoes</div>
-
-    <div class="sidebar">
-    <i class="fa-solid fa-user" onclick="window.location.href='./info.html'"></i>
-    <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
-    <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
-    <i class="fa-solid fa-file-lines" onclick="window.location.href='/comparativos.html'"></i>
-    <i class="fa-solid fa-gear active"></i>
-    <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
+        
+        <div class="inputs">
+            <div class="input-wrapper">
+    <input type="password" placeholder="Senha" id="senhaAtual">
+    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaAtual', this)">
+        <i class="fa-solid fa-eye"></i>
+    </button>
 </div>
+
+            <div class="input-wrapper">
+    <input type="password" placeholder="Senha" id="senhaNova">
+    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaNova', this)">
+        <i class="fa-solid fa-eye"></i>
+    </button>
+</div>
+
+        </div>
+        <button class="action">Atualizar</button>
+    </details>
+
+    <!-- Deletar conta -->
+    <details>
+        <summary><span>Deletar conta</span></summary>
+        <div style="border-top: 3px solid #ccc;"></div>
+
+        <div class="inputs">
+            <input type="email" placeholder="Email">
+            <div class="input-wrapper">
+    <input type="password" placeholder="Senha" id="senhaDelete">
+    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaDelete', this)">
+        <i class="fa-solid fa-eye"></i>
+    </button>
+</div>
+
+        </div>
+        <button class="action delete">Deletar</button>
+    </details>
+    </div>
+    <div class="sidebar">
+        <i class="fa-solid fa-user" onclick="window.location.href='./info.html'"></i>
+        <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
+        <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
+        <i class="fa-solid fa-file-lines" onclick="window.location.href='/comparativos.html'"></i>
+        <i class="fa-solid fa-gear active"></i>
+        <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
+    </div>
 </body>
+
 </html>
-<script>
-     function logout() {
+    <script>
+        function toggleSenha(id, btn) {
+    const input = document.getElementById(id);
+    const icon = btn.querySelector('i');
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+    function logout() {
         sessionStorage.clear();
         window.location.href = '../../login.html';
     }
+</script>
+<script>
+document.getElementById("btnAtualizarEmail").addEventListener("click", function() {
+    const idEmpresa = 1; // substitua pelo ID real da empresa logada
+    const novoEmail = document.querySelector('input[placeholder="Email novo"]').value;
+
+    fetch("http://localhost:3000/empresa/email", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ idEmpresa, novoEmail })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensagem || "Email atualizado!");
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Erro ao atualizar email.");
+    });
+});
+</script>
+<script>
+document.getElementById("btnAtualizarSenha").addEventListener("click", function() {
+    const idEmpresa = 1; // substitua pelo ID real da empresa logada
+    const novaSenha = document.querySelector('input[placeholder="Senha nova"]').value;
+
+    fetch("http://localhost:3000/empresa/senha", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ idEmpresa, novaSenha })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensagem || "Senha atualizada!");
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Erro ao atualizar senha.");
+    });
+});
 </script>
