@@ -22,9 +22,28 @@ function login(email, senha) {
     `;
     return database.executar(instrucaoSql);
 }
+function atualizarEmail(idEmpresa, novoEmail) {
+    const instrucaoSql = `
+        UPDATE empresa
+        SET email = '${novoEmail}'
+        WHERE idEmpresa = ${idEmpresa};
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function atualizarSenha(idEmpresa, novaSenha) {
+    const instrucaoSql = `
+        UPDATE empresa
+        SET senha = '${novaSenha}'
+        WHERE idEmpresa = ${idEmpresa};
+    `;
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     cadastrarEmpresa,
     buscarEmpresaPorCnpjEmail,
-    login
+    login,
+    atualizarEmail,
+    atualizarSenha
 };

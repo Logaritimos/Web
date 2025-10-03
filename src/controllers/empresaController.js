@@ -64,8 +64,24 @@ function login(req, res) {
             res.status(500).json({ erro: erro.message });
         });
 }
+function atualizarEmail(req, res) {
+    const { idEmpresa, novoEmail } = req.body;
 
+    empresaModel.atualizarEmail(idEmpresa, novoEmail)
+        .then(() => res.status(200).json({ mensagem: "Email atualizado com sucesso!" }))
+        .catch(err => res.status(500).json({ erro: err.message }));
+}
+
+function atualizarSenha(req, res) {
+    const { idEmpresa, novaSenha } = req.body;
+
+    empresaModel.atualizarSenha(idEmpresa, novaSenha)
+        .then(() => res.status(200).json({ mensagem: "Senha atualizada com sucesso!" }))
+        .catch(err => res.status(500).json({ erro: err.message }));
+}
 module.exports = {
     cadastrarComEndereco,
-    login
+    login,
+    atualizarEmail,
+    atualizarSenha
 }
