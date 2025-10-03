@@ -1,34 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/util.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./CSS/comparativos.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <title>Document</title>
 </head>
+
 <body>
     <header>
-    <span>LOGARITMOS</span>
-</header>
+        <div>
+            <img src="./assets/imagem/logo.png" alt="">
+        </div>   
+    </header>
 
+    <div class="container">
 
-<div class="title">Comparativos</div>
+    <main>
+    <h2>COMPARATIVOS</h2>
+    <div class="box">
 
+        <!-- Filtros -->
+        <div class="filtros">
+            <input type="date">
+            <input type="date">
+            <button><i class="fas fa-calendar-alt"></i></button>
+            <input type="text" placeholder="Pesquisar">
+            <button><i class="fa-solid fa-plus"></i></button>
+            <button><i class="fa-solid fa-edit"></i></button>
+            <button><i class="fa-solid fa-star"></i></button>
+            <button><i class="fas fa-trash"></i></button>
+        </div> 
+        <hr>
+        <!-- Cards -->
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>SP | RJ</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>RO | PE</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>TO | AC</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>RS | SC</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>MG | BA</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    Imagem das bandeiras dos estados comparados
+                </div>
+                <div class="card-body">
+                    <h3>Título do Comparativo</h3>
+                    <p>MT | GO</p>
+                </div>
+                <div class="card-actions">
+                    <button>...</button>
+                </div>
+            </div>
+        </div> 
+
+    </div> 
+</main>
+
+ <!--Sidebar-->
     <div class="sidebar">
-    <i class="fa-solid fa-user" onclick="window.location.href='./info.html'"></i>
-    <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
-    <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
-    <i class="fa-solid fa-file-lines active"></i>
-    <i class="fa-solid fa-gear"  onclick="window.location.href='/configuracoes.html'"></i>
-    <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
+        <a href="#"><i class="fa-solid fa-user"></i></a>
+        <a href="#"><i class="fa-solid fa-clock" onclick="window.location.href='dashboard/dashboard.html'"></i></a>
+        <a href="http://localhost:4200"><i class="fa-solid fa-envelope" ></i></a>
+        <a href="#" class="active"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+    </div>
 </div>
+  
 </body>
 </html>
-<script>
-     function logout() {
-        sessionStorage.clear();
-        window.location.href = '../../login.html';
-    }
-</script>
