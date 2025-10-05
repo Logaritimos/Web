@@ -1,33 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/util.css">
+    <link rel="stylesheet" href="./CSS/util.css">
+    <link rel="stylesheet" href="./CSS/info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Document</title>
 </head>
+
 <body>
+
     <header>
-    <span>LOGARITMOS</span>
-</header>
-
-
-<div class="title">Informações Pessoais</div>
-
+        <span>LOGARITMOS</span>
+    </header>
+    
     <div class="sidebar">
-    <i class="fa-solid fa-user active"></i>
-    <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
-    <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
-    <i class="fa-solid fa-file-lines" onclick="window.location.href='/comparativos.html'"></i>
-    <i class="fa-solid fa-gear" onclick="window.location.href='/configuracoes.html'"></i>
-    <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
-</div>
+        <i class="fa-solid fa-user active"></i>
+        <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
+        <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
+        <i class="fa-solid fa-file-lines" onclick="window.location.href='/comparativo.html'"></i>
+        <i class="fa-solid fa-gear" onclick="window.location.href='/configuracoes.html'"></i>
+        <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
+    </div>
+
+    <div class="container"></div>
+        <div class="title">
+            Informações Pessoais
+        </div>
+
+        <div class="form-info">
+            <div class="coluna-esq">
+                <div class="info-pessoal">
+                    <label for="razaoSocial">Razão Social</label>
+                    <input type="text" id="input_razaoSocial" placeholder="Razão Social">
+                </div>
+
+
+                <div class="info-pessoal">
+                    <label for="CEP">CEP</label>
+                    <input type="text" id="input_cep" placeholder="CEP">
+                </div>
+
+                <div class="info-pessoal">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="input_cidade" placeholder="Cidade">
+                </div>    
+                
+                <div class="info-pessoal">
+                    <label for="logradouro">Logradouro</label>
+                    <input type="text" id="input_logradouro" placeholder="Logradouro">
+                </div>    
+                
+                <div class="info-pessoal">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" id="input_complemento" placeholder="Complemento">
+                </div>
+            </div>
+
+            <div class="coluna-dir">
+                <div class="info-pessoal">
+                    <label for="CNPJ">CNPJ</label>
+                    <input type="text" id="input_cnpj" placeholder="CNPJ">
+                </div>                
+
+                <div class="info-pessoal">
+                    <label for="UF">UF</label>
+                    <select id="uf">
+                        <option value="" disabled selected>Selecione um estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+
+                <div class="info-pessoal">
+                    <label for="Bairro">Bairro</label>
+                    <input type="text" id="input_bairro" placeholder="Bairro">
+                </div>
+
+                <div class="info-pessoal">
+                    <label for="numero">Número</label>
+                    <input type="text" id="input_numero" placeholder="Número">
+                </div>
+
+                <div class="acoes-form">
+                    <button class="botao-editar" onclick="">Editar</button>
+                    <button class="botao-atualizar" onclick="">Atualizar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
+
 </html>
 <script>
-     function logout() {
+    function logout() {
         sessionStorage.clear();
         window.location.href = '../../login.html';
     }
