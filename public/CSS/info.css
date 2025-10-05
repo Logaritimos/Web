@@ -1,0 +1,70 @@
+.form-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 120px;
+    margin-bottom: 30px;
+}
+
+.coluna-esq {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 350px;
+} 
+
+.coluna-dir {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 350px;
+}
+
+.info-pessoal {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.info-pessoal label {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.info-pessoal input,
+.info-pessoal select {
+    height: 35px;
+    width: 350px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    border-color: #000;
+}
+
+.acoes-form {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+    max-height: 35px;
+    width: 350px;
+    margin-top: 25px;  
+    gap: 15px; 
+}
+
+.acoes-form button { 
+    height: 35px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.acoes-form button:hover {
+    background-color: #333;
+}
+
