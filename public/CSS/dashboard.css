@@ -11,7 +11,7 @@
     font-size: 16px;
     font-weight: 600;
     text-align: left;
-    color: #fff;
+    color: #ffffff;
 }
 
 .table-section {
@@ -45,7 +45,11 @@
     gap: 20px;
 }
 
-
+.titulo {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
 
 .top-cards {
     display: flex;
@@ -62,7 +66,7 @@
 }
 
 .icon-square {
-    background-color: #D9D9D9;
+    background-color: #f2f2f2;
     width: 50px;
     height: 50px;
     display: flex;
@@ -75,7 +79,7 @@
 }
 
 .card-content h3 {
-    color: #D9D9D9;
+    color: #f3f3f3;
     font-size: 14px;
     margin-bottom: 5px;
 }
@@ -96,6 +100,12 @@
 
 .charts-container {
     flex: 1;
+}
+
+.charts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
 }
 
 table th,
@@ -122,7 +132,8 @@ table td {
 }
 
 .pagination button.active {
-    background-color: #4f4f4f;
+    background-color: #717171;
+    color: white;
 }
 
 
@@ -131,18 +142,42 @@ table td {
     background-color: #3d6e85;
     border: 2px solid black;
     border-radius: 8px;
-    width: 80%; /* ocupa 80% da tela */
-    margin: 20px auto; /* centraliza horizontalmente */
+    width: 80%; 
+    margin: 20px auto;
 }
 
 .top-cards .card {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+     box-shadow: 0 4px 3px rgba(0, 0, 0, 0.2);
+
 }
 
 .chart {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+
 }
 
 .table-container {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+     box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+
 }
+
+header {
+  width: 100% !important;
+  height:70px !important;
+  background-color: #00283a;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100% !important;
+    top: 10vh !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
