@@ -58,6 +58,7 @@ main h2 {
   border-radius: 10px;
   padding-bottom: -2%;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      height: 550px;
 }
 
 /* FILTROS */
@@ -106,6 +107,7 @@ hr {
   max-height: 550px;  
   overflow-y: auto;   
   gap: 20px;  
+  height: 465px;
 }
 
 .card {

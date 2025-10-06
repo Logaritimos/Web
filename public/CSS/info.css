@@ -33,38 +33,59 @@
     color: #000;
 }
 
+.info-pessoal input::placeholder {
+  color: rgb(214, 214, 214); 
+   
+}
+
+
 .info-pessoal input,
 .info-pessoal select {
     height: 35px;
     width: 350px;
-    border: 3px solid #000;
+    border: 1px solid #3f3f3f;
     border-radius: 5px;
+  color: rgb(214, 214, 214); 
     border-color: #000;
+    background-color: #00283A;
+    padding-left: 10px;
 }
 
 .acoes-form {
     display: flex; 
     flex-direction: row; 
-    justify-content: space-evenly;
+    justify-content: space-between;
     max-height: 35px;
     width: 350px;
     margin-top: 25px;  
     gap: 15px; 
 }
 
-.acoes-form button { 
+.botao-editar, .botao-atualizar { 
     height: 35px;
-    width: 150px;
+    width: 160px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    background-color: #000;
     color: #fff;
     transition: background-color 0.3s;
 }
 
-.acoes-form button:hover {
-    background-color: #333;
+.botao-editar {
+    background-color: white;
+    color: #00283A;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
+
+.botao-atualizar {
+    background-color: #00283A;
+    color: white;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+
+    
+}
+
+
 

@@ -8,22 +8,25 @@
     <link rel="stylesheet" href="./CSS/util.css">
     <link rel="stylesheet" href="./CSS/info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <title>Document</title>
 </head>
 
 <body>
 
     <header>
-        <span>LOGARITMOS</span>
+        <div>
+            <img src="./assets/imagem/logo.png" alt="">
+        </div>   
     </header>
     
     <div class="sidebar">
-        <i class="fa-solid fa-user active"></i>
-        <i class="fa-solid fa-clock" onclick="window.location.href='./dashboard/dashboard.html'"></i>
-        <i class="fa-solid fa-envelope" onclick="window.location.href='/mensagem.html'"></i>
-        <i class="fa-solid fa-file-lines" onclick="window.location.href='/comparativo.html'"></i>
-        <i class="fa-solid fa-gear" onclick="window.location.href='/configuracoes.html'"></i>
-        <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i>
+        <a href="#"><i class="fa-solid fa-user"></i></a>
+        <a href="#"><i class="fa-solid fa-clock" onclick="window.location.href='dashboard/dashboard.html'"></i></a>
+        <a href="http://localhost:4200"><i class="fa-solid fa-envelope" ></i></a>
+        <a href="#" class="active"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
     </div>
 
     <div class="container"></div>
@@ -41,7 +44,7 @@
 
                 <div class="info-pessoal">
                     <label for="CEP">CEP</label>
-                    <input type="text" id="input_cep" placeholder="CEP">
+                    <input class="inputs" type="text" id="input_cep" placeholder="CEP">
                 </div>
 
                 <div class="info-pessoal">
