@@ -163,7 +163,6 @@ table td {
 
 header {
   width: 100% !important;
-  height:70px !important;
   background-color: #00283a;
   display: flex;
   justify-content: space-between;
