@@ -5,26 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard | Logaritmos</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../CSS/dashboard.css">
-<link rel="stylesheet" href="../CSS/util.css">
+<link rel="stylesheet" href="./CSS/dashboard.css">
+<link rel="stylesheet" href="./CSS/util.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
  <!--Header-->
     <header>
         <div>
-            <img src="../assets/imagem/logo.png" alt="">
+            <img src="./assets/imagem/logo.png" alt="">
         </div>   
     </header>
 
     <!--Sidebar-->
-    <div class="sidebar">
-        <a href="#"><i class="fa-solid fa-user" onclick="window.location.href='../info.html'"></i></a>
-        <a href="#"  class="active"><i class="fa-solid fa-clock"></i></a>
-        <a href="#"><i class="fa-solid fa-envelope"  onclick="window.location.href='../../mensagem.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-file-lines" onclick="window.location.href='../comparativo.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+    
+  <div class="sidebar">
+         <!-- Informações -->
+        <a href="info.html" >
+            <i class="fa-solid fa-user"></i>
+        </a>
+    
+        <!-- Dashboard -->
+        <a href="dashboard.html" class="active">
+            <i class="fa-solid fa-clock"></i>
+        </a>
+    
+        <!-- Angular -->
+        <a href="http://localhost:4200">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    
+        <!-- Comparativos -->
+        <a href="comparativos.html">
+            <i class="fa-solid fa-file-lines"></i>
+        </a>
+    
+        <!-- Configurações -->
+        <a href="configuracoes.html">
+            <i class="fa-solid fa-gear"></i>
+        </a>
+    
+        <!-- Logout -->
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
     </div>
 
 
