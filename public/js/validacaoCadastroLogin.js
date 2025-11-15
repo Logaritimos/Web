@@ -8,6 +8,13 @@ function aplicarMascaraCNPJ(campo) {
     .slice(0, 18);
 }
 
+function aplicarMascaraTelefone(campo) {
+  campo.value = campo.value.replace(/\D/g, "")
+    .replace(/^(\d{2})(\d)/, "($1) $2")
+    .replace(/(\d{5})(\d{4})$/, "$1-$2")
+    .slice(0, 15);
+}
+
 function aplicarMascaraCEP(campo) {
   campo.value = campo.value.replace(/\D/g, "")
     .replace(/^(\d{5})(\d)/, "$1-$2")
@@ -59,6 +66,38 @@ function validarFormularioEtapa1() {
     valido = false;
   } else {
     removerErro("cnpj", "erro-cnpj");
+  }
+
+  // Nome
+  if (nomeCompleto.value.trim() === "") {
+    mostrarErro("nomeCompleto", "erro-nome");
+    valido = false;
+  } else {
+    removerErro("nomeCompleto", "erro-nome");
+  }
+
+  // Telefone
+  if (telefone.value.trim().length !== 15) {
+    mostrarErro("telefone", "erro-telefone");
+    valido = false;
+  } else {
+    removerErro("telefone", "erro-telefone");
+  }
+
+  // Setor
+  if (setorUsuario.value.trim() === "setor") {
+    mostrarErro("setorUsuario", "erro-setor");
+    valido = false;
+  } else {
+    removerErro("setorUsuario", "erro-setor");
+  }
+
+  // Cargo
+  if (cargoUsuario.value.trim() === "cargo") {
+    mostrarErro("cargoUsuario", "erro-cargo");
+    valido = false;
+  } else {
+    removerErro("cargoUsuario", "erro-cargo");
   }
 
   // Email
@@ -147,6 +186,9 @@ function validarFormularioEtapa2() {
 // --- APLICANDO MÁSCARAS --- //
 document.getElementById("cnpj").addEventListener("input", function() {
   aplicarMascaraCNPJ(this);
+});
+document.getElementById("telefone").addEventListener("input", function() {
+  aplicarMascaraTelefone(this);
 });
 document.getElementById("cep").addEventListener("input", function() {
   aplicarMascaraCEP(this);

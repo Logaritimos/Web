@@ -52,7 +52,7 @@
           <div id="cadastro1" class="cadastro1">
             <div class="campo" style="position: relative;">
               <div class="desenho">
-                <img src="./assets/imagem/boneco.png" alt="">
+                <img src="./assets/imagem/empresa.png" alt="">
               </div>
               <input id="razaoSocial" type="text" placeholder="Razão Social" />
               <span id="erro-razao" class="msg-erro">Informe a razão social</span>
@@ -68,6 +68,52 @@
 
             <div class="campo" style="position: relative;">
               <div class="desenho">
+                <img src="./assets/imagem/boneco.png" alt="">
+              </div>
+              <input id="nomeCompleto" type="text" placeholder="Nome" />
+              <span id="erro-nome" class="msg-erro">Informe o seu nome completo</span>
+            </div>
+
+            <div class="campo" style="position: relative;">
+              <div class="desenho">
+                <img src="./assets/imagem/telefone.png" alt="">
+              </div>
+              <input id="telefone" type="text" placeholder="Telefone" maxlength="15" />
+              <span id="erro-telefone" class="msg-erro">Telefone inválido</span>
+            </div>
+
+            <div class="linha-campos">
+              <div class="campo" style="position: relative;">
+                <div class="desenho">
+                  <img src="./assets/imagem/profissao.png" alt="">
+                </div>
+                <select name="setorUsuario" id="setorUsuario">
+                  <option value="setor">Setor</option>
+                  <option value="admin">Administração</option>
+                  <option value="vendas">Vendas</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="operacao">Operações</option>
+                </select>
+                <span id="erro-setor" class="msg-erro">Setor inválido</span>
+              </div>
+              <div class="campo" style="position: relative;">
+                <select name="cargoUsuario" id="cargoUsuario">
+                  <option value="cargo">Cargo</option>
+                  <option value="">Gerente de Projetos</option>
+                  <option value="">Analista Financeiro</option>
+                  <option value="">Consultor de Vendas</option>
+                  <option value="">Assistente de Vendas</option>
+                  <option value="">Gerente de Marketing</option>
+                  <option value="">Coordenador de Marketing</option>
+                  <option value="">Analista de Dados</option>
+                  <option value="">Gerente de Produção</option>
+                </select>
+                <span id="erro-cargo" class="msg-erro">Cargo inválido</span>
+              </div>
+            </div>
+
+            <div class="campo" style="position: relative;">
+              <div class="desenho">
                 <img src="./assets/imagem/email.png" alt="">
               </div>
               <input id="email_input" type="text" placeholder="Email" />
@@ -79,7 +125,7 @@
                 <img src="./assets/imagem/cadeado.png" alt="">
               </div>
               <input id="senha_input" type="password" placeholder="Senha" />
-              <i id="toggleSenha" class="fa-solid fa-eye-slash" style="position: absolute; right: 10px; top: 45%; transform: translateY(-50%);
+              <i id="toggleSenha" class="fa-solid fa-eye" style="position: absolute; right: 10px; top: 45%; transform: translateY(-50%);
                          cursor: pointer; font-size: 18px; color: #ffffff;"></i>
               <span id="erro-senha" class="msg-erro">
                 deve ter 8+ caracteres, maiúscula, minúscula, número e símbolo
@@ -91,7 +137,7 @@
                 <img src="./assets/imagem/cadeado.png" alt="">
               </div>
               <input id="confirmacao_senha_input" type="password" placeholder="Confirmar Senha" />
-              <i id="toggleConfirmacao" class="fa-solid fa-eye-slash" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+              <i id="toggleConfirmacao" class="fa-solid fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
                     cursor: pointer; font-size: 18px; color: #f4f4f4;">
               </i>
 
@@ -108,7 +154,9 @@
           <!-- CADASTRO 2 -->
           <div class="cadastro2" style="display:none; width: 100%; flex-direction: column; gap: 10px;">
 
-            <div class="voltar" style="margin-bottom: 10px; cursor: pointer;"></div>
+            <div class="voltar" style="margin-bottom: 10px; cursor: pointer;" onclick="voltarParaCadastro1()">
+              <img src="./assets/imagem/seta.png" alt="">
+            </div>
 
             <!-- Linha CEP + UF -->
             <div class="linha-campos">
@@ -179,6 +227,7 @@
   function voltarParaCadastro1() {
     document.querySelector(".cadastro2").style.display = "none";
     document.querySelector(".cadastro1").style.display = "flex";
+    document.querySelector(".container").style.height = "90%";
   }
 
 
@@ -186,6 +235,11 @@
     //empresa
     const razaoVar = document.getElementById("razaoSocial").value.trim();
     const cnpjVar = document.getElementById("cnpj").value.trim().replace(/\D/g, "");
+    //usuario
+    const nomeVar = document.getElementById("nomeCompleto").value.trim();
+    const telefoneVar = document.getElementById("telefone").value.trim();
+    const setorVar = document.getElementById("setorUsuario").value.trim();
+    const cargoVar = document.getElementById("cargoUsuario").value.trim();
     const emailVar = document.getElementById("email_input").value.trim();
     const senhaVar = document.getElementById("senha_input").value;
     const confirmacao_senhaVar = document.getElementById("confirmacao_senha_input").value;
@@ -198,7 +252,7 @@
     const complementoVar = document.getElementById("complemento") ? document.getElementById("complemento").value.trim() : "";
     const cepVar = document.getElementById("cep").value.trim().replace(/\D/g, "");
 
-    if (!razaoVar || !cnpjVar || !emailVar || !senhaVar || !confirmacao_senhaVar ||
+    if (!razaoVar || !cnpjVar || !nomeVar || !telefoneVar || !emailVar || !senhaVar || !confirmacao_senhaVar ||
       !estadoVar || !cidadeVar || !bairroVar || !logradouroVar || !numVar || !cepVar) {
       return false;
     }
@@ -215,6 +269,10 @@
       body: JSON.stringify({
         razaoSocialServer: razaoVar,
         cnpjServer: cnpjVar,
+        nomeServer: nomeVar,
+        telefoneServer: telefoneVar,
+        setorServer: setorVar,
+        cargoServer: cargoVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
         logradouroServer: logradouroVar,
@@ -255,6 +313,7 @@
     if (validarFormularioEtapa1()) {
       document.querySelector(".cadastro1").style.display = "none";
       document.querySelector(".cadastro2").style.display = "flex";
+      document.querySelector(".container").style.height = "75%";
 
       document.querySelector(".voltar").style.display = "block";
     }
@@ -271,12 +330,12 @@
   toggleSenha.addEventListener("click", () => {
     if (senhaInput.type === "password") {
       senhaInput.type = "text";
-      toggleSenha.classList.remove("fa-eye-slash");
-      toggleSenha.classList.add("fa-eye");
-    } else {
-      senhaInput.type = "password";
       toggleSenha.classList.remove("fa-eye");
       toggleSenha.classList.add("fa-eye-slash");
+    } else {
+      senhaInput.type = "password";
+      toggleSenha.classList.remove("fa-eye-slash");
+      toggleSenha.classList.add("fa-eye");
     }
   });
 
@@ -287,12 +346,12 @@
   toggleConfirmacao.addEventListener("click", () => {
     if (confirmacaoInput.type === "password") {
       confirmacaoInput.type = "text";
-      toggleConfirmacao.classList.remove("fa-eye-slash");
-      toggleConfirmacao.classList.add("fa-eye");
-    } else {
-      confirmacaoInput.type = "password";
       toggleConfirmacao.classList.remove("fa-eye");
       toggleConfirmacao.classList.add("fa-eye-slash");
+    } else {
+      confirmacaoInput.type = "password";
+      toggleConfirmacao.classList.remove("fa-eye-slash");
+      toggleConfirmacao.classList.add("fa-eye");
     }
   });
 
