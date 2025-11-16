@@ -32,7 +32,7 @@
             <button  id="btnAdd"><i class="fa-solid fa-plus"></i></button>
             <button><i class="fa-solid fa-edit"></i></button>
             <button><i class="fa-solid fa-star"></i></button>
-            <button><i class="fas fa-trash"></i></button>
+            <button id="btnRemover"><i class="fas fa-trash"></i></button>
         </div> 
 
             <div id="modal" class="modal">
@@ -104,6 +104,33 @@
             <option value="TO">Tocantins</option>
         </select>
 
+        <label for="selectAno">Ano</label>
+        <select id="selectAno">
+            <option value="">Selecione</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+        </select>
+
+        <label for="selectMes">Mês</label>
+        <select id="selectMes">
+            <option value="">Selecione</option>
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select>
+
+        <input id="inputTitulo" type="text" placeholder="Título do comparativos" />
+
         <div class="modal-buttons">
             <button id="cancelarModal">Cancelar</button>
             <button id="confirmarModal" class="confirmar">Criar Comparativo</button>
@@ -112,6 +139,34 @@
 </div>
         <hr>
     <div class="cards-container"></div>
+      <!-- MODAL CONFIRMAÇÃO DE EXCLUSÃO -->
+        <div id="modalExcluir" class="modal">
+            <div class="modal-content">
+                <h3>Excluir Card</h3>
+                <p>Tem certeza que deseja remover este card?</p>
+
+                <div class="modal-buttons">
+                    <button id="cancelarExcluir">Cancelar</button>
+                    <button id="confirmarExcluir" class="confirmar">Excluir</button>
+                </div>
+            </div>
+        </div>
+  
+        <!-- MODAL DE DETALHES -->
+    <div id="modal-detalhes" class="modal-overlay">
+        <div class="modal-content">
+            
+            <button class="modal-close">&times;</button>
+
+            <h2 id="modal-titulo">Título aqui</h2>
+
+            <div class="modal-info">
+                <p><strong>Estado A:</strong> <span id="modal-estadoA"></span></p>
+                <p><strong>Estado B:</strong> <span id="modal-estadoB"></span></p>
+            </div>
+
+        </div>
+    </div>
 
     </div> 
 </main>
@@ -136,52 +191,219 @@ const modal = document.getElementById('modal');
 const cancelar = document.getElementById('cancelarModal');
 const confirmar = document.getElementById('confirmarModal');
 
-// ABRIR MODAL
+const estado1 = document.getElementById("estado1");
+const estado2 = document.getElementById("estado2");
+const inputTitulo = document.getElementById("inputTitulo");
+
+const btnRemover = document.getElementById("btnRemover");
+let cardParaExcluir = null;
+const modalExcluir = document.getElementById("modalExcluir");
+const cancelarExcluir = document.getElementById("cancelarExcluir");
+const confirmarExcluir = document.getElementById("confirmarExcluir");
+
+
+let cardEmEdicao = null;     // referencia para o card que está sendo editado
+let modoEdicao = false;      // flag: true quando estamos no modo edição
+
+/* cria o card */
 btnPlus.addEventListener('click', () => {
+    modoEdicao = false;
+    cardEmEdicao = null;
+    confirmar.innerText = "Criar Comparativo";
+    // limpa campos
+    estado1.value = "";
+    estado2.value = "";
+    inputTitulo.value = "";
     modal.style.display = 'flex';
 });
 
-// botão coan
+/* cancelar*/
 cancelar.addEventListener('click', () => {
-    modal.style.display = 'none';
+    fecharModal();
 });
 
-// cria o card
+/*CRIA ou EDITA dependendo do modoEdicao*/
 confirmar.addEventListener('click', () => {
-    const e1 = document.getElementById("estado1").value;
-    const e2 = document.getElementById("estado2").value;
+    const e1 = estado1.value;
+    const e2 = estado2.value;
+    const titulo = inputTitulo.value.trim();
+
+    if (!titulo) {
+        alert("Digite um título!");
+        return;
+    }
 
     if (!e1 || !e2) {
         alert("Selecione os dois estados!");
         return;
     }
 
-    criarCard(e1, e2);
-    modal.style.display = 'none';
+    if (modoEdicao && cardEmEdicao) {
+        // UPDATE
+        editarCard(cardEmEdicao, titulo, e1, e2);
+    } else {
+        // CREATE
+        criarCard(titulo, e1, e2);
+    }
+
+    fecharModal();
 });
 
-// monatr na tela - leva para o .cards-container
-function criarCard(estadoA, estadoB) {
+/* fechar ou resetar */
+function fecharModal() {
+    modal.style.display = 'none';
+    confirmar.innerText = "Criar Comparativo";
+    modoEdicao = false;
+    cardEmEdicao = null;
+    estado1.value = "";
+    estado2.value = "";
+    inputTitulo.value = "";
+}
+
+// cria o card no container
+function criarCard(titulo, estadoA, estadoB) {
     const container = document.querySelector(".cards-container");
 
     const card = document.createElement("div");
     card.classList.add("card");
 
+    card.setAttribute("data-titulo", titulo);
+    card.setAttribute("data-estadoA", estadoA);
+    card.setAttribute("data-estadoB", estadoB);
+
     card.innerHTML = `
         <div class="card-body">
-            <h3>Comparativo</h3>
-            <p>${estadoA} | ${estadoB}</p>
+            <h3>${titulo}</h3>
+            <p class="estados-texto">${estadoA} | ${estadoB}</p>
         </div>
         <div class="card-actions">
-            <button>...</button>
+            <button class="btn-more">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
         </div>
     `;
+
+    // abre modal
+    card.querySelector(".btn-more").addEventListener("click", (ev) => {
+        ev.stopPropagation(); // impede clique de selecionar card
+        abrirModalDetalhes(card);
+    });
+
+    // seleciona/desseleciona
+    card.addEventListener("click", () => {
+        if (card.classList.contains("selecionado")) {
+            card.classList.remove("selecionado");
+            return;
+        }
+
+        document.querySelectorAll(".card")
+            .forEach(c => c.classList.remove("selecionado"));
+
+        card.classList.add("selecionado");
+    });
 
     container.appendChild(card);
 }
 
-//<div class="card-img">
- //          <img src="./assets/bandeiras/${estadoA}.png" style="width:70px; margin-right:10px;">
- //          <img src="./assets/bandeiras/${estadoB}.png" style="width:70px;">
- //      </div>
+function abrirModalDetalhes(card) {
+    const modal = document.getElementById("modal-detalhes");
+
+    document.getElementById("modal-titulo").textContent = card.dataset.titulo;
+    document.getElementById("modal-estadoA").textContent = card.dataset.estadoA;
+    document.getElementById("modal-estadoB").textContent = card.dataset.estadoB;
+
+    modal.style.display = "flex";
+}
+
+// fecha modal no botão
+document.querySelector(".modal-close").addEventListener("click", () => {
+    document.getElementById("modal-detalhes").style.display = "none";
+});
+
+
+
+// ATUALIZAR
+function editarCard(card, novoTitulo, novoA, novoB) {
+    if (!card) return;
+    const h3 = card.querySelector(".card-body h3");
+    const p = card.querySelector(".card-body .estados-texto");
+
+    if (h3) h3.innerText = novoTitulo;
+    if (p) p.innerText = `${novoA} | ${novoB}`;
+
+    card.classList.remove("selecionado"); // remove seleção após editar
+    cardEmEdicao = null;
+    modoEdicao = false;
+}
+
+/* quando clica no btn de edição, abre o modal preenchido com os dados do card selecionado. */
+const btnEditarBarra = document.querySelectorAll('.filtros button').length
+    ? document.querySelectorAll('.filtros button').find
+      ? (() => { 
+            const buttons = Array.from(document.querySelectorAll('.filtros button'));
+            return buttons.find(b => b.querySelector('.fa-edit')) || document.querySelector('.fa-edit').parentElement;
+        })()
+      : document.querySelector('.fa-edit').parentElement
+    : document.querySelector('.fa-edit').parentElement;
+
+const btnEditar = btnEditarBarra || (document.querySelector('.fa-edit') ? document.querySelector('.fa-edit').parentElement : null);
+
+if (btnEditar) {
+    btnEditar.addEventListener('click', () => {
+        const selecionado = document.querySelector(".card.selecionado");
+        if (!selecionado) {
+            alert("Selecione um card primeiro (clique no card) para editar.");
+            return;
+        }
+
+        // preenche modal com dados do card selecionado
+        const tituloAtual = selecionado.querySelector(".card-body h3").innerText;
+        const texto = selecionado.querySelector(".card-body .estados-texto").innerText;
+        const [estadoA, estadoB] = texto.split(" | ");
+
+        inputTitulo.value = tituloAtual;
+        estado1.value = estadoA || "";
+        estado2.value = estadoB || "";
+
+        // modo edição ativado
+        modoEdicao = true;
+        cardEmEdicao = selecionado;
+        confirmar.innerText = "Salvar Alterações";
+
+        modal.style.display = 'flex';
+    });
+} else {
+    console.warn("Botão de editar da barra não encontrado.");
+}
+
+document.getElementById("btnRemover").addEventListener("click", () => {
+    const selecionado = document.querySelector(".card.selecionado");
+
+    if (!selecionado) {
+        alert("Selecione um card antes de remover.");
+        return;
+    }
+
+    cardParaExcluir = selecionado;
+    modalExcluir.style.display = "flex";
+});
+
+// Botão CANCELAR
+cancelarExcluir.addEventListener("click", () => {
+    modalExcluir.style.display = "none";
+    cardParaExcluir = null;
+});
+
+// Botão CONFIRMAR EXCLUSÃO
+confirmarExcluir.addEventListener("click", () => {
+    if (cardParaExcluir) {
+        cardParaExcluir.remove();
+        cardParaExcluir = null;
+    }
+
+    modalExcluir.style.display = "none";
+});
+
+
 </script>
+
