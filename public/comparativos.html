@@ -19,7 +19,7 @@
 
     <div class="container">
 
-    <main>
+<main>
     <h2>COMPARATIVOS</h2>
     <div class="box">
 
@@ -29,128 +29,381 @@
             <input type="date">
             <button><i class="fas fa-calendar-alt"></i></button>
             <input type="text" placeholder="Pesquisar">
-            <button><i class="fa-solid fa-plus"></i></button>
+            <button  id="btnAdd"><i class="fa-solid fa-plus"></i></button>
             <button><i class="fa-solid fa-edit"></i></button>
             <button><i class="fa-solid fa-star"></i></button>
-            <button><i class="fas fa-trash"></i></button>
+            <button id="btnRemover"><i class="fas fa-trash"></i></button>
         </div> 
+
+            <div id="modal" class="modal">
+    <div class="modal-content">
+        <h3>Criar Comparativo</h3>
+
+        <label>Estado A:</label>
+        <select id="estado1" class="select-estado">
+            <option value="">Selecione</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+
+        <label>Estado B:</label>
+        <select id="estado2" class="select-estado">
+            <option value="">Selecione</option>
+            <!-- repetir mesmo bloco -->
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+
+        <label for="selectAno">Ano</label>
+        <select id="selectAno">
+            <option value="">Selecione</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+        </select>
+
+        <label for="selectMes">Mês</label>
+        <select id="selectMes">
+            <option value="">Selecione</option>
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select>
+
+        <input id="inputTitulo" type="text" placeholder="Título do comparativos" />
+
+        <div class="modal-buttons">
+            <button id="cancelarModal">Cancelar</button>
+            <button id="confirmarModal" class="confirmar">Criar Comparativo</button>
+        </div>
+    </div>
+</div>
         <hr>
-        <!-- Cards -->
-        <div class="cards-container">
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
+    <div class="cards-container"></div>
+      <!-- MODAL CONFIRMAÇÃO DE EXCLUSÃO -->
+        <div id="modalExcluir" class="modal">
+            <div class="modal-content">
+                <h3>Excluir Card</h3>
+                <p>Tem certeza que deseja remover este card?</p>
+
+                <div class="modal-buttons">
+                    <button id="cancelarExcluir">Cancelar</button>
+                    <button id="confirmarExcluir" class="confirmar">Excluir</button>
                 </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>SP | RJ</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
+            </div>
+        </div>
+  
+        <!-- MODAL DE DETALHES -->
+    <div id="modal-detalhes" class="modal-overlay">
+        <div class="modal-content">
+            
+            <button class="modal-close">&times;</button>
+
+            <h2 id="modal-titulo">Título aqui</h2>
+
+            <div class="modal-info">
+                <p><strong>Estado A:</strong> <span id="modal-estadoA"></span></p>
+                <p><strong>Estado B:</strong> <span id="modal-estadoB"></span></p>
             </div>
 
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
-                </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>RO | PE</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
-                </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>TO | AC</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
-                </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>RS | SC</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
-                </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>MG | BA</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    Imagem das bandeiras dos estados comparados
-                </div>
-                <div class="card-body">
-                    <h3>Título do Comparativo</h3>
-                    <p>MT | GO</p>
-                </div>
-                <div class="card-actions">
-                    <button>...</button>
-                </div>
-            </div>
-        </div> 
+        </div>
+    </div>
 
     </div> 
 </main>
 
-<div class="sidebar">
-         <!-- Informações -->
-        <a href="info.html">
-            <i class="fa-solid fa-user"></i>
-        </a>
-    
-        <!-- Dashboard -->
-        <a href="dashboard.html">
-            <i class="fa-solid fa-clock"></i>
-        </a>
-    
-        <!-- Angular -->
-        <a href="http://localhost:4200" 
-            <i class="fa-solid fa-envelope"></i>
-        </a>
-    
-        <!-- Comparativos -->
-        <a href="comparativos.html" class="active">
-            <i class="fa-solid fa-file-lines"></i>
-        </a>
-    
-        <!-- Configurações -->
-        <a href="configuracoes.html">
-            <i class="fa-solid fa-gear"></i>
-        </a>
-    
-        <!-- Logout -->
-        <a href="#" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </a>
+ <!--Sidebar-->
+    <div class="sidebar">
+        <a href="#"><i class="fa-solid fa-user"></i></a>
+        <a href="#"><i class="fa-solid fa-clock" onclick="window.location.href='dashboard/dashboard.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i></a>
+        <a href="#" class="active"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
     </div>
 </div>
   
 </body>
 </html>
+
+<script>
+const btnPlus = document.querySelector('.fa-plus').parentElement;
+const modal = document.getElementById('modal');
+const cancelar = document.getElementById('cancelarModal');
+const confirmar = document.getElementById('confirmarModal');
+
+const estado1 = document.getElementById("estado1");
+const estado2 = document.getElementById("estado2");
+const inputTitulo = document.getElementById("inputTitulo");
+
+const btnRemover = document.getElementById("btnRemover");
+let cardParaExcluir = null;
+const modalExcluir = document.getElementById("modalExcluir");
+const cancelarExcluir = document.getElementById("cancelarExcluir");
+const confirmarExcluir = document.getElementById("confirmarExcluir");
+
+
+let cardEmEdicao = null;     // referencia para o card que está sendo editado
+let modoEdicao = false;      // flag: true quando estamos no modo edição
+
+/* cria o card */
+btnPlus.addEventListener('click', () => {
+    modoEdicao = false;
+    cardEmEdicao = null;
+    confirmar.innerText = "Criar Comparativo";
+    // limpa campos
+    estado1.value = "";
+    estado2.value = "";
+    inputTitulo.value = "";
+    modal.style.display = 'flex';
+});
+
+/* cancelar*/
+cancelar.addEventListener('click', () => {
+    fecharModal();
+});
+
+/*CRIA ou EDITA dependendo do modoEdicao*/
+confirmar.addEventListener('click', () => {
+    const e1 = estado1.value;
+    const e2 = estado2.value;
+    const titulo = inputTitulo.value.trim();
+
+    if (!titulo) {
+        alert("Digite um título!");
+        return;
+    }
+
+    if (!e1 || !e2) {
+        alert("Selecione os dois estados!");
+        return;
+    }
+
+    if (modoEdicao && cardEmEdicao) {
+        // UPDATE
+        editarCard(cardEmEdicao, titulo, e1, e2);
+    } else {
+        // CREATE
+        criarCard(titulo, e1, e2);
+    }
+
+    fecharModal();
+});
+
+/* fechar ou resetar */
+function fecharModal() {
+    modal.style.display = 'none';
+    confirmar.innerText = "Criar Comparativo";
+    modoEdicao = false;
+    cardEmEdicao = null;
+    estado1.value = "";
+    estado2.value = "";
+    inputTitulo.value = "";
+}
+
+// cria o card no container
+function criarCard(titulo, estadoA, estadoB) {
+    const container = document.querySelector(".cards-container");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.setAttribute("data-titulo", titulo);
+    card.setAttribute("data-estadoA", estadoA);
+    card.setAttribute("data-estadoB", estadoB);
+
+    card.innerHTML = `
+        <div class="card-body">
+            <h3>${titulo}</h3>
+            <p class="estados-texto">${estadoA} | ${estadoB}</p>
+        </div>
+        <div class="card-actions">
+            <button class="btn-more">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+    `;
+
+    // abre modal
+    card.querySelector(".btn-more").addEventListener("click", (ev) => {
+        ev.stopPropagation(); // impede clique de selecionar card
+        abrirModalDetalhes(card);
+    });
+
+    // seleciona/desseleciona
+    card.addEventListener("click", () => {
+        if (card.classList.contains("selecionado")) {
+            card.classList.remove("selecionado");
+            return;
+        }
+
+        document.querySelectorAll(".card")
+            .forEach(c => c.classList.remove("selecionado"));
+
+        card.classList.add("selecionado");
+    });
+
+    container.appendChild(card);
+}
+
+function abrirModalDetalhes(card) {
+    const modal = document.getElementById("modal-detalhes");
+
+    document.getElementById("modal-titulo").textContent = card.dataset.titulo;
+    document.getElementById("modal-estadoA").textContent = card.dataset.estadoA;
+    document.getElementById("modal-estadoB").textContent = card.dataset.estadoB;
+
+    modal.style.display = "flex";
+}
+
+// fecha modal no botão
+document.querySelector(".modal-close").addEventListener("click", () => {
+    document.getElementById("modal-detalhes").style.display = "none";
+});
+
+
+
+// ATUALIZAR
+function editarCard(card, novoTitulo, novoA, novoB) {
+    if (!card) return;
+    const h3 = card.querySelector(".card-body h3");
+    const p = card.querySelector(".card-body .estados-texto");
+
+    if (h3) h3.innerText = novoTitulo;
+    if (p) p.innerText = `${novoA} | ${novoB}`;
+
+    card.classList.remove("selecionado"); // remove seleção após editar
+    cardEmEdicao = null;
+    modoEdicao = false;
+}
+
+/* quando clica no btn de edição, abre o modal preenchido com os dados do card selecionado. */
+const btnEditarBarra = document.querySelectorAll('.filtros button').length
+    ? document.querySelectorAll('.filtros button').find
+      ? (() => { 
+            const buttons = Array.from(document.querySelectorAll('.filtros button'));
+            return buttons.find(b => b.querySelector('.fa-edit')) || document.querySelector('.fa-edit').parentElement;
+        })()
+      : document.querySelector('.fa-edit').parentElement
+    : document.querySelector('.fa-edit').parentElement;
+
+const btnEditar = btnEditarBarra || (document.querySelector('.fa-edit') ? document.querySelector('.fa-edit').parentElement : null);
+
+if (btnEditar) {
+    btnEditar.addEventListener('click', () => {
+        const selecionado = document.querySelector(".card.selecionado");
+        if (!selecionado) {
+            alert("Selecione um card primeiro (clique no card) para editar.");
+            return;
+        }
+
+        // preenche modal com dados do card selecionado
+        const tituloAtual = selecionado.querySelector(".card-body h3").innerText;
+        const texto = selecionado.querySelector(".card-body .estados-texto").innerText;
+        const [estadoA, estadoB] = texto.split(" | ");
+
+        inputTitulo.value = tituloAtual;
+        estado1.value = estadoA || "";
+        estado2.value = estadoB || "";
+
+        // modo edição ativado
+        modoEdicao = true;
+        cardEmEdicao = selecionado;
+        confirmar.innerText = "Salvar Alterações";
+
+        modal.style.display = 'flex';
+    });
+} else {
+    console.warn("Botão de editar da barra não encontrado.");
+}
+
+document.getElementById("btnRemover").addEventListener("click", () => {
+    const selecionado = document.querySelector(".card.selecionado");
+
+    if (!selecionado) {
+        alert("Selecione um card antes de remover.");
+        return;
+    }
+
+    cardParaExcluir = selecionado;
+    modalExcluir.style.display = "flex";
+});
+
+// Botão CANCELAR
+cancelarExcluir.addEventListener("click", () => {
+    modalExcluir.style.display = "none";
+    cardParaExcluir = null;
+});
+
+// Botão CONFIRMAR EXCLUSÃO
+confirmarExcluir.addEventListener("click", () => {
+    if (cardParaExcluir) {
+        cardParaExcluir.remove();
+        cardParaExcluir = null;
+    }
+
+    modalExcluir.style.display = "none";
+});
+
+
+</script>
+
