@@ -5,21 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Logaritimos</title>
-
+    <title>Logaritimos - Login</title>
     <script src="./js/sessao.js"></script>
-
     <link rel="stylesheet" href="./CSS/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!--Header-->
     <header>
         <div>
-            <img src="./assets/imagem/logo.png" alt="">
+            <img src="./assets/imagem/logo.png" alt="Logo">
         </div>
         <div class="links">
             <ul>
@@ -41,7 +37,7 @@
 
             <div class="parte1">
                 <h2>Bem vindo(a) de volta!</h2>
-                <p>Cadastre-se mantenha-se conectado conosco</p>
+                <p>Cadastre-se e mantenha-se conectado conosco</p>
                 <button onclick="window.location.href='cadastro.html'">Cadastro</button>
             </div>
 
@@ -64,21 +60,23 @@
                             <img src="./assets/imagem/cadeado.png" alt="">
                         </div>
                         <input id="senha_input" type="password" placeholder="Senha">
-                        <!-- Ícone de mostrar/ocultar senha (opcional) -->
-                        <!-- <i id="toggleSenha" class="fa-solid fa-eye-slash" 
-                            style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
-                            cursor: pointer; font-size: 18px; color: #555;"></i> -->
                         <span id="erro_senha" style="color: red; font-size: 14px;"></span>
                         <br>
                     </div>
 
                     <button class="botao" onclick="entrar()">Login</button>
+                    
+                    <div id="div_aguardar" style="display: none; margin-top: 10px; text-align: center;">
+                        <span>Autenticando...</span> 
+                    </div>
+                    
+                    <div id="div_erros_login" style="display: none; color: red; margin-top: 10px;"></div>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <!--footer inicio-->
     <footer>
         <div>
             <h1>Logaritmos 2025 - TODOS OS DIREITOS RESERVADOS</h1>
@@ -87,77 +85,73 @@
 </body>
 
 </html>
+
 <script>
-function entrar() {
-    aguardar();
+    function entrar() {
+        // Limpa erros anteriores
+        document.getElementById("erro_email").innerText = "";
+        document.getElementById("erro_senha").innerText = "";
 
-    var emailVar = email_input.value.trim();
-    var senhaVar = senha_input.value.trim();
+        // Chama função de loading (agora segura porque adicionamos a div no HTML)
+        aguardar();
 
-    document.getElementById("erro_email").innerText = "";
-    document.getElementById("erro_senha").innerText = "";
+        var emailVar = email_input.value.trim();
+        var senhaVar = senha_input.value.trim();
 
-    let temErro = false;
+        let temErro = false;
 
-    if (emailVar === "") {
-        document.getElementById("erro_email").innerText = "Email inválido, por favor insira um email!";
-        temErro = true;
-    }
-    if (senhaVar === "") {
-        document.getElementById("erro_senha").innerText = "Senha inválida, por favor insira uma senha!";
-        temErro = true;
-    }
-
-    if (temErro) {
-        finalizarAguardar();
-        return false;
-    }
-
-    fetch("/empresa/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ emailServer: emailVar, senhaServer: senhaVar })
-    })
-    .then(resposta => {
-        if (resposta.ok) {
-            return resposta.json().then(json => {
-                sessionStorage.EMAIL_EMPRESA = json.email;
-                sessionStorage.RAZAO_SOCIAL = json.razaoSocial;
-                sessionStorage.ID_EMPRESA = json.idEmpresa;
-
-                setTimeout(() => {
-                    window.location = "dashboard.html";
-                }, 1000);
-            });
-        } else {
-            document.getElementById("erro_senha").innerText = "Email ou senha inválidos.";
-            finalizarAguardar();
+        if (emailVar === "") {
+            document.getElementById("erro_email").innerText = "Email inválido!";
+            temErro = true;
         }
-    })
-    .catch(erro => {
-        console.log("Erro no fetch:", erro);
-        document.getElementById("erro_senha").innerText = "Email ou senha inválidos.";
-        finalizarAguardar();
-    });
+        if (senhaVar === "") {
+            document.getElementById("erro_senha").innerText = "Senha inválida!";
+            temErro = true;
+        }
 
-    return false;
-}
+        if (temErro) {
+            finalizarAguardar();
+            return false;
+        }
 
-    // Esconder e aparecer senha
-    const senhaInput = document.getElementById("senha_input");
-    const toggleSenha = document.getElementById("toggleSenha");
+        // CORREÇÃO 1: Rota no plural (/usuarios) se você seguiu meu conselho anterior
+        fetch("/usuario/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            // CORREÇÃO 2: Usar 'email' e 'senha' para bater com o controller e o banco
+            body: JSON.stringify({
+                email: emailVar,
+                senha: senhaVar
+            })
+        })
+        .then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    // CORREÇÃO 3: Salvando dados de USUÁRIO, não de Empresa
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    // Se o usuário tiver vinculo com empresa, pode vir no json também:
+                    // sessionStorage.FK_EMPRESA = json.fkEmpresa; 
 
-    if (toggleSenha) {
-        toggleSenha.addEventListener("click", () => {
-            if (senhaInput.type === "password") {
-                senhaInput.type = "text";
-                toggleSenha.classList.remove("fa-eye-slash");
-                toggleSenha.classList.add("fa-eye");
+                    setTimeout(() => {
+                        window.location = "dashboard.html"; // Ou para onde o usuário deve ir
+                    }, 1000);
+                });
             } else {
-                senhaInput.type = "password";
-                toggleSenha.classList.remove("fa-eye");
-                toggleSenha.classList.add("fa-eye-slash");
+                console.log("Houve um erro ao tentar realizar o login!");
+                document.getElementById("erro_senha").innerText = "Email ou senha incorretos";
+                finalizarAguardar();
             }
+        })
+        .catch(erro => {
+            console.log("Erro no fetch:", erro);
+            document.getElementById("erro_senha").innerText = "Erro de conexão ou servidor offline";
+            finalizarAguardar();
         });
+
+        return false;
     }
 </script>

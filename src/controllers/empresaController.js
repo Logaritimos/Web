@@ -1,87 +1,106 @@
 var empresaModel = require("../models/empresaModel");
 var enderecoModel = require("../models/enderecoModel");
+var usuarioModel = require("../models/usuarioModel");
 
 function cadastrarComEndereco(req, res) {
-    var { razaoSocialServer, emailServer, senhaServer, cnpjServer,
-        logradouroServer, numeroServer, complementoServer, bairroServer,
-        cidadeServer, estadoServer, cepServer } = req.body;
-
-
-    if (!emailServer || !senhaServer || !razaoSocialServer || !cnpjServer || !logradouroServer ||
-        !cepServer || !estadoServer || !cidadeServer || !bairroServer || !numeroServer) {
-        res.status(400).send("Campos obrigatórios estão faltando.");
-        return;
-    }
-
-    empresaModel.cadastrarEmpresa(razaoSocialServer, cnpjServer, emailServer, senhaServer)
-        .then(() => {
-            return empresaModel.buscarEmpresaPorCnpjEmail(cnpjServer, emailServer);
-        })
-        .then((resultadoBusca) => {
-            if (resultadoBusca.length === 0) {
-                res.status(404).json({ erro: "Empresa não encontrada após cadastro." });
-                return;
-            }
-
-            const idEmpresa = resultadoBusca[0].idEmpresa;
-
-            return enderecoModel.cadastrarEndereco( logradouroServer, numeroServer, complementoServer,
-                bairroServer, cidadeServer, estadoServer, cepServer, idEmpresa);
-
-        })
-        .then(() => {
-            res.status(201).json({ mensagem: "Empresa e endereço cadastrados com sucesso!" });
-        })
-        .catch((erro) => {
-            console.log("Erro ao cadastrar empresa e endereço:", erro);
-            res.status(500).json({ erro: erro.message });
-        });
-}
-
-function login(req, res) {
+    // Usuario e Empresa
+    var razaoSocial = req.body.razaoSocialServer;
+    var cnpj = req.body.cnpjServer;
+    var nome = req.body.nomeServer;
+    var telefone = req.body.telefoneServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (!email || !senha) {
-        res.status(400).send("Email e senha são obrigatórios.");
+    // Endereço
+    var logradouro = req.body.logradouroServer;
+    var numero = req.body.numeroServer;
+    var complemento = req.body.complementoServer;
+    var bairro = req.body.bairroServer;
+    var cidade = req.body.cidadeServer;
+    var estado = req.body.estadoServer;
+    var cep = req.body.cepServer;
+
+    // Estrangeiras (Setor e Cargo)
+    var setorTexto = req.body.setorServer;
+    var cargoTexto = req.body.cargoServer;
+
+
+    if (!razaoSocial || !cnpj || !nome || !email || !senha) {
+        res.status(400).send("Dados incompletos.");
         return;
     }
 
-    empresaModel.login(email, senha)
-        .then((resultado) => {
-            if (resultado.length === 1) {
-                res.status(200).json({
-                    idEmpresa: resultado[0].idEmpresa,
-                    razaoSocial: resultado[0].razaoSocial,
-                    email: resultado[0].email
+    var fkSetor;
+    if (setorTexto == "admin") fkSetor = 1;
+    else if (setorTexto == "vendas") fkSetor = 2;
+    else if (setorTexto == "marketing") fkSetor = 3;
+    else if (setorTexto == "operacao") fkSetor = 4;
+    else fkSetor = 1; // Default
+
+    var fkCargo = Number(cargoTexto); 
+    if (isNaN(fkCargo)) fkCargo = 1;
+
+    empresaModel.buscarEmpresaPorCnpj(cnpj).then((resultado) => {
+        
+        if (resultado.length > 0) {
+            // --- Empresa JÁ EXISTE ---
+            var idEmpresa = resultado[0].idEmpresa;
+            console.log(`Empresa ${idEmpresa}, [${razaoSocial}] já existe. Cadastrando apenas usuário...`);
+
+            usuarioModel.cadastrarUsuario(nome, telefone, email, senha, idEmpresa, fkSetor, fkCargo)
+                .then((resUsuario) => {
+                     res.json({ mensagem: "Usuário cadastrado e vinculado a empresa existente!" });
+                })
+                .catch((erro) => {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
                 });
-            } else {
-                res.status(403).json({ erro: "Email ou senha inválidos!" });
-            }
-        })
-        .catch((erro) => {
-            console.log("Erro no login:", erro);
-            res.status(500).json({ erro: erro.message });
-        });
-}
-function atualizarEmail(req, res) {
-    const { idEmpresa, novoEmail } = req.body;
 
-    empresaModel.atualizarEmail(idEmpresa, novoEmail)
-        .then(() => res.status(200).json({ mensagem: "Email atualizado com sucesso!" }))
-        .catch(err => res.status(500).json({ erro: err.message }));
+        } else {
+            // --- Empresa NÃO EXISTE (Cadastrar Tudo) ---
+            console.log("Empresa nova. Cadastrando Empresa, Endereço e Usuário...");
+
+            empresaModel.cadastrarEmpresa(razaoSocial, cnpj)
+                .then((resEmpresa) => {
+                    var idEmpresa = resEmpresa.insertId;
+
+                    
+                    var promessaEndereco = enderecoModel.cadastrarEndereco(logradouro, numero, complemento, bairro, cidade, estado, cep, idEmpresa);
+                    var promessaUsuario = usuarioModel.cadastrarUsuario(nome, telefone, email, senha, idEmpresa, fkSetor, fkCargo);
+
+                    return Promise.all([promessaEndereco, promessaUsuario]);
+                })
+                .then(() => {
+                    res.status(201).json({ mensagem: "Empresa nova, endereço e usuário criados com sucesso!" });
+                })
+                .catch((erro) => {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
+                });
+        }
+
+    }).catch((erro) => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
-function atualizarSenha(req, res) {
-    const { idEmpresa, novaSenha } = req.body;
+function buscarPorCnpj(req, res) {
+    var cnpj = req.params.cnpj;
 
-    empresaModel.atualizarSenha(idEmpresa, novaSenha)
-        .then(() => res.status(200).json({ mensagem: "Senha atualizada com sucesso!" }))
-        .catch(err => res.status(500).json({ erro: err.message }));
+    empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado[0]);
+        } else {
+            res.status(204).send();
+        }
+    }).catch((erro) => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
+
 module.exports = {
     cadastrarComEndereco,
-    login,
-    atualizarEmail,
-    atualizarSenha
+    buscarPorCnpj
 }

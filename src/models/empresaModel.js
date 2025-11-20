@@ -9,8 +9,14 @@ function cadastrarEmpresa(razaoSocial, cnpj) {
 }
 
 function buscarEmpresaPorCnpj(cnpj) {
-    const instrucaoSql = `
-        SELECT idEmpresa FROM empresa WHERE cnpj = '${cnpj}' LIMIT 1;
+    const instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}';`;
+    return database.executar(instrucaoSql);
+}
+function buscarPorCnpj(cnpj) {
+    var instrucaoSql = `
+        SELECT * FROM empresa 
+        JOIN endereco ON idEmpresa = fkEmpresa 
+        WHERE cnpj = '${cnpj}';
     `;
     return database.executar(instrucaoSql);
 }
@@ -18,4 +24,5 @@ function buscarEmpresaPorCnpj(cnpj) {
 module.exports = {
     cadastrarEmpresa,
     buscarEmpresaPorCnpj,
+    buscarPorCnpj
 };

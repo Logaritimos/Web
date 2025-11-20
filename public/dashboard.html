@@ -54,6 +54,41 @@
 
 <h2 class="titulo">Dashboard</h2>
 <div class="fundo">
+    <div class="filtro-bar">
+    <div class="filtro-item">
+        <label>Ano:</label>
+        <select id="filtroAno">
+            <option value="todos">Todos</option>
+            <option value="2024">2021</option>
+            <option value="2023">2020</option>
+            <option value="2022">2019</option>
+            <option value="2021">2018</option>
+            <option value="2020">2017</option>
+        </select>
+    </div>
+
+    <div class="filtro-item">
+        <label>Natureza:</label>
+        <select id="filtroNatureza">
+            <option value="todos">Todas</option>
+            <option value="Regular">Regular</option>
+            <option value="Irregular">Irregular</option>
+        </select>
+    </div>
+
+    <div class="filtro-item">
+        <label>Tipo:</label>
+        <select id="filtroTipo">
+            <option value="todos">Embarque + Desembarque</option>
+            <option value="embarque">Apenas Embarques</option>
+            <option value="desembarque">Apenas Desembarques</option>
+        </select>
+    </div>
+
+    <button class="btn-filtrar" onclick="aplicarFiltros()">
+        <i class="fa-solid fa-filter"></i> Aplicar
+    </button>
+</div>
 
 <div class="dashboard-container">
 
@@ -102,26 +137,23 @@
 
 <div class="main-content">
     <div class="charts-container">
-
-        <div class="">
+        <div class="chart-wrapper" style="flex: 1; background-color: #001A27; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; margin-bottom: 10px;">
             <h4 class="chart-title">Passageiros por Voos Anualmente</h4>
-            <div  class="chart">
-            <canvas id="lineChart" height="70"></canvas>
+            <div class="chart" style="position: relative; height: 100%; width: 100%;">
+                <canvas id="lineChart"></canvas>
             </div>
         </div>
         
-        <div class="">
+        <div class="chart-wrapper" style="flex: 1; background-color: #001A27; border-radius: 8px; padding: 10px; display: flex; flex-direction: column;">
             <h4 class="chart-title">Tráfego de Passageiros por Mês</h4>
-            <div class="chart">
-            <canvas id="barChart" height="70"></canvas>
+            <div class="chart" style="position: relative; height: 100%; width: 100%;">
+                <canvas id="barChart"></canvas>
+            </div>
         </div>
-        </div>
-
-        
     </div>
-
     <div class="table-section">
         <h4 class="table-title">Ranking Destinos Nacionais</h4>
+        <br>
         <div class="table-container">
             <table>
                 <thead>
@@ -150,92 +182,220 @@
         window.location.href = '../../login.html';
     }
 
-    // --- Gráficos ---
-    const ctxLine = document.getElementById('lineChart').getContext('2d');
-    new Chart(ctxLine, {
-        type: 'line',
-        data: {
-            labels: ['2017', '2018','2019','2020','2021','2022','2023', '2024', '2025'],
-            datasets: [{
-                label: 'Passageiros (milhões)',
-                data: [50,55,40,45,60,70, 60, 45, 40, 55],
-                borderColor: '#D9D9D9',
-                backgroundColor: '#001A27',
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { labels: { color: '#fff' } } },
-            scales: { x:{ ticks:{color:'#fff'} }, y:{ ticks:{color:'#fff'} } }
-        }
-    });
+    let graficoLinha;
+    let graficoBarra;
+    
+    window.onload = function() {
+        obterDadosGraficoAnual();
+        obterDadosGraficoMensal();
+    };
 
-    const ctxBar = document.getElementById('barChart').getContext('2d');
-    new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-            datasets: [{
-                label: 'Passageiros (milhares)',
-                data: [5,6,7,8,6,7,9,10,8,6,5,7],
-                backgroundColor: '#D9D9D9'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { labels: { color: '#fff' } } },
-            scales: { x:{ ticks:{color:'#fff'} }, y:{ ticks:{color:'#fff'} } }
-        }
-    });
+    // --- Gráfico (1) linha ---
+    function obterDadosGraficoAnual() {
+        fetch(`/voo/anuais`)
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(dados => {
+                        plotarGraficoLinha(dados);
+                    });
+                } else {
+                    console.error('Erro na API (Anual):', resposta.status, resposta.statusText);
+                    resposta.text().then(texto => console.error("Texto do erro:", texto));
+                }
+            })
+            .catch(erro => console.error('Erro CRÍTICO na requisição (Anual):', erro));
+    }
+    function plotarGraficoLinha(dados) {
+        const ctxLine = document.getElementById('lineChart').getContext('2d');
+        
+        const labelsAno = dados.map(dado => dado.ano);
+        const dadosPassageiros = dados.map(dado => dado.total);
+
+        graficoLinha = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: labelsAno,
+                datasets: [{
+                    label: 'Passageiros Totais',
+                    data: dadosPassageiros,
+                    borderColor: '#D9D9D9',
+                    backgroundColor: '#001A27',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: { 
+                    x: { ticks: { color: '#fff' } }, 
+                    y: { ticks: { color: '#fff' } } 
+                }
+            }
+        });
+    }
+
+    // --- Gráfico (2) barra ---
+    function obterDadosGraficoMensal() {
+        fetch(`/voo/mensais`)
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(dados => {
+                        plotarGraficoBarra(dados);
+                    });
+                } else {
+                    console.error('Erro na API (Mensal):', resposta.status, resposta.statusText);
+                    resposta.text().then(texto => console.error("Texto do erro:", texto));
+                }
+            })
+            .catch(erro => console.error('Erro CRÍTICO na requisição (Mensal):', erro));
+    }
+    function plotarGraficoBarra(dados) {
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+
+        const labelsMes = dados.map(dado => dado.mes);
+        const dadosPassageiros = dados.map(dado => dado.total);
+
+        graficoBarra = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: labelsMes,
+                datasets: [{
+                    label: 'Passageiros',
+                    data: dadosPassageiros,
+                    backgroundColor: '#D9D9D9'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: { 
+                    x: { ticks: { color: '#fff' } }, 
+                    y: { ticks: { color: '#fff' } } 
+                }
+            }
+        });
+    }
 
     // --- Paginação do Ranking de Destinos ---
-    const destinos = [];
-    for(let i=1;i<=26;i++){
-        destinos.push({nome:`Destino #${i}`, embarque:`${Math.floor(Math.random()*20+5)}%`, desembarque:`${Math.floor(Math.random()*20+5)}%`});
+    let listaDestinos = [];
+    const rowsPerPage = 9;
+    let currentPage = 1;
+
+    window.onload = function() {
+        obterDadosGraficoAnual();
+        obterDadosGraficoMensal();
+        obterDadosTabela();
+    };
+
+    function obterDadosTabela() {
+        fetch(`/voo/destinos`)
+            .then(resposta => {
+                if (resposta.ok) {
+                    resposta.json().then(dados => {
+                        listaDestinos = dados;
+                        renderTable(currentPage);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(erro => console.error('Erro na requisição:', erro));
     }
 
     const tableBody = document.getElementById('table-body');
     const pagination = document.getElementById('pagination');
-    const rowsPerPage = 5;
-    let currentPage = 1;
-    const totalPages = Math.ceil(destinos.length / rowsPerPage);
 
-    function renderTable(page){
+    function renderTable(page) {
         tableBody.innerHTML = '';
-        const start = (page-1)*rowsPerPage;
+        
+        const totalPages = Math.ceil(listaDestinos.length / rowsPerPage);
+        const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        destinos.slice(start,end).forEach(d => {
+        
+        const paginatedItems = listaDestinos.slice(start, end);
+
+        paginatedItems.forEach(d => {
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${d.nome}</td><td>${d.embarque}</td><td>${d.desembarque}</td>`;
+            
+            const embAtual = Number(d.embarqueAtual);
+            const embAnt = Number(d.embarqueAnterior);
+            const desAtual = Number(d.desembarqueAtual);
+            const desAnt = Number(d.desembarqueAnterior);
+
+            const embarqueFormatado = embAtual.toLocaleString('pt-BR');
+            const desembarqueFormatado = desAtual.toLocaleString('pt-BR');
+
+            const htmlVarEmbarque = calcularVariacao(embAtual, embAnt);
+            const htmlVarDesembarque = calcularVariacao(desAtual, desAnt);
+
+            tr.innerHTML = `
+                <td>${d.nome}</td>
+                <td>
+                    ${embarqueFormatado} 
+                    ${htmlVarEmbarque}
+                </td>
+                <td>
+                    ${desembarqueFormatado}
+                    ${htmlVarDesembarque}
+                </td>
+            `;
             tableBody.appendChild(tr);
         });
-        renderPagination();
+
+        renderPagination(totalPages);
+    }
+    function calcularVariacao(atual, anterior) {
+        // Não tinha dados no ano anterior (Novo destino)
+        if (anterior === 0) {
+            return atual > 0 
+                ? '<span class="variacao variacao-positiva"><i class="fa-solid fa-arrow-up"></i> Novo</span>' 
+                : '<span class="variacao variacao-neutra">-</span>';
+        }
+
+        const diferenca = atual - anterior;
+        const porcentagem = (diferenca / anterior) * 100;
+        
+        const porcentagemAbsoluta = Math.abs(porcentagem);
+        const valorFormatado = porcentagemAbsoluta.toFixed(1).replace('.', ',');
+
+        if (porcentagem > 0) {
+            return `<span class="variacao variacao-positiva">
+                        <i class="fa-solid fa-arrow-up"></i> ${valorFormatado}%
+                    </span>`;
+        } else if (porcentagem < 0) {
+            return `<span class="variacao variacao-negativa">
+                        <i class="fa-solid fa-arrow-down"></i> ${valorFormatado}%
+                    </span>`;
+        } else {
+            return '<span class="variacao variacao-neutra">0%</span>';
+        }
     }
 
-    function renderPagination(){
+    function renderPagination(totalPages) {
         pagination.innerHTML = '';
+
         const prev = document.createElement('button');
         prev.textContent = '<';
-        prev.disabled = currentPage===1;
-        prev.onclick = ()=>{ currentPage--; renderTable(currentPage); };
+        prev.disabled = currentPage === 1;
+        prev.onclick = () => { currentPage--; renderTable(currentPage); };
         pagination.appendChild(prev);
 
-        for(let i=1;i<=totalPages;i++){
+        for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement('button');
             btn.textContent = i;
-            if(i===currentPage) btn.classList.add('active');
-            btn.onclick = ()=>{ currentPage=i; renderTable(currentPage); };
+            if (i === currentPage) btn.classList.add('active');
+            btn.onclick = () => { currentPage = i; renderTable(currentPage); };
             pagination.appendChild(btn);
         }
 
         const next = document.createElement('button');
         next.textContent = '>';
-        next.disabled = currentPage===totalPages;
-        next.onclick = ()=>{ currentPage++; renderTable(currentPage); };
+        next.disabled = currentPage === totalPages || totalPages === 0;
+        next.onclick = () => { currentPage++; renderTable(currentPage); };
         pagination.appendChild(next);
     }
-
-    renderTable(currentPage);
 </script>
 
 </body>
