@@ -62,7 +62,7 @@
               <div class="desenho">
                 <img src="./assets/imagem/cnpj.png" alt="">
               </div>
-              <input id="cnpj" type="text" placeholder="CNPJ" />
+              <input id="cnpj" type="text" placeholder="CNPJ" onblur="pesquisarEmpresa()" />
               <span id="erro-cnpj" class="msg-erro">CNPJ inválido</span>
             </div>
 
@@ -99,14 +99,14 @@
               <div class="campo" style="position: relative;">
                 <select name="cargoUsuario" id="cargoUsuario">
                   <option value="cargo">Cargo</option>
-                  <option value="">Gerente de Projetos</option>
-                  <option value="">Analista Financeiro</option>
-                  <option value="">Consultor de Vendas</option>
-                  <option value="">Assistente de Vendas</option>
-                  <option value="">Gerente de Marketing</option>
-                  <option value="">Coordenador de Marketing</option>
-                  <option value="">Analista de Dados</option>
-                  <option value="">Gerente de Produção</option>
+                  <option value="1">Gerente de Projetos</option>
+                  <option value="2">Analista Financeiro</option>
+                  <option value="3">Consultor de Vendas</option>
+                  <option value="4">Assistente de Vendas</option>
+                  <option value="5">Gerente de Marketing</option>
+                  <option value="6">Coordenador de Marketing</option>
+                  <option value="7">Analista de Dados</option>
+                  <option value="8">Gerente de Produção</option>
                 </select>
                 <span id="erro-cargo" class="msg-erro">Cargo inválido</span>
               </div>
@@ -228,6 +228,54 @@
     document.querySelector(".container").style.height = "90%";
   }
 
+  async function pesquisarEmpresa() {
+    var cnpj = document.getElementById("cnpj").value.replace(/\D/g, "");
+
+    if (cnpj.length === 14) {
+        try {
+            const resposta = await fetch(`/empresa/buscar/${cnpj}`);
+
+            if (resposta.status === 200) {
+                const dados = await resposta.json();
+                console.log("Empresa encontrada:", dados);
+
+                // Preenchendo campos automaticamente
+                document.getElementById("razaoSocial").value = dados.razaoSocial;
+                document.getElementById("cep").value = dados.cep;
+                document.getElementById("uf").value = dados.estado;
+                document.getElementById("cidade").value = dados.cidade;
+                document.getElementById("bairro").value = dados.bairro;
+                document.getElementById("logradouro").value = dados.logradouro;
+                document.getElementById("numero").value = dados.numero;
+                if(dados.complemento) {
+                    document.getElementById("complemento").value = dados.complemento;
+                }
+
+                document.getElementById("razaoSocial").disabled = true;
+                document.getElementById("cep").disabled = true;
+                document.getElementById("uf").disabled = true;
+                document.getElementById("cidade").disabled = true;
+                document.getElementById("bairro").disabled = true;
+                document.getElementById("logradouro").disabled = true;
+                document.getElementById("numero").disabled = true;
+                if(dados.complemento) {
+                    document.getElementById("complemento").disabled = true;
+                }
+
+                alert("Empresa encontrada! Vincularemos seu cadastro a ela.");
+            } else {
+                // Se não encontrar (status 204), libera os campos para cadastro novo
+                console.log("Empresa não encontrada. Cadastro novo.");
+                document.getElementById("razaoSocial").disabled = false;
+                document.getElementById("razaoSocial").value = "";
+                // Limpar campos de endereço também se quiser
+            }
+
+        } catch (erro) {
+            console.error("Erro ao buscar empresa:", erro);
+        }
+    }
+}
 
   function cadastrar() {
     //empresa

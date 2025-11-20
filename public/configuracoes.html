@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -8,165 +8,186 @@
     <link rel="stylesheet" href="./CSS/util.css">
     <link rel="stylesheet" href="./CSS/configuracoes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Logaritmos</title>
+    <title>Configurações - Usuário</title>
 </head>
 
 <body>
     <header>
         <div>
             <img src="./assets/imagem/logo.png" alt="">
-        </div>   
+        </div>
     </header>
     <div class="main-content">
-    <div class="title">Configurações</div>
-    <details open>
-        <summary><span>Redefinição de email</span></summary>
-        <div style="border-top: 3px solid #ccc;"></div>
-        <div class="inputs">
-            <input type="email" placeholder="Email atual">
-            <input type="email" placeholder="Email novo">
-        </div>
-        <button class="action">Atualizar</button>
-    </details>
-
-    <!-- Redefinição de senha -->
-    <details>
-        <summary><span>Redefinição de senha</span></summary>
-        <div style="border-top: 3px solid #ccc;"></div>
-
+        <div class="title">Configurações</div>
         
-        <div class="inputs">
-            <div class="input-wrapper">
-    <input type="password" placeholder="Senha" id="senhaAtual">
-    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaAtual', this)">
-        <i class="fa-solid fa-eye"></i>
-    </button>
-</div>
+        <details open>
+            <summary><span>Redefinição de email</span></summary>
+            <div style="border-top: 3px solid #ccc;"></div>
+            <div class="inputs">
+                <input type="email" placeholder="Email atual" id="inputEmailAtual" disabled> 
+                <input type="email" placeholder="Email novo" id="inputNovoEmail">
+            </div>
+            <button class="action" id="btnAtualizarEmail">Atualizar</button>
+        </details>
 
-            <div class="input-wrapper">
-    <input type="password" placeholder="Senha" id="senhaNova">
-    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaNova', this)">
-        <i class="fa-solid fa-eye"></i>
-    </button>
-</div>
+        <details>
+            <summary><span>Redefinição de senha</span></summary>
+            <div style="border-top: 3px solid #ccc;"></div>
 
-        </div>
-        <button class="action">Atualizar</button>
-    </details>
+            <div class="inputs">
+                <div class="input-wrapper">
+                    <input type="password" placeholder="Senha Atual" id="senhaAtual">
+                    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaAtual', this)">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
 
-    <!-- Deletar conta -->
-    <details>
-        <summary><span>Deletar conta</span></summary>
-        <div style="border-top: 3px solid #ccc;"></div>
+                <div class="input-wrapper">
+                    <input type="password" placeholder="Nova Senha" id="senhaNova">
+                    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaNova', this)">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
 
-        <div class="inputs">
-            <input type="email" placeholder="Email">
-            <div class="input-wrapper">
-    <input type="password" placeholder="Senha" id="senhaDelete">
-    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaDelete', this)">
-        <i class="fa-solid fa-eye"></i>
-    </button>
-</div>
+            </div>
+            <button class="action" id="btnAtualizarSenha">Atualizar</button>
+        </details>
 
-        </div>
-        <button class="action delete">Deletar</button>
-    </details>
+        <details>
+            <summary><span>Deletar conta</span></summary>
+            <div style="border-top: 3px solid #ccc;"></div>
+
+            <div class="inputs">
+                <input type="email" placeholder="Email" id="inputEmailDelete" disabled>
+                
+                <div class="input-wrapper">
+                    <input type="password" placeholder="Senha para confirmar" id="senhaDelete">
+                    <button type="button" class="toggle-visibility" onclick="toggleSenha('senhaDelete', this)">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+
+            </div>
+            <button class="action delete" id="btnDeletarConta">Deletar</button>
+        </details>
     </div>
+    
     <div class="sidebar">
-         <!-- Informações -->
-        <a href="info.html">
-            <i class="fa-solid fa-user"></i>
-        </a>
-    
-        <!-- Dashboard -->
-        <a href="dashboard.html">
-            <i class="fa-solid fa-clock"></i>
-        </a>
-    
-        <!-- Angular -->
-        <a href="http://localhost:4200">
-            <i class="fa-solid fa-envelope"></i>
-        </a>
-    
-        <!-- Comparativos -->
-        <a href="comparativos.html">
-            <i class="fa-solid fa-file-lines"></i>
-        </a>
-    
-        <!-- Configurações -->
-        <a href="configuracoes.html" class="active">
-            <i class="fa-solid fa-gear"></i>
-        </a>
-    
-        <!-- Logout -->
-        <a href="#" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </a>
+        <a href="info.html"><i class="fa-solid fa-user"></i></a>
+        <a href="dashboard.html"><i class="fa-solid fa-clock"></i></a>
+        <a href="http://localhost:4200"><i class="fa-solid fa-envelope"></i></a>
+        <a href="comparativos.html"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="configuracoes.html" class="active"><i class="fa-solid fa-gear"></i></a>
+        <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
 </body>
 
 </html>
-    <script>
-        function toggleSenha(id, btn) {
-    const input = document.getElementById(id);
-    const icon = btn.querySelector('i');
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-    } else {
-        input.type = "password";
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
+
+<script>
+    function toggleSenha(id, btn) {
+        const input = document.getElementById(id);
+        const icon = btn.querySelector('i');
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = "password";
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
     }
-}
 
     function logout() {
         sessionStorage.clear();
-        window.location.href = '../../login.html';
+        window.location.href = 'login.html';
     }
-</script>
-<script>
-document.getElementById("btnAtualizarEmail").addEventListener("click", function() {
-    const idEmpresa = 1; // substitua pelo ID real da empresa logada
-    const novoEmail = document.querySelector('input[placeholder="Email novo"]').value;
 
-    fetch("http://localhost:3000/empresa/email", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ idEmpresa, novoEmail })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.mensagem || "Email atualizado!");
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Erro ao atualizar email.");
-    });
-});
-</script>
-<script>
-document.getElementById("btnAtualizarSenha").addEventListener("click", function() {
-    const idEmpresa = 1; // substitua pelo ID real da empresa logada
-    const novaSenha = document.querySelector('input[placeholder="Senha nova"]').value;
+    const idUsuario = sessionStorage.ID_USUARIO;
 
-    fetch("http://localhost:3000/empresa/senha", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ idEmpresa, novaSenha })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.mensagem || "Senha atualizada!");
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Erro ao atualizar senha.");
+    if(sessionStorage.EMAIL_USUARIO) {
+        const inputEmail = document.getElementById('inputEmailAtual');
+        if(inputEmail) inputEmail.value = sessionStorage.EMAIL_USUARIO;
+
+        const inputDelete = document.getElementById('inputEmailDelete');
+        if(inputDelete) inputDelete.value = sessionStorage.EMAIL_USUARIO;
+    }
+
+    document.getElementById("btnAtualizarEmail").addEventListener("click", function () {
+        const novoEmail = document.getElementById('inputNovoEmail').value;
+        const emailAtual = document.getElementById('inputEmailAtual').value; 
+
+        if (!idUsuario) return alert("Usuário não logado!");
+        if (!novoEmail || !emailAtual) return alert("Preencha o email atual e o novo.");
+
+        fetch("/usuario/email", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idUsuario, novoEmail, emailAtual })
+        })
+        .then(async res => {
+            const data = await res.json();
+            if (res.ok) {
+                alert(data.mensagem);
+                sessionStorage.EMAIL_USUARIO = novoEmail; 
+                document.getElementById('inputEmailAtual').value = novoEmail;
+                document.getElementById('inputEmailDelete').value = novoEmail;
+                document.getElementById('inputNovoEmail').value = ""; 
+            } else {
+                alert("Erro: " + data.mensagem);
+            }
+        })
+        .catch(err => console.error(err));
     });
-});
+
+    document.getElementById("btnAtualizarSenha").addEventListener("click", function () {
+        const senhaAtual = document.getElementById('senhaAtual').value;
+        const novaSenha = document.getElementById('senhaNova').value;
+
+        if (!idUsuario) return alert("Usuário não logado!");
+        if (!senhaAtual || !novaSenha) return alert("Preencha a senha atual e a nova.");
+
+        fetch("/usuario/senha", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idUsuario, novaSenha, senhaAtual })
+        })
+        .then(async res => {
+            const data = await res.json();
+            if (res.ok) {
+                alert(data.mensagem);
+                document.getElementById('senhaAtual').value = "";
+                document.getElementById('senhaNova').value = "";
+            } else {
+                alert("Erro: " + data.mensagem);
+            }
+        })
+        .catch(err => console.error(err));
+    });
+
+    document.getElementById("btnDeletarConta").addEventListener("click", function () {
+        const senha = document.getElementById('senhaDelete').value;
+
+        if (!idUsuario) return alert("Usuário não logado!");
+        if (!senha) return alert("Digite sua senha para confirmar.");
+
+        if (confirm("Tem certeza? Essa ação não pode ser desfeita.")) {
+            fetch(`/usuario/${idUsuario}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ senha })
+            })
+            .then(async res => {
+                const data = await res.json();
+                if (res.ok) {
+                    alert("Conta deletada.");
+                    logout();
+                } else {
+                    alert("Erro: " + data.mensagem);
+                }
+            })
+            .catch(err => console.error(err));
+        }
+    });
 </script>
