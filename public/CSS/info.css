@@ -1,9 +1,12 @@
+.title {
+    margin-top: 0px !important;
+}
+
 .form-info {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 120px;
-    margin-bottom: 30px;
 }
 
 .coluna-esq {
@@ -23,7 +26,7 @@
 .info-pessoal {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    position: relative;
 }
 
 .info-pessoal label {
@@ -87,5 +90,30 @@
     
 }
 
+/* Bordas de erro */
 
+.info-pessoal {
+    
+    height: 100px;
+}
 
+.info-pessoal input {
+  height: 40px;
+  box-sizing: border-box;
+ 
+}
+
+.info-pessoal input.erro  {
+  border: 1px solid red;
+}
+ 
+.msg-erro {
+  font-size: 12px;
+  color: red;
+
+  left: 5px;
+    display: none;
+
+ align-items: end;
+ 
+}

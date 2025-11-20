@@ -128,6 +128,7 @@ function validarFormularioEtapa1() {
   return valido;
 }
 
+
 function validarFormularioEtapa2() {
   let valido = true;
 
