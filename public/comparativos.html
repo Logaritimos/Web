@@ -35,108 +35,143 @@
             <button id="btnRemover"><i class="fas fa-trash"></i></button>
         </div> 
 
-            <div id="modal" class="modal">
-    <div class="modal-content">
-        <h3>Criar Comparativo</h3>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Criar Comparativo</h3>
 
-        <label>Estado A:</label>
-        <select id="estado1" class="select-estado">
-            <option value="">Selecione</option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-        </select>
+            <div class="colunas-modal">
+                <div class="coluna coluna-a">
+                
+                    <label>Estado A:</label>
+                    <select id="estado1" class="select-estado">
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
 
-        <label>Estado B:</label>
-        <select id="estado2" class="select-estado">
-            <option value="">Selecione</option>
-            <!-- repetir mesmo bloco -->
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-        </select>
+                    <label for="selectAno">Ano A</label>
+                    <select id="selectAnoA">
+                        <option value="">Selecione</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
 
-        <label for="selectAno">Ano</label>
-        <select id="selectAno">
-            <option value="">Selecione</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-        </select>
+                    <label for="selectMes">Mês A</label>
+                    <select id="selectMes">
+                        <option value="">Selecione</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
 
-        <label for="selectMes">Mês</label>
-        <select id="selectMes">
-            <option value="">Selecione</option>
-            <option value="01">Janeiro</option>
-            <option value="02">Fevereiro</option>
-            <option value="03">Março</option>
-            <option value="04">Abril</option>
-            <option value="05">Maio</option>
-            <option value="06">Junho</option>
-            <option value="07">Julho</option>
-            <option value="08">Agosto</option>
-            <option value="09">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
+                <div class="coluna coluna-b">
+                    <label>Estado B:</label>
+                    <select id="estado2" class="select-estado">
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
 
-        <input id="inputTitulo" type="text" placeholder="Título do comparativos" />
 
-        <div class="modal-buttons">
-            <button id="cancelarModal">Cancelar</button>
-            <button id="confirmarModal" class="confirmar">Criar Comparativo</button>
+                    <label for="selectAno">Ano B</label>
+                    <select id="selectAnoB">
+                        <option value="">Selecione</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>
+
+                
+
+                    <label for="selectMes">Mês B</label>
+                    <select id="selectMes">
+                        <option value="">Selecione</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+            </div>
+
+            <input id="inputTitulo" type="text" placeholder="Título do comparativos" />
+
+            <div class="modal-buttons">
+                <button id="cancelarModal">Cancelar</button>
+                <button id="confirmarModal" class="confirmar">Criar Comparativo</button>
+            </div>
         </div>
     </div>
-</div>
+
         <hr>
     <div class="cards-container"></div>
       <!-- MODAL CONFIRMAÇÃO DE EXCLUSÃO -->
@@ -153,25 +188,76 @@
         </div>
   
         <!-- MODAL DE DETALHES -->
-    <div id="modal-detalhes" class="modal-overlay">
-        <div class="modal-content">
-            
-            <button class="modal-close">&times;</button>
+    <div id="modal-detalhes" class="modal-comparativo">
+    <div class="modal-card">
+        
+        <button class="close-btn">&times;</button>
 
-            <h2 id="modal-titulo">Título aqui</h2>
-
-            <div class="modal-info">
-                <p><strong>Estado A:</strong> <span id="modal-estadoA"></span></p>
-                <p><strong>Estado B:</strong> <span id="modal-estadoB"></span></p>
+        <div class="topo">
+            <div class="lado">
+                <h3 id="dataA">Jul/2025</h3>
+                <p id="nomeA">São Paulo</p>
             </div>
 
+            <h1 class="x">X</h1>
+
+            <div class="lado">
+                <h3 id="dataB">Jul/2025</h3>
+
+                <p id="nomeB">Rio de Janeiro</p>
+            </div>
         </div>
+
+        <hr>
+
+        <div class="comparacao">
+            <div class="coluna">
+                <p class="valor" id="aeroA">7</p>
+            </div>
+            <p class="titulo">Quantidade de aeroportos</p>
+            <div class="coluna">
+                <p class="valor" id="aeroB">4</p>
+            </div>
+        </div>
+
+        <div class="linha">
+            <p id="totalA">102.232.121</p>
+            <span>Total de Voos</span>
+            <p id="totalB">63.232.121</p>
+        </div>
+
+        <div class="linha">
+            <p id="embA">63.232.121</p>
+            <span>Embarques</span>
+            <p id="embB">102.232.121</p>
+        </div>
+
+        <div class="linha">
+            <p id="desA">102.232.121</p>
+            <span>Desembarques</span>
+            <p id="desB">102.232.121</p>
+        </div>
+
+        <div class="linha">
+            <p id="regA">2.232.121</p>
+            <span>Voos Regulares</span>
+            <p id="regB">102.232.121</p>
+        </div>
+
+        <div class="linha">
+            <p id="irregA">92.232.121</p>
+            <span>Voos Irregulares</span>
+            <p id="irregB">102.232.121</p>
+        </div>
+
+        <button class="btn-delete">Deletar</button>
+    </div>
+</div>
+
     </div>
 
     </div> 
 </main>
-
- <!--Sidebar-->
     <div class="sidebar">
         <a href="#"><i class="fa-solid fa-user"></i></a>
         <a href="#"><i class="fa-solid fa-clock" onclick="window.location.href='dashboard/dashboard.html'"></i></a>
@@ -278,7 +364,7 @@ function criarCard(titulo, estadoA, estadoB) {
         </div>
         <div class="card-actions">
             <button class="btn-more">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
     `;
@@ -308,18 +394,27 @@ function criarCard(titulo, estadoA, estadoB) {
 function abrirModalDetalhes(card) {
     const modal = document.getElementById("modal-detalhes");
 
-    document.getElementById("modal-titulo").textContent = card.dataset.titulo;
-    document.getElementById("modal-estadoA").textContent = card.dataset.estadoA;
-    document.getElementById("modal-estadoB").textContent = card.dataset.estadoB;
+    // pega os dados
+    const titulo = card.dataset.titulo;
+    const estadoA = card.dataset.estadoA;
+    const estadoB = card.dataset.estadoB;
+
+    // preenche título do topo
+    document.getElementById("nomeA").textContent = estadoA;
+    document.getElementById("nomeB").textContent = estadoB;
+
+    // preenche datas falsas por enquanto
+    document.getElementById("dataA").textContent = "Jul/2025";
+    document.getElementById("dataB").textContent = "Jul/2025";
 
     modal.style.display = "flex";
 }
 
+
 // fecha modal no botão
-document.querySelector(".modal-close").addEventListener("click", () => {
+document.querySelector("#modal-detalhes .close-btn").addEventListener("click", () => {
     document.getElementById("modal-detalhes").style.display = "none";
 });
-
 
 
 // ATUALIZAR
@@ -403,7 +498,4 @@ confirmarExcluir.addEventListener("click", () => {
 
     modalExcluir.style.display = "none";
 });
-
-
 </script>
-
