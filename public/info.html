@@ -17,35 +17,35 @@
     <header>
         <div>
             <img src="./assets/imagem/logo.png" alt="">
-        </div>   
+        </div>
     </header>
-    
-  <div class="sidebar">
-         <!-- Informações -->
+
+    <div class="sidebar">
+        <!-- Informações -->
         <a href="info.html" class="active">
             <i class="fa-solid fa-user"></i>
         </a>
-    
+
         <!-- Dashboard -->
         <a href="dashboard.html">
             <i class="fa-solid fa-clock"></i>
         </a>
-    
+
         <!-- Angular -->
         <a href="http://localhost:4200">
             <i class="fa-solid fa-envelope"></i>
         </a>
-    
+
         <!-- Comparativos -->
         <a href="comparativos.html">
             <i class="fa-solid fa-file-lines"></i>
         </a>
-    
+
         <!-- Configurações -->
         <a href="configuracoes.html">
             <i class="fa-solid fa-gear"></i>
         </a>
-    
+
         <!-- Logout -->
         <a href="#" onclick="logout()">
             <i class="fa-solid fa-right-from-bracket"></i>
@@ -53,103 +53,266 @@
     </div>
 
     <div class="container"></div>
-        <div class="title">
-            Informações Pessoais
-        </div>
+    <div class="title">
+        Informações Pessoais
+    </div>
 
-        <div class="form-info">
-            <div class="coluna-esq">
-                <div class="info-pessoal">
-                    <label for="razaoSocial">Razão Social</label>
-                    <input type="text" id="input_razaoSocial" placeholder="Razão Social">
-                </div>
-
-
-                <div class="info-pessoal">
-                    <label for="CEP">CEP</label>
-                    <input class="inputs" type="text" id="input_cep" placeholder="CEP">
-                </div>
-
-                <div class="info-pessoal">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" id="input_cidade" placeholder="Cidade">
-                </div>    
-                
-                <div class="info-pessoal">
-                    <label for="logradouro">Logradouro</label>
-                    <input type="text" id="input_logradouro" placeholder="Logradouro">
-                </div>    
-                
-                <div class="info-pessoal">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" id="input_complemento" placeholder="Complemento">
-                </div>
+    <div class="form-info">
+        <div class="coluna-esq">
+            <div class="info-pessoal">
+                <label for="razaoSocial">Razão Social</label>
+                <input type="text" id="razaoSocial" placeholder="Razão Social">
+                <span id="erro-razao" class="msg-erro">Informe a razão social</span>
             </div>
 
-            <div class="coluna-dir">
-                <div class="info-pessoal">
-                    <label for="CNPJ">CNPJ</label>
-                    <input type="text" id="input_cnpj" placeholder="CNPJ">
-                </div>                
+            <div class="info-pessoal">
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeCompleto" placeholder="Nome">
+                <span id="erro-nome" class="msg-erro">Informe o seu nome completo</span>
+            </div>
 
-                <div class="info-pessoal">
-                    <label for="UF">UF</label>
-                    <select id="uf">
-                        <option value="" disabled selected>Selecione um estado</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-                </div>
+            <div class="info-pessoal">
+                <label for="setor">Setor</label>
+                <select id="setorUsuario">
+                    <option value="setor">Setor</option>
+                    <option value="admin">Administração</option>
+                    <option value="vendas">Vendas</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="operacao">Operações</option>
+                </select>
+                <span id="erro-setor" class="msg-erro">Selecione um setor válido</span>
+            </div>
 
-                <div class="info-pessoal">
-                    <label for="Bairro">Bairro</label>
-                    <input type="text" id="input_bairro" placeholder="Bairro">
-                </div>
+            <div class="info-pessoal">
+                <label for="CEP">CEP</label>
+                <input class="inputs" type="text" id="cep" placeholder="CEP">
+                <span id="erro-cep" class="msg-erro">CEP inválido</span>
+            </div>
 
-                <div class="info-pessoal">
-                    <label for="numero">Número</label>
-                    <input type="text" id="input_numero" placeholder="Número">
-                </div>
+            <div class="info-pessoal">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" placeholder="Cidade">
+                <span id="erro-cidade" class="msg-erro">Informe a cidade</span>
+            </div>
 
-                <div class="acoes-form">
-                    <button class="botao-editar" onclick="">Editar</button>
-                    <button class="botao-atualizar" onclick="">Atualizar</button>
-                </div>
+            <div class="info-pessoal">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" id="logradouro" placeholder="Logradouro">
+                <span id="erro-logradouro" class="msg-erro">Informe o logradouro</span>
+            </div>
 
+            <div class="info-pessoal">
+                <label for="complemento">Complemento</label>
+                <input type="text" id="complemento" placeholder="Complemento">
+                <span id="erro-complemento" class="msg-erro">Informe o complemento</span>
+            </div>
+        </div>
+
+        <div class="coluna-dir">
+            <div class="info-pessoal">
+                <label for="CNPJ">CNPJ</label>
+                <input type="text" id="cnpj" placeholder="CNPJ">
+                <span id="erro-cnpj" class="msg-erro">CNPJ inválido</span>
+            </div>
+
+            <div class="info-pessoal">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" placeholder="Telefone">
+                <span id="erro-telefone" class="msg-erro">Telefone inválido</span>
+            </div>
+
+            <div class="info-pessoal">
+                <label for="cargo">Cargo</label>
+                <select id="cargoUsuario">
+                    <option value="1">Cargo</option>
+                    <option value="2">Gerente de Projetos</option>
+                    <option value="3">Analista Financeiro</option>
+                    <option value="4">Consultor de Vendas</option>
+                    <option value="5">Assistente de Vendas</option>
+                    <option value="6">Gerente de Marketing</option>
+                    <option value="7">Coordenador de Marketing</option>
+                    <option value="8">Analista de Dados</option>
+                    <option value="9">Gerente de Produção</option>
+                </select>
+                <span id="erro-cargo" class="msg-erro">Selecione um cargo válido</span>
+            </div>
+
+            <div class="info-pessoal">
+                <label for="UF">UF</label>
+                <select id="uf">
+                    <option value="0">Selecione um estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+                <span id="erro-uf" class="msg-erro">Selecione uma UF válida</span>
+            </div>
+
+            <div class="info-pessoal">
+                <label for="Bairro">Bairro</label>
+                <input type="text" id="bairro" placeholder="Bairro">
+                <span id="erro-bairro" class="msg-erro">Informe o bairro</span>
+            </div>
+
+            <div class="info-pessoal">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" placeholder="Número">
+                <span id="erro-numero" class="msg-erro">Informe o número</span>
+            </div>
+
+            <div class="acoes-form">
+                <button class="botao-editar" onclick="">Editar</button>
+                <button class="botao-atualizar" onclick="atualizar()">Atualizar</button>
             </div>
 
         </div>
 
     </div>
+
+    </div>
 </body>
 
 </html>
+<script src="./js/validacaoCadastroLogin.js"></script>
 <script>
+    function atualizar() {
+        let valido = true;
+
+        // Razão Social
+
+        if (razaoSocial.value.trim() === "") {
+            mostrarErro("razaoSocial", "erro-razao");
+            valido = false;
+        } else {
+            removerErro("razaoSocial", "erro-razao");
+        }
+
+        // CNPJ
+
+        if (cnpj.value.trim().length !== 18) {
+            mostrarErro("cnpj", "erro-cnpj");
+            valido = false;
+        } else {
+            removerErro("cnpj", "erro-cnpj");
+        }
+
+        // Nome
+        if (nomeCompleto.value.trim() === "") {
+            mostrarErro("nomeCompleto", "erro-nome");
+            valido = false;
+        } else {
+            removerErro("nomeCompleto", "erro-nome");
+        }
+
+        // Telefone
+        if (telefone.value.trim().length !== 15) {
+            mostrarErro("telefone", "erro-telefone");
+            valido = false;
+        } else {
+            removerErro("telefone", "erro-telefone");
+        }
+
+        // Setor
+        if (setorUsuario.value.trim() === "setor") {
+            mostrarErro("setorUsuario", "erro-setor");
+            valido = false;
+        } else {
+            removerErro("setorUsuario", "erro-setor");
+        }
+
+        // Cargo
+        if (cargoUsuario.value.trim() === "1") {
+            mostrarErro("cargoUsuario", "erro-cargo");
+            valido = false;
+        } else {
+            removerErro("cargoUsuario", "erro-cargo");
+        }
+
+        // CEP
+        if (cep.value.trim().length !== 9) {
+            mostrarErro("cep", "erro-cep");
+            valido = false;
+        } else {
+            removerErro("cep", "erro-cep");
+        }
+
+        // UF
+        if (uf.value.trim() === "0") {
+            mostrarErro("uf", "erro-uf");
+            valido = false;
+        } else {
+            removerErro("uf", "erro-uf");
+        }
+
+        // Cidade
+        if(cidade.value.trim() === "") {
+            mostrarErro("cidade", "erro-cidade")
+        } else {
+            removerErro
+        }
+
+        // Cidade
+        if(bairro.value.trim() === "") {
+            mostrarErro("bairro", "erro-bairro")
+        } else {
+            removerErro
+        }
+
+        // Bairro
+        if(cidade.value.trim() === "") {
+            mostrarErro("cidade", "erro-cidade")
+        } else {
+            removerErro
+        }
+        
+        // Logradouro
+        if(logradouro.value.trim() === "") {
+            mostrarErro("logradouro", "erro-logradouro")
+        } else {
+            removerErro
+        }
+
+        // Número
+        if(numero.value.trim() === "") {
+            mostrarErro("numero", "erro-numero")
+        } else {
+            removerErro
+        }
+
+        // Complemento
+        if(complemento.value.trim() === "") {
+            mostrarErro("complemento", "erro-complemento")
+        } else {
+            removerErro
+        }
+        
+        return valido;
+    }
+
     function logout() {
         sessionStorage.clear();
         window.location.href = '../../login.html';
