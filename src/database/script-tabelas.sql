@@ -5,9 +5,31 @@ USE logaritmos;
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY auto_increment,
 razaoSocial VARCHAR(200) NOT NULL,
-cnpj CHAR(14) NOT NULL,
-email VARCHAR(200) NOT NULL,
-senha VARCHAR(200) NOT NULL
+cnpj CHAR(14) NOT NULL
+);
+
+CREATE TABLE setor(
+idSetor INT PRIMARY KEY auto_increment,
+nome VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE cargo(
+idCargo INT PRIMARY KEY auto_increment,
+titulo VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE usuario(
+idUsuario INT PRIMARY KEY auto_increment,
+nome VARCHAR(200) NOT NULL,
+telefone VARCHAR(45) NOT NULL,
+email VARCHAR(45) NOT NULL,
+senha VARCHAR(45) NOT NULL,
+fkEmpresa INT NOT NULL,
+fkSetor INT NOT NULL,
+fkCargo INT NOT NULL,
+CONSTRAINT fkEmpresaUsuario FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+CONSTRAINT fkSetorUsuario FOREIGN KEY (fkSetor) REFERENCES setor(idSetor),
+CONSTRAINT fkCargoUsuario FOREIGN KEY (fkCargo) REFERENCES cargo(idCargo)
 );
 
 CREATE TABLE endereco(
@@ -25,24 +47,18 @@ FOREIGN KEY(fkEmpresa) REFERENCES empresa(idEmpresa)
 
 CREATE TABLE alertas(
 idAlerta INT PRIMARY KEY auto_increment,
-descricao VARCHAR(200) NOT NULL
+descricao VARCHAR(200) NOT NULL,
+categoria VARCHAR(45) NOT NULL,
+dtHora DATETIME DEFAULT CURRENT_TIMESTAMP,
+fkEmpresa INT NOT NULL,
+CONSTRAINT fkEmpresaAlertas FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
-CREATE TABLE ocorrenciaAlertas(
-idOcorrencia INT auto_increment,
-fkEmpresa INT,
-CONSTRAINT fkOcorrenciaEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-fkAlertas INT,
-CONSTRAINT fkOcorrenciaAlertas FOREIGN KEY (fkAlertas) REFERENCES alertas(idAlerta),
-CONSTRAINT pkCompostaOcorrencia PRIMARY KEY (idOcorrencia, fkEmpresa, fkAlertas),
-dtHora DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE relatorio(
+CREATE TABLE historicoRelatorios(
 idRelatorio INT PRIMARY KEY auto_increment,
 nome VARCHAR(100) NOT NULL,
 favorito TINYINT(1) NOT NULL,
-dtHora DATETIME DEFAULT CURRENT_TIMESTAMP,
+sqlRelatorio TEXT NOT NULL,
 fkEmpresa INT NOT NULL,
 CONSTRAINT fkRelatorioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
@@ -61,14 +77,13 @@ numVoosTotais INT NOT NULL
 );
 
 CREATE TABLE cardsComparativos(
-idCards INT auto_increment,
-fkVoo INT,
-CONSTRAINT fkCardsVoo FOREIGN KEY (fkVoo) REFERENCES voo(idVoo),
-fkEmpresa INT,
-CONSTRAINT fkCardsEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-CONSTRAINT pkCompostaCards PRIMARY KEY (idCards, fkVoo, fkEmpresa),
+idCards INT PRIMARY KEY auto_increment,
 nome VARCHAR(100) NOT NULL,
-favorito TINYINT(1) NOT NULL
+favorito TINYINT(1) NOT NULL,
+sqlVooComparador TEXT NOT NULL,
+sqlVooComparado TEXT NOT NULL,
+fkEmpresa INT,
+CONSTRAINT fkCardsEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE registroLogs(
@@ -77,3 +92,29 @@ categoria VARCHAR(15) NOT NULL,
 descricao VARCHAR(200) NOT NULL,
 dtHora DATETIME NOT NULL
 );
+
+CREATE TABLE notificacao(
+idNotificacao INT PRIMARY KEY auto_increment,
+mensagem VARCHAR(200) NOT NULL,
+urlCanal VARCHAR(100) NOT NULL,
+status VARCHAR(45) NOT NULL,
+parametro VARCHAR(100) NOT NULL,
+fkEmpresa INT NOT NULL,
+CONSTRAINT fkEmpresaNotificacao FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+);
+
+INSERT INTO setor VALUES
+(DEFAULT, 'Administração'),
+(DEFAULT, 'Vendas'),
+(DEFAULT, 'Marketing'),
+(DEFAULT, 'Operações');
+
+INSERT INTO cargo VALUES
+(DEFAULT, 'Gerente de Projetos'),
+(DEFAULT, 'Analista Financeiro'),
+(DEFAULT, 'Consultor de Vendas'),
+(DEFAULT, 'Assistente de Vendas'),
+(DEFAULT, 'Gerente de Marketing'),
+(DEFAULT, 'Coordenador de Marketing'),
+(DEFAULT, 'Analista de Dados'),
+(DEFAULT, 'Gerente de Produção');

@@ -16,6 +16,8 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var empresaRouter = require("./src/routes/empresa");
 var enderecoRouter = require("./src/routes/endereco");
+var usuarioRouter = require("./src/routes/usuario");
+var vooRouter = require("./src/routes/voo");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +28,8 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/empresa", empresaRouter);
 app.use("/endereco", enderecoRouter);
+app.use("/usuario", usuarioRouter);
+app.use("/voo", vooRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -1,49 +1,28 @@
 var database = require("../database/config")
 
-function cadastrarEmpresa(razaoSocial, cnpj, email, senha) {
+function cadastrarEmpresa(razaoSocial, cnpj) {
     const instrucaoSql = `
-        INSERT INTO empresa (razaoSocial, cnpj, email, senha)
-        VALUES ('${razaoSocial}', '${cnpj}', '${email}', '${senha}');
+        INSERT INTO empresa (razaoSocial, cnpj)
+        VALUES ('${razaoSocial}', '${cnpj}');
     `;
     return database.executar(instrucaoSql);
 }
 
-function buscarEmpresaPorCnpjEmail(cnpj, email) {
-    const instrucaoSql = `
-        SELECT idEmpresa FROM empresa WHERE cnpj = '${cnpj}' AND email = '${email}' LIMIT 1;
-    `;
+function buscarEmpresaPorCnpj(cnpj) {
+    const instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}';`;
     return database.executar(instrucaoSql);
 }
-function login(email, senha) {
-    const instrucaoSql = `
-        SELECT idEmpresa, razaoSocial, email
-        FROM empresa
-        WHERE email = '${email}' AND senha = '${senha}';
-    `;
-    return database.executar(instrucaoSql);
-}
-function atualizarEmail(idEmpresa, novoEmail) {
-    const instrucaoSql = `
-        UPDATE empresa
-        SET email = '${novoEmail}'
-        WHERE idEmpresa = ${idEmpresa};
-    `;
-    return database.executar(instrucaoSql);
-}
-
-function atualizarSenha(idEmpresa, novaSenha) {
-    const instrucaoSql = `
-        UPDATE empresa
-        SET senha = '${novaSenha}'
-        WHERE idEmpresa = ${idEmpresa};
+function buscarPorCnpj(cnpj) {
+    var instrucaoSql = `
+        SELECT * FROM empresa 
+        JOIN endereco ON idEmpresa = fkEmpresa 
+        WHERE cnpj = '${cnpj}';
     `;
     return database.executar(instrucaoSql);
 }
 
 module.exports = {
     cadastrarEmpresa,
-    buscarEmpresaPorCnpjEmail,
-    login,
-    atualizarEmail,
-    atualizarSenha
+    buscarEmpresaPorCnpj,
+    buscarPorCnpj
 };
