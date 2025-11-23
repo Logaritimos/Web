@@ -35,8 +35,8 @@ function cadastrarComEndereco(req, res) {
     else if (setorTexto == "vendas") fkSetor = 2;
     else if (setorTexto == "marketing") fkSetor = 3;
     else if (setorTexto == "operacao") fkSetor = 4;
-    else fkSetor = 1; // Default
-
+    else fkSetor = 1;
+    
     var fkCargo = Number(cargoTexto); 
     if (isNaN(fkCargo)) fkCargo = 1;
 
@@ -99,8 +99,39 @@ function buscarPorCnpj(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+function buscarInfo(req, res) {
+    var idUsuario = req.params.idUsuario;
+    empresaModel.buscarInfoCompleta(idUsuario)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado[0]);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch((erro) => res.status(500).json(erro));
+}
+
+function atualizarInfo(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var dados = req.body;
+
+    if (dados.cnpj) dados.cnpj = dados.cnpj.replace(/\D/g, ""); 
+    if (dados.cep) dados.cep = dados.cep.replace(/\D/g, "");
+    if (dados.telefone) dados.telefone = dados.telefone.replace(/\D/g, "");
+
+    empresaModel.atualizarInfo(idUsuario, dados.idEmpresa, dados)
+        .then((resultado) => {
+            res.status(200).json({ mensagem: "Dados atualizados com sucesso!" });
+        })
+        .catch((erro) => {
+            console.log("ERRO NO SQL:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
 module.exports = {
     cadastrarComEndereco,
-    buscarPorCnpj
+    buscarPorCnpj,
+    buscarInfo,
+    atualizarInfo
 }
