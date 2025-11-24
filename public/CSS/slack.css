@@ -1,0 +1,180 @@
+
+  /* HEADER */
+header {
+  width: 100vw;
+  height: 10vh;
+  background-color: #00283a;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+header img {
+  width: 150px;
+}
+
+  .containerSlack {
+    max-width: 900px;
+    width: 90%; /* proporcional à tela */
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+
+  h1 {
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #555;
+  }
+
+  .section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+  }
+
+  label { display: block; margin-top: 12px; font-weight: bold; }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    width: 10vh;
+    height: 90vh;
+    background-color: #00283a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 30px;
+}  
+
+ .sidebar a {
+    color: white;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    text-decoration: none;
+    transition: background 0.3s;
+    margin-top: -5px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #005b7a; 
+}
+
+.sidebar a:hover {
+  background-color: #005b7a; 
+} 
+
+/* INPUTS */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* COLUNAS */
+.row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* cada coluna = 50% */
+    gap: 25px;
+}
+
+/* AGRUPAMENTO DOS FILTROS */
+.row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* TOGGLE SWITCH */
+  .toggle {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 230px;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: relative;
+    width: 55px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 30px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 2px;
+    top: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+
+  input:checked + .slider {
+    background: #28a745;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(28px);
+  }
+
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .btn-success { background: #28a745; color: white; }
+
+  .status {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+  }
+
+  .status.ok { background: #d4edda; border: 1px solid #80b184; }
+  .status.err { background: #f8d7da; border: 1px solid #c98b8b; }

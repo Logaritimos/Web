@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/util.css">
+    <link rel="stylesheet" href="./CSS/slack.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <img src="./assets/imagem/logo.png" alt="">
+        </div>   
+    </header>
+    
+  <div class="sidebar">
+         <!-- Informações -->
+        <a href="info.html" class="active">
+            <i class="fa-solid fa-user"></i>
+        </a>
+    
+        <!-- Dashboard -->
+        <a href="dashboard.html">
+            <i class="fa-solid fa-clock"></i>
+        </a>
+    
+        <!-- Angular -->
+        <a href="http://localhost:4200">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    
+        <!-- Comparativos -->
+        <a href="comparativos.html">
+            <i class="fa-solid fa-file-lines"></i>
+        </a>
+    
+        <!-- Configurações -->
+        <a href="configuracoes.html">
+            <i class="fa-solid fa-gear"></i>
+        </a>
+    
+        <!-- Logout -->
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </div>
+
+    <div class="containerSlack">
+
+  <h1>Parametrização – Integração Slack</h1>
+  <p>Configure como o sistema enviará notificações automáticas ao Slack.</p>
+
+  <div class="section row">
+    <div style="flex:1; min-width:260px;">
+      <h3>Filtros</h3>
+
+      <label>Companhia</label>
+      <input id="filterAirline" placeholder="Gol, Azul, LATAM" />
+
+      <label>Tipo de voo</label>
+      <input id="filterType" placeholder="doméstico, internacional" />
+
+      <label>Estado</label>
+      <select id="estado">
+        <option value="">Todos</option>
+        <option value="SP">SP</option>
+        <option value="RJ">RJ</option>
+        <option value="MG">MG</option>
+        <option value="BA">BA</option>
+        <option value="ES">ES</option>
+        <option value="PR">PR</option>
+        <option value="SC">SC</option>
+        <option value="RS">RS</option>
+      </select>
+    </div>
+
+    <div class="checkbox-group">
+      <label class="toggle">
+        Ativar notificação
+        <input type="checkbox" id="ativarIntegracao" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section">
+    <button class="btn-success">Enviar</button>
+    <div id="status" class="status"></div>
+  </div>
+
+</div>
+</body>
+
+</html>
+<script>
+   
+</script>
