@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: flex-start;
     max-width: 350px;
-} 
+}
 
 .coluna-dir {
     display: flex;
@@ -37,8 +37,8 @@
 }
 
 .info-pessoal input::placeholder {
-  color: rgb(214, 214, 214); 
-   
+    color: rgb(214, 214, 214);
+
 }
 
 
@@ -48,23 +48,24 @@
     width: 350px;
     border: 1px solid #3f3f3f;
     border-radius: 5px;
-  color: rgb(214, 214, 214); 
+    color: rgb(214, 214, 214);
     border-color: #000;
     background-color: #00283A;
     padding-left: 10px;
 }
 
 .acoes-form {
-    display: flex; 
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     max-height: 35px;
     width: 350px;
-    margin-top: 25px;  
-    gap: 15px; 
+    margin-top: 25px;
+    gap: 15px;
 }
 
-.botao-editar, .botao-atualizar { 
+.botao-editar,
+.botao-atualizar {
     height: 35px;
     width: 160px;
     border-radius: 5px;
@@ -87,33 +88,51 @@
     border: 1px solid rgb(0, 0, 0);
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 
-    
+
 }
 
-/* Bordas de erro */
+input:disabled,
+select:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border: 1px solid #ced4da;
+}
+
+.msg-erro {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.erro {
+    border: 1px solid red !important;
+}
+
 
 .info-pessoal {
-    
+
     height: 100px;
 }
 
 .info-pessoal input {
-  height: 40px;
-  box-sizing: border-box;
- 
+    height: 40px;
+    box-sizing: border-box;
+
 }
 
-.info-pessoal input.erro  {
-  border: 1px solid red;
+.info-pessoal input.erro {
+    border: 1px solid red;
 }
- 
+
 .msg-erro {
-  font-size: 12px;
-  color: red;
+    font-size: 12px;
+    color: red;
 
-  left: 5px;
+    left: 5px;
     display: none;
 
- align-items: end;
- 
+    align-items: end;
+
 }
