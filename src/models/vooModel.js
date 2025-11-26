@@ -41,8 +41,18 @@ function buscarDestinos() {
     return database.executar(instrucaoSql);
 }
 
+function buscarDadosVoo(estado, ano, mes) {
+    var instrucao = `
+        SELECT * FROM voo 
+        WHERE estado = '${estado}' 
+        AND ano = ${ano} 
+        AND mes = '${mes}';
+    `;
+    return database.executar(instrucao);
+}
 module.exports = {
     buscarDadosAnuais,
     buscarDadosMensais,
-    buscarDestinos
+    buscarDestinos,
+    buscarDadosVoo
 };

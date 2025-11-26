@@ -15,4 +15,7 @@ router.get("/destinos", function (req, res) {
     vooController.buscarDestinos(req, res);
 });
 
+router.post("/buscar", function (req, res) {
+    vooController.buscarPorFiltro(req, res);
+});
 module.exports = router;
