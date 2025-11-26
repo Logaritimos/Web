@@ -41,8 +41,39 @@ function buscarDestinos(req, res) {
             res.status(500).json(erro.sqlMessage);
         });
 }
+function buscarPorFiltro(req, res) {
+    var estado = req.body.estado;
+    var ano = req.body.ano;
+    var mes = req.body.mes;
+
+    if (!estado || !ano || !mes) {
+        return res.status(400).send("Filtros incompletos");
+    }
+
+    vooModel.buscarDadosVoo(estado, ano, mes)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado[0]);
+            } else {
+                // Se não achar nada, retorna um objeto zerado para não quebrar o front
+                res.status(200).json({
+                    qtdAeroportos: 0,
+                    numVoosTotais: 0,
+                    numEmbarques: 0,
+                    numDesembarques: 0,
+                    numVoosRegulares: 0,
+                    numVoosIrregulares: 0
+                });
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 module.exports = {
     buscarDadosAnuais,
     buscarDadosMensais,
-    buscarDestinos
+    buscarDestinos,
+    buscarPorFiltro
 }

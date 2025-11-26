@@ -1,501 +1,631 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./CSS/comparativos.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <title>Logaritimos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/comparativos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Logaritmos - Comparativos</title>
 </head>
 
 <body>
     <header>
-        <div>
-            <img src="./assets/imagem/logo.png" alt="">
-        </div>   
+        <div><img src="./assets/imagem/logo.png" alt=""></div>
     </header>
 
     <div class="container">
+        <main>
+            <h2>COMPARATIVOS</h2>
+            <div class="box">
 
-<main>
-    <h2>COMPARATIVOS</h2>
-    <div class="box">
+                <div class="filtros">
+                    <input type="date" id="dataInicio">
+                    <input type="date" id="dataFim">
+                    <button id="btnFiltrarData"><i class="fas fa-calendar-alt"></i></button>
+                    
+                    <input type="text" placeholder="Pesquisar" id="inputPesquisa"> <button id="btnAdd"><i class="fa-solid fa-plus"></i></button>
+                    <button id="btnEditarMain"><i class="fa-solid fa-edit"></i></button>
+                    <button id="btnRemoverMain"><i class="fas fa-trash"></i></button>
+                </div>
 
-        <!-- Filtros -->
-        <div class="filtros">
-            <input type="date">
-            <input type="date">
-            <button><i class="fas fa-calendar-alt"></i></button>
-            <input type="text" placeholder="Pesquisar">
-            <button  id="btnAdd"><i class="fa-solid fa-plus"></i></button>
-            <button><i class="fa-solid fa-edit"></i></button>
-            <button><i class="fa-solid fa-star"></i></button>
-            <button id="btnRemover"><i class="fas fa-trash"></i></button>
-        </div> 
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <h3 id="tituloModal">Criar Comparativo</h3>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h3>Criar Comparativo</h3>
+                        <div class="colunas-modal">
+                            <div class="coluna coluna-a">
+                                <label>Estado A:</label>
+                                <select id="estado1">
+                                    <option value="">Selecione</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    </select>
 
-            <div class="colunas-modal">
-                <div class="coluna coluna-a">
+                                <label>Ano A:</label>
+                                <select id="selectAnoA">
+                                    <option value="">Selecione</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+
+                                <label>Mês A:</label>
+                                <select id="selectMesA">
+                                    <option value="">Selecione</option>
+                                    <option value="01">Janeiro</option>
+                                    <option value="02">Fevereiro</option>
+                                    <option value="03">Março</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Maio</option>
+                                    <option value="06">Junho</option>
+                                    <option value="07">Julho</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+
+                            <div class="coluna coluna-b">
+                                <label>Estado B:</label>
+                                <select id="estado2">
+                                    <option value="">Selecione</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="MG">Minas Gerais</option>
+                                </select>
+
+                                <label>Ano B:</label>
+                                <select id="selectAnoB">
+                                    <option value="">Selecione</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+
+                                <label>Mês B:</label>
+                                <select id="selectMesB">
+                                    <option value="">Selecione</option>
+                                    <option value="01">Janeiro</option>
+                                    <option value="02">Fevereiro</option>
+                                    <option value="03">Março</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Maio</option>
+                                    <option value="06">Junho</option>
+                                    <option value="07">Julho</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input id="inputTitulo" type="text" placeholder="Título do comparativo" />
+
+                        <div class="modal-buttons">
+                            <button id="cancelarModal">Cancelar</button>
+                            <button id="confirmarModal" class="confirmar">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
                 
-                    <label>Estado A:</label>
-                    <select id="estado1" class="select-estado">
-                        <option value="">Selecione</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-
-                    <label for="selectAno">Ano A</label>
-                    <select id="selectAnoA">
-                        <option value="">Selecione</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                    </select>
-
-                    <label for="selectMes">Mês A</label>
-                    <select id="selectMes">
-                        <option value="">Selecione</option>
-                        <option value="01">Janeiro</option>
-                        <option value="02">Fevereiro</option>
-                        <option value="03">Março</option>
-                        <option value="04">Abril</option>
-                        <option value="05">Maio</option>
-                        <option value="06">Junho</option>
-                        <option value="07">Julho</option>
-                        <option value="08">Agosto</option>
-                        <option value="09">Setembro</option>
-                        <option value="10">Outubro</option>
-                        <option value="11">Novembro</option>
-                        <option value="12">Dezembro</option>
-                    </select>
+                <div class="cards-container" id="cardsContainer">
                 </div>
-
-                <div class="coluna coluna-b">
-                    <label>Estado B:</label>
-                    <select id="estado2" class="select-estado">
-                        <option value="">Selecione</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-
-
-                    <label for="selectAno">Ano B</label>
-                    <select id="selectAnoB">
-                        <option value="">Selecione</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                    </select>
-
-                
-
-                    <label for="selectMes">Mês B</label>
-                    <select id="selectMes">
-                        <option value="">Selecione</option>
-                        <option value="01">Janeiro</option>
-                        <option value="02">Fevereiro</option>
-                        <option value="03">Março</option>
-                        <option value="04">Abril</option>
-                        <option value="05">Maio</option>
-                        <option value="06">Junho</option>
-                        <option value="07">Julho</option>
-                        <option value="08">Agosto</option>
-                        <option value="09">Setembro</option>
-                        <option value="10">Outubro</option>
-                        <option value="11">Novembro</option>
-                        <option value="12">Dezembro</option>
-                    </select>
-                </div>
-            </div>
-
-            <input id="inputTitulo" type="text" placeholder="Título do comparativos" />
-
-            <div class="modal-buttons">
-                <button id="cancelarModal">Cancelar</button>
-                <button id="confirmarModal" class="confirmar">Criar Comparativo</button>
-            </div>
-        </div>
-    </div>
-
-        <hr>
-    <div class="cards-container"></div>
-      <!-- MODAL CONFIRMAÇÃO DE EXCLUSÃO -->
-        <div id="modalExcluir" class="modal">
-            <div class="modal-content">
-                <h3>Excluir Card</h3>
-                <p>Tem certeza que deseja remover este card?</p>
-
-                <div class="modal-buttons">
-                    <button id="cancelarExcluir">Cancelar</button>
-                    <button id="confirmarExcluir" class="confirmar">Excluir</button>
-                </div>
-            </div>
-        </div>
-  
-        <!-- MODAL DE DETALHES -->
-    <div id="modal-detalhes" class="modal-comparativo">
-    <div class="modal-card">
-        
-        <button class="close-btn">&times;</button>
-
-        <div class="topo">
-            <div class="lado">
-                <h3 id="dataA">Jul/2025</h3>
-                <p id="nomeA">São Paulo</p>
-            </div>
-
-            <h1 class="x">X</h1>
-
-            <div class="lado">
-                <h3 id="dataB">Jul/2025</h3>
-
-                <p id="nomeB">Rio de Janeiro</p>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="comparacao">
-            <div class="coluna">
-                <p class="valor" id="aeroA">7</p>
-            </div>
-            <p class="titulo">Quantidade de aeroportos</p>
-            <div class="coluna">
-                <p class="valor" id="aeroB">4</p>
-            </div>
-        </div>
-
-        <div class="linha">
-            <p id="totalA">102.232.121</p>
-            <span>Total de Voos</span>
-            <p id="totalB">63.232.121</p>
-        </div>
-
-        <div class="linha">
-            <p id="embA">63.232.121</p>
-            <span>Embarques</span>
-            <p id="embB">102.232.121</p>
-        </div>
-
-        <div class="linha">
-            <p id="desA">102.232.121</p>
-            <span>Desembarques</span>
-            <p id="desB">102.232.121</p>
-        </div>
-
-        <div class="linha">
-            <p id="regA">2.232.121</p>
-            <span>Voos Regulares</span>
-            <p id="regB">102.232.121</p>
-        </div>
-
-        <div class="linha">
-            <p id="irregA">92.232.121</p>
-            <span>Voos Irregulares</span>
-            <p id="irregB">102.232.121</p>
-        </div>
-
-        <button class="btn-delete">Deletar</button>
-    </div>
+                <div id="emptyState" style="display: none; flex-direction: column; align-items: center; margin-top: 50px; color: #888;">
+    <i class="fa-solid fa-chart-simple" style="font-size: 60px; margin-bottom: 20px; opacity: 0.5;"></i>
+    <h3 style="color: #fff;">Ainda não tem nenhum comparativo?</h3>
+    <p style="color: #aaa; margin-bottom: 20px;">Crie análises detalhadas entre estados e períodos.</p>
+    <button onclick="document.getElementById('btnAdd').click()" 
+            style="padding: 10px 20px; background-color: #0091BD; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Criar meu primeiro card
+    </button>
 </div>
 
-    </div>
+                <div id="modalExcluir" class="modal">
+                    <div class="modal-content">
+                        <h3>Excluir Card</h3>
+                        <p>Tem certeza que deseja remover este card?</p>
+                        <div class="modal-buttons">
+                            <button id="cancelarExcluir">Cancelar</button>
+                            <button id="confirmarExcluir" class="confirmar">Excluir</button>
+                        </div>
+                    </div>
+                </div>
 
-    </div> 
-</main>
-    <div class="sidebar">
-        <a href="#"><i class="fa-solid fa-user"></i></a>
-        <a href="#"><i class="fa-solid fa-clock" onclick="window.location.href='dashboard/dashboard.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i></a>
-        <a href="#" class="active"><i class="fa-solid fa-file-lines"></i></a>
-        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+                <div id="modal-detalhes" class="modal-comparativo">
+                    <div class="modal-card">
+                        <button class="close-btn">&times;</button>
+
+                        <div class="topo">
+                            <div class="lado">
+                                <h3 id="dataA">...</h3>
+                                <p id="nomeA">...</p>
+                            </div>
+
+                            <h1 class="x">X</h1>
+
+                            <div class="lado">
+                                <h3 id="dataB">...</h3>
+                                <p id="nomeB">...</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="comparacao">
+                            <div class="coluna">
+                                <p class="valor" id="aeroA">...</p>
+                            </div>
+                            <p class="titulo">Quantidade de aeroportos</p>
+                            <div class="coluna">
+                                <p class="valor" id="aeroB">...</p>
+                            </div>
+                        </div>
+
+                        <div class="linha">
+                            <p id="totalA">...</p>
+                            <span>Total de Voos</span>
+                            <p id="totalB">...</p>
+                        </div>
+
+                        <div class="linha">
+                            <p id="embA">...</p>
+                            <span>Embarques</span>
+                            <p id="embB">...</p>
+                        </div>
+
+                        <div class="linha">
+                            <p id="desA">...</p>
+                            <span>Desembarques</span>
+                            <p id="desB">...</p>
+                        </div>
+
+                        <div class="linha">
+                            <p id="regA">...</p>
+                            <span>Voos Regulares</span>
+                            <p id="regB">...</p>
+                        </div>
+
+                        <div class="linha">
+                            <p id="irregA">...</p>
+                            <span>Voos Irregulares</span>
+                            <p id="irregB">...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <div class="sidebar">
+            <a href="info.html"><i class="fa-solid fa-user"></i></a>
+            <a href="dashboard.html"><i class="fa-solid fa-clock"></i></a>
+            <a href="comparativos.html" class="active"><i class="fa-solid fa-file-lines"></i></a>
+            <a href="configuracoes.html"><i class="fa-solid fa-gear"></i></a>
+            <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
     </div>
-</div>
-  
 </body>
 </html>
 
 <script>
-const btnPlus = document.querySelector('.fa-plus').parentElement;
-const modal = document.getElementById('modal');
-const cancelar = document.getElementById('cancelarModal');
-const confirmar = document.getElementById('confirmarModal');
+    // --- ELEMENTOS GLOBAIS ---
+    const modal = document.getElementById('modal');
+    const container = document.getElementById("cardsContainer");
+    
+    // --- ESTADOS ---
+    let cardSelecionadoId = null; 
+    let modoEdicao = false;
 
-const estado1 = document.getElementById("estado1");
-const estado2 = document.getElementById("estado2");
-const inputTitulo = document.getElementById("inputTitulo");
+    // --- CONFIGURAÇÃO INICIAL DE BOTÕES ---
+    const btnEditar = document.getElementById('btnEditarMain');
+    const btnRemover = document.getElementById('btnRemoverMain');
+    
+    // Começam desabilitados visualmente
+    btnEditar.style.opacity = "0.5";
+    btnRemover.style.opacity = "0.5";
+    btnEditar.style.pointerEvents = "none";
+    btnRemover.style.pointerEvents = "none";
 
-const btnRemover = document.getElementById("btnRemover");
-let cardParaExcluir = null;
-const modalExcluir = document.getElementById("modalExcluir");
-const cancelarExcluir = document.getElementById("cancelarExcluir");
-const confirmarExcluir = document.getElementById("confirmarExcluir");
+    // --- 1. CARREGAMENTO INTELIGENTE ---
+    window.onload = async function() {
+        const idUsuario = sessionStorage.ID_USUARIO;
 
+        if(!idUsuario) {
+            alert("Sessão expirada. Faça login novamente.");
+            return window.location.href = '../../login.html';
+        }
 
-let cardEmEdicao = null;     // referencia para o card que está sendo editado
-let modoEdicao = false;      // flag: true quando estamos no modo edição
+        let idEmpresa = sessionStorage.ID_EMPRESA;
 
-/* cria o card */
-btnPlus.addEventListener('click', () => {
-    modoEdicao = false;
-    cardEmEdicao = null;
-    confirmar.innerText = "Criar Comparativo";
-    // limpa campos
-    estado1.value = "";
-    estado2.value = "";
-    inputTitulo.value = "";
-    modal.style.display = 'flex';
-});
+        if (!idEmpresa || idEmpresa === "undefined") {
+            try {
+                const resposta = await fetch(`/empresa/info/${idUsuario}`);
+                const dados = await resposta.json();
+                
+                if (dados.idEmpresa) {
+                    idEmpresa = dados.idEmpresa;
+                    sessionStorage.ID_EMPRESA = idEmpresa;
+                } else {
+                    alert("Este usuário não está vinculado a uma empresa.");
+                    return;
+                }
+            } catch (erro) {
+                console.error("Erro ao recuperar empresa:", erro);
+                return;
+            }
+        }
 
-/* cancelar*/
-cancelar.addEventListener('click', () => {
-    fecharModal();
-});
+        carregarCards(idEmpresa);
+    };
 
-/*CRIA ou EDITA dependendo do modoEdicao*/
-confirmar.addEventListener('click', () => {
-    const e1 = estado1.value;
-    const e2 = estado2.value;
-    const titulo = inputTitulo.value.trim();
+    function carregarCards(idEmpresa) {
+        fetch(`/cards/${idEmpresa}`)
+            .then(res => {
+                if (!res.ok) throw new Error("Erro ao buscar cards");
+                return res.json();
+            })
+            .then(cards => {
+                container.innerHTML = ""; 
+                const emptyState = document.getElementById("emptyState");
 
-    if (!titulo) {
-        alert("Digite um título!");
-        return;
+                if(cards.length === 0) {
+                    emptyState.style.display = "flex";
+                    container.style.display = "none"; 
+                } else {
+                    emptyState.style.display = "none";
+                    container.style.display = "flex"; // ou grid/block dependendo do CSS
+                    cards.forEach(card => renderizarCard(card));
+                }
+            })
+            .catch(err => console.error("Erro ao listar cards:", err));
     }
 
-    if (!e1 || !e2) {
-        alert("Selecione os dois estados!");
-        return;
-    }
-
-    if (modoEdicao && cardEmEdicao) {
-        // UPDATE
-        editarCard(cardEmEdicao, titulo, e1, e2);
-    } else {
-        // CREATE
-        criarCard(titulo, e1, e2);
-    }
-
-    fecharModal();
-});
-
-/* fechar ou resetar */
-function fecharModal() {
-    modal.style.display = 'none';
-    confirmar.innerText = "Criar Comparativo";
-    modoEdicao = false;
-    cardEmEdicao = null;
-    estado1.value = "";
-    estado2.value = "";
-    inputTitulo.value = "";
-}
-
-// cria o card no container
-function criarCard(titulo, estadoA, estadoB) {
-    const container = document.querySelector(".cards-container");
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    card.setAttribute("data-titulo", titulo);
-    card.setAttribute("data-estadoA", estadoA);
-    card.setAttribute("data-estadoB", estadoB);
-
-    card.innerHTML = `
-        <div class="card-body">
-            <h3>${titulo}</h3>
-            <p class="estados-texto">${estadoA} | ${estadoB}</p>
-        </div>
-        <div class="card-actions">
-            <button class="btn-more">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
-    `;
-
-    // abre modal
-    card.querySelector(".btn-more").addEventListener("click", (ev) => {
-        ev.stopPropagation(); // impede clique de selecionar card
-        abrirModalDetalhes(card);
-    });
-
-    // seleciona/desseleciona
-    card.addEventListener("click", () => {
-        if (card.classList.contains("selecionado")) {
-            card.classList.remove("selecionado");
+    function renderizarCard(cardData) {
+        let configA, configB;
+        try {
+            configA = JSON.parse(cardData.sqlVooComparador); 
+            configB = JSON.parse(cardData.sqlVooComparado);
+        } catch (e) {
+            console.error("Erro ao ler JSON do card:", cardData);
             return;
         }
 
-        document.querySelectorAll(".card")
-            .forEach(c => c.classList.remove("selecionado"));
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.setAttribute("data-id", cardData.idCards);
+        card.dataset.json = JSON.stringify(cardData);
 
-        card.classList.add("selecionado");
+        card.innerHTML = `
+            <div class="card-body">
+                <h3>${cardData.nome}</h3>
+                <p class="estados-texto">
+                    ${configA.estado} (${configA.mes}/${configA.ano}) 
+                    <br>vs<br> 
+                    ${configB.estado} (${configB.mes}/${configB.ano})
+                </p>
+            </div>
+            <div class="card-actions">
+                <button class="btn-more"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        `;
+        // ... dentro de renderizarCard ...
+
+        // Lógica de Seleção / Desseleção (Toggle)
+        card.addEventListener("click", () => {
+            
+            // Verifica se este card JÁ ESTÁ selecionado
+            const isSelected = card.classList.contains("selecionado");
+
+            // 1. Limpa a seleção de TODOS os cards (padrão)
+            document.querySelectorAll(".card").forEach(c => c.classList.remove("selecionado"));
+            
+            if (isSelected) {
+                // CASO 1: Já estava selecionado -> Desseleciona tudo
+                cardSelecionadoId = null;
+                
+                // Desabilita botões
+                btnEditar.style.opacity = "0.5";
+                btnRemover.style.opacity = "0.5";
+                btnEditar.style.pointerEvents = "none";
+                btnRemover.style.pointerEvents = "none";
+
+            } else {
+                // CASO 2: Não estava selecionado -> Seleciona este
+                card.classList.add("selecionado");
+                cardSelecionadoId = cardData.idCards;
+
+                // Habilita botões
+                btnEditar.style.opacity = "1";
+                btnRemover.style.opacity = "1";
+                btnEditar.style.pointerEvents = "auto";
+                btnRemover.style.pointerEvents = "auto";
+            }
+        });
+
+    // ... resto da função ...
+
+        card.addEventListener("click", () => {
+            document.querySelectorAll(".card").forEach(c => c.classList.remove("selecionado"));
+            card.classList.add("selecionado");
+            cardSelecionadoId = cardData.idCards;
+
+            // Habilita botões de ação
+            btnEditar.style.opacity = "1";
+            btnRemover.style.opacity = "1";
+            btnEditar.style.pointerEvents = "auto";
+            btnRemover.style.pointerEvents = "auto";
+        });
+
+        // AÇÃO DA LUPA
+        card.querySelector(".btn-more").addEventListener("click", (e) => {
+            e.stopPropagation();
+            abrirDetalhes(configA, configB);
+        });
+
+        container.appendChild(card);
+    }
+
+    // --- 2. DETALHES COM COMPARAÇÃO (LUPA) ---
+    async function abrirDetalhes(confA, confB) {
+        const modalDet = document.getElementById("modal-detalhes");
+        
+        // Preenche cabeçalho
+        document.getElementById("nomeA").innerText = confA.estado;
+        document.getElementById("nomeB").innerText = confB.estado;
+        document.getElementById("dataA").innerText = `${confA.mes}/${confA.ano}`;
+        document.getElementById("dataB").innerText = `${confB.mes}/${confB.ano}`;
+
+        // Limpa valores (loading)
+        resetarCores();
+        const ids = ["aero", "total", "emb", "des", "reg", "irreg"];
+        ids.forEach(id => {
+            document.getElementById(id + "A").innerText = "...";
+            document.getElementById(id + "B").innerText = "...";
+        });
+
+        modalDet.style.display = "flex";
+
+        try {
+            // Busca dados A
+            const resA = await fetch("/voo/buscar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ estado: confA.estado, ano: confA.ano, mes: confA.mes })
+            });
+            const dadosA = await resA.json();
+
+            // Busca dados B
+            const resB = await fetch("/voo/buscar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ estado: confB.estado, ano: confB.ano, mes: confB.mes })
+            });
+            const dadosB = await resB.json();
+
+            // Preenche valores
+            preencherValores("A", dadosA);
+            preencherValores("B", dadosB);
+
+            // --- AQUI ESTÁ A MÁGICA: COMPARAR E PINTAR ---
+            compararEColorir(dadosA, dadosB);
+
+        } catch (erro) {
+            console.error("Erro ao buscar detalhes:", erro);
+            alert("Erro ao carregar os dados comparativos.");
+        }
+    }
+
+    function preencherValores(lado, dados) {
+        if (!dados) return;
+        document.getElementById(`aero${lado}`).innerText = formatarNumero(dados.qtdAeroportos);
+        document.getElementById(`total${lado}`).innerText = formatarNumero(dados.numVoosTotais);
+        document.getElementById(`emb${lado}`).innerText = formatarNumero(dados.numEmbarques);
+        document.getElementById(`des${lado}`).innerText = formatarNumero(dados.numDesembarques);
+        document.getElementById(`reg${lado}`).innerText = formatarNumero(dados.numVoosRegulares);
+        document.getElementById(`irreg${lado}`).innerText = formatarNumero(dados.numVoosIrregulares);
+    }
+
+    // Função nova para pintar de verde quem ganhou
+    function compararEColorir(dA, dB) {
+        destacarMelhor('aero', dA.qtdAeroportos, dB.qtdAeroportos);
+        destacarMelhor('total', dA.numVoosTotais, dB.numVoosTotais);
+        destacarMelhor('emb', dA.numEmbarques, dB.numEmbarques);
+        destacarMelhor('des', dA.numDesembarques, dB.numDesembarques);
+        destacarMelhor('reg', dA.numVoosRegulares, dB.numVoosRegulares);
+        // Irregular é ruim, então quem tiver MENOS ganha (invertido)
+        destacarMelhor('irreg', dB.numVoosIrregulares, dA.numVoosIrregulares); 
+    }
+
+    function destacarMelhor(prefixo, valorA, valorB) {
+        const elA = document.getElementById(prefixo + "A");
+        const elB = document.getElementById(prefixo + "B");
+
+        // Converte para número caso venha como string
+        const vA = Number(valorA);
+        const vB = Number(valorB);
+
+        if (vA > vB) {
+            elA.style.color = "#00ff7f"; // Verde Spring
+            elA.style.fontWeight = "bold";
+        } else if (vB > vA) {
+            elB.style.color = "#00ff7f";
+            elB.style.fontWeight = "bold";
+        }
+    }
+
+    function resetarCores() {
+        const spans = document.querySelectorAll('.comparacao p.valor, .linha p');
+        spans.forEach(span => {
+            span.style.color = ""; // Volta ao CSS original
+            span.style.fontWeight = "normal";
+        });
+    }
+
+    function formatarNumero(num) {
+        return Number(num || 0).toLocaleString('pt-BR');
+    }
+
+    // --- 3. FILTROS (DATA E PESQUISA) ---
+
+    // Filtro por Data
+    document.getElementById('btnFiltrarData').addEventListener('click', () => {
+        const inputInicio = document.getElementById('dataInicio').value;
+        const inputFim = document.getElementById('dataFim').value;
+        const cards = document.querySelectorAll('.card');
+
+        if (!inputInicio && !inputFim) {
+            cards.forEach(card => card.style.display = "flex");
+            return;
+        }
+
+        const dataInicio = inputInicio ? new Date(inputInicio + "T00:00:00") : new Date("1900-01-01");
+        const dataFim = inputFim ? new Date(inputFim + "T23:59:59") : new Date("2100-01-01");
+
+        cards.forEach(card => {
+            const dados = JSON.parse(card.dataset.json);
+            const configA = JSON.parse(dados.sqlVooComparador);
+            const configB = JSON.parse(dados.sqlVooComparado);
+
+            // Mês no JS é 0-11, então subtraímos 1 do mês salvo (01 -> 0)
+            const dataCardA = new Date(configA.ano, configA.mes - 1, 1);
+            const dataCardB = new Date(configB.ano, configB.mes - 1, 1);
+
+            const aNoPeriodo = dataCardA >= dataInicio && dataCardA <= dataFim;
+            const bNoPeriodo = dataCardB >= dataInicio && dataCardB <= dataFim;
+
+            // Mostra se A OU B estiverem no período
+            card.style.display = (aNoPeriodo || bNoPeriodo) ? "flex" : "none";
+        });
     });
 
-    container.appendChild(card);
-}
+    // Filtro por Texto (Título)
+    document.getElementById('inputPesquisa').addEventListener('input', (e) => {
+        const termo = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
 
-function abrirModalDetalhes(card) {
-    const modal = document.getElementById("modal-detalhes");
+        cards.forEach(card => {
+            const titulo = card.querySelector('h3').innerText.toLowerCase();
+            if (titulo.includes(termo)) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
 
-    // pega os dados
-    const titulo = card.dataset.titulo;
-    const estadoA = card.dataset.estadoA;
-    const estadoB = card.dataset.estadoB;
+    // --- 4. AÇÕES DOS BOTÕES ---
+    document.getElementById('btnAdd').addEventListener('click', () => {
+        modoEdicao = false;
+        document.getElementById('tituloModal').innerText = "Criar Comparativo";
+        limparModal();
+        modal.style.display = 'flex';
+    });
 
-    // preenche título do topo
-    document.getElementById("nomeA").textContent = estadoA;
-    document.getElementById("nomeB").textContent = estadoB;
+    document.getElementById('btnEditarMain').addEventListener('click', () => {
+        // A verificação de seleção já é feita visualmente desabilitando o botão
+        if(btnEditar.style.opacity === "0.5") return; 
 
-    // preenche datas falsas por enquanto
-    document.getElementById("dataA").textContent = "Jul/2025";
-    document.getElementById("dataB").textContent = "Jul/2025";
-
-    modal.style.display = "flex";
-}
-
-
-// fecha modal no botão
-document.querySelector("#modal-detalhes .close-btn").addEventListener("click", () => {
-    document.getElementById("modal-detalhes").style.display = "none";
-});
-
-
-// ATUALIZAR
-function editarCard(card, novoTitulo, novoA, novoB) {
-    if (!card) return;
-    const h3 = card.querySelector(".card-body h3");
-    const p = card.querySelector(".card-body .estados-texto");
-
-    if (h3) h3.innerText = novoTitulo;
-    if (p) p.innerText = `${novoA} | ${novoB}`;
-
-    card.classList.remove("selecionado"); // remove seleção após editar
-    cardEmEdicao = null;
-    modoEdicao = false;
-}
-
-/* quando clica no btn de edição, abre o modal preenchido com os dados do card selecionado. */
-const btnEditarBarra = document.querySelectorAll('.filtros button').length
-    ? document.querySelectorAll('.filtros button').find
-      ? (() => { 
-            const buttons = Array.from(document.querySelectorAll('.filtros button'));
-            return buttons.find(b => b.querySelector('.fa-edit')) || document.querySelector('.fa-edit').parentElement;
-        })()
-      : document.querySelector('.fa-edit').parentElement
-    : document.querySelector('.fa-edit').parentElement;
-
-const btnEditar = btnEditarBarra || (document.querySelector('.fa-edit') ? document.querySelector('.fa-edit').parentElement : null);
-
-if (btnEditar) {
-    btnEditar.addEventListener('click', () => {
         const selecionado = document.querySelector(".card.selecionado");
-        if (!selecionado) {
-            alert("Selecione um card primeiro (clique no card) para editar.");
-            return;
-        }
-
-        // preenche modal com dados do card selecionado
-        const tituloAtual = selecionado.querySelector(".card-body h3").innerText;
-        const texto = selecionado.querySelector(".card-body .estados-texto").innerText;
-        const [estadoA, estadoB] = texto.split(" | ");
-
-        inputTitulo.value = tituloAtual;
-        estado1.value = estadoA || "";
-        estado2.value = estadoB || "";
-
-        // modo edição ativado
         modoEdicao = true;
-        cardEmEdicao = selecionado;
-        confirmar.innerText = "Salvar Alterações";
+        document.getElementById('tituloModal').innerText = "Editar Comparativo";
+        
+        const dados = JSON.parse(selecionado.dataset.json);
+        const configA = JSON.parse(dados.sqlVooComparador);
+        const configB = JSON.parse(dados.sqlVooComparado);
+
+        document.getElementById('inputTitulo').value = dados.nome;
+        document.getElementById('estado1').value = configA.estado;
+        document.getElementById('selectAnoA').value = configA.ano;
+        document.getElementById('selectMesA').value = configA.mes;
+        document.getElementById('estado2').value = configB.estado;
+        document.getElementById('selectAnoB').value = configB.ano;
+        document.getElementById('selectMesB').value = configB.mes;
 
         modal.style.display = 'flex';
     });
-} else {
-    console.warn("Botão de editar da barra não encontrado.");
-}
 
-document.getElementById("btnRemover").addEventListener("click", () => {
-    const selecionado = document.querySelector(".card.selecionado");
+    document.getElementById('confirmarModal').addEventListener('click', () => {
+        const titulo = document.getElementById('inputTitulo').value;
+        const fkEmpresa = sessionStorage.ID_EMPRESA;
 
-    if (!selecionado) {
-        alert("Selecione um card antes de remover.");
-        return;
+        const configA = {
+            estado: document.getElementById('estado1').value,
+            ano: document.getElementById('selectAnoA').value,
+            mes: document.getElementById('selectMesA').value
+        };
+        const configB = {
+            estado: document.getElementById('estado2').value,
+            ano: document.getElementById('selectAnoB').value,
+            mes: document.getElementById('selectMesB').value
+        };
+
+        if(!titulo || !configA.estado || !configB.estado) return alert("Preencha todos os campos!");
+
+        const corpo = { nome: titulo, configA, configB, fkEmpresa };
+
+        const url = modoEdicao ? `/cards/editar/${cardSelecionadoId}` : `/cards/cadastrar`;
+        const method = modoEdicao ? "PUT" : "POST";
+
+        fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(corpo)
+        }).then(() => location.reload());
+    });
+
+    document.getElementById('cancelarModal').addEventListener('click', () => modal.style.display = 'none');
+
+    document.getElementById('btnRemoverMain').addEventListener('click', () => {
+        if(btnRemover.style.opacity === "0.5") return;
+        document.getElementById('modalExcluir').style.display = 'flex';
+    });
+
+    document.getElementById('confirmarExcluir').addEventListener('click', () => {
+        fetch(`/cards/${cardSelecionadoId}`, { method: "DELETE" })
+            .then(() => location.reload());
+    });
+
+    document.getElementById('cancelarExcluir').addEventListener('click', () => {
+        document.getElementById('modalExcluir').style.display = 'none';
+    });
+
+    function limparModal() {
+        document.getElementById('inputTitulo').value = "";
+        document.getElementById('estado1').value = "";
+        document.getElementById('estado2').value = "";
+        document.getElementById('selectAnoA').value = "";
+        document.getElementById('selectAnoB').value = "";
+        document.getElementById('selectMesA').value = "";
+        document.getElementById('selectMesB').value = "";
     }
 
-    cardParaExcluir = selecionado;
-    modalExcluir.style.display = "flex";
-});
+    // Fecha modais
+    document.querySelector(".close-btn").addEventListener("click", () => {
+        document.getElementById("modal-detalhes").style.display = "none";
+    });
 
-// Botão CANCELAR
-cancelarExcluir.addEventListener("click", () => {
-    modalExcluir.style.display = "none";
-    cardParaExcluir = null;
-});
-
-// Botão CONFIRMAR EXCLUSÃO
-confirmarExcluir.addEventListener("click", () => {
-    if (cardParaExcluir) {
-        cardParaExcluir.remove();
-        cardParaExcluir = null;
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("modal-detalhes")) {
+            document.getElementById("modal-detalhes").style.display = "none";
+        }
+        if (event.target == document.getElementById("modal")) {
+            document.getElementById("modal").style.display = "none";
+        }
+        if (event.target == document.getElementById("modalExcluir")) {
+            document.getElementById("modalExcluir").style.display = "none";
+        }
     }
 
-    modalExcluir.style.display = "none";
-});
+    function logout() {
+        sessionStorage.clear();
+        window.location.href = '../../login.html';
+    }
 </script>
