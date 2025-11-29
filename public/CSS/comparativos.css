@@ -173,6 +173,12 @@ hr {
     gap: 30px;
 }  
 
+.sidebar img{
+  width: 42px;
+  height: 37px;
+  cursor: pointer;
+}
+
  .sidebar a {
     color: white;
     font-size: 25px;
