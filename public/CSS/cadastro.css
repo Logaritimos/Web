@@ -344,6 +344,9 @@ footer h1 {
     .cadastro{
       height: 85%;
     }
+    .card-cadastro{
+      overflow-y: scroll;
+    }
 
     .container {
         flex-direction: column;
