@@ -29,14 +29,14 @@ function buscarDestinos() {
     var instrucaoSql = `
         SELECT 
             estado as nome,
-            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-1 THEN numEmbarques ELSE 0 END) as embarqueAtual,
-            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-1 THEN numDesembarques ELSE 0 END) as desembarqueAtual,
+            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-3 THEN numEmbarques ELSE 0 END) as embarqueAtual,
+            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-3 THEN numDesembarques ELSE 0 END) as desembarqueAtual,
             
-            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-2 THEN numEmbarques ELSE 0 END) as embarqueAnterior,
-            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-2 THEN numDesembarques ELSE 0 END) as desembarqueAnterior
+            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-4 THEN numEmbarques ELSE 0 END) as embarqueAnterior,
+            SUM(CASE WHEN ano = YEAR(CURRENT_DATE())-4 THEN numDesembarques ELSE 0 END) as desembarqueAnterior
         FROM voo
         GROUP BY estado
-        ORDER BY (SUM(CASE WHEN ano = 2024 THEN numEmbarques ELSE 0 END)) DESC;
+        ORDER BY (SUM(CASE WHEN ano = 2021 THEN numEmbarques ELSE 0 END)) DESC;
     `;
     return database.executar(instrucaoSql);
 }

@@ -197,7 +197,7 @@
             </div>
 
           </div>
-          
+
         </div>
 
       </div>
@@ -232,50 +232,50 @@
     var cnpj = document.getElementById("cnpj").value.replace(/\D/g, "");
 
     if (cnpj.length === 14) {
-        try {
-            const resposta = await fetch(`/empresa/buscar/${cnpj}`);
+      try {
+        const resposta = await fetch(`/empresa/buscar/${cnpj}`);
 
-            if (resposta.status === 200) {
-                const dados = await resposta.json();
-                console.log("Empresa encontrada:", dados);
+        if (resposta.status === 200) {
+          const dados = await resposta.json();
+          console.log("Empresa encontrada:", dados);
 
-                // Preenchendo campos automaticamente
-                document.getElementById("razaoSocial").value = dados.razaoSocial;
-                document.getElementById("cep").value = dados.cep;
-                document.getElementById("uf").value = dados.estado;
-                document.getElementById("cidade").value = dados.cidade;
-                document.getElementById("bairro").value = dados.bairro;
-                document.getElementById("logradouro").value = dados.logradouro;
-                document.getElementById("numero").value = dados.numero;
-                if(dados.complemento) {
-                    document.getElementById("complemento").value = dados.complemento;
-                }
+          // Preenchendo campos automaticamente
+          document.getElementById("razaoSocial").value = dados.razaoSocial;
+          document.getElementById("cep").value = dados.cep;
+          document.getElementById("uf").value = dados.estado;
+          document.getElementById("cidade").value = dados.cidade;
+          document.getElementById("bairro").value = dados.bairro;
+          document.getElementById("logradouro").value = dados.logradouro;
+          document.getElementById("numero").value = dados.numero;
+          if (dados.complemento) {
+            document.getElementById("complemento").value = dados.complemento;
+          }
 
-                document.getElementById("razaoSocial").disabled = true;
-                document.getElementById("cep").disabled = true;
-                document.getElementById("uf").disabled = true;
-                document.getElementById("cidade").disabled = true;
-                document.getElementById("bairro").disabled = true;
-                document.getElementById("logradouro").disabled = true;
-                document.getElementById("numero").disabled = true;
-                if(dados.complemento) {
-                    document.getElementById("complemento").disabled = true;
-                }
+          document.getElementById("razaoSocial").disabled = true;
+          document.getElementById("cep").disabled = true;
+          document.getElementById("uf").disabled = true;
+          document.getElementById("cidade").disabled = true;
+          document.getElementById("bairro").disabled = true;
+          document.getElementById("logradouro").disabled = true;
+          document.getElementById("numero").disabled = true;
+          if (dados.complemento) {
+            document.getElementById("complemento").disabled = true;
+          }
 
-                alert("Empresa encontrada! Vincularemos seu cadastro a ela.");
-            } else {
-                // Se não encontrar (status 204), libera os campos para cadastro novo
-                console.log("Empresa não encontrada. Cadastro novo.");
-                document.getElementById("razaoSocial").disabled = false;
-                document.getElementById("razaoSocial").value = "";
-                // Limpar campos de endereço também se quiser
-            }
-
-        } catch (erro) {
-            console.error("Erro ao buscar empresa:", erro);
+          alert("Empresa encontrada! Vincularemos seu cadastro a ela.");
+        } else {
+          // Se não encontrar (status 204), libera os campos para cadastro novo
+          console.log("Empresa não encontrada. Cadastro novo.");
+          document.getElementById("razaoSocial").disabled = false;
+          document.getElementById("razaoSocial").value = "";
+          // Limpar campos de endereço também se quiser
         }
+
+      } catch (erro) {
+        console.error("Erro ao buscar empresa:", erro);
+      }
     }
-}
+  }
 
   function cadastrar() {
     //empresa
@@ -298,54 +298,56 @@
     const complementoVar = document.getElementById("complemento") ? document.getElementById("complemento").value.trim() : "";
     const cepVar = document.getElementById("cep").value.trim().replace(/\D/g, "");
 
-    if (!razaoVar || !cnpjVar || !nomeVar || !telefoneVar || !emailVar || !senhaVar || !confirmacao_senhaVar ||
-      !estadoVar || !cidadeVar || !bairroVar || !logradouroVar || !numVar || !cepVar) {
+    if (validarFormularioEtapa2()) {
+      if (!razaoVar || !cnpjVar || !nomeVar || !telefoneVar || !emailVar || !senhaVar || !confirmacao_senhaVar ||
+        !estadoVar || !cidadeVar || !bairroVar || !logradouroVar || !numVar || !cepVar) {
+        return false;
+      }
+
+      if (senhaVar !== confirmacao_senhaVar) {
+        return false;
+      }
+
+      fetch("/empresa/cadastrar-com-endereco", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          razaoSocialServer: razaoVar,
+          cnpjServer: cnpjVar,
+          nomeServer: nomeVar,
+          telefoneServer: telefoneVar,
+          setorServer: setorVar,
+          cargoServer: cargoVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          logradouroServer: logradouroVar,
+          numeroServer: numVar,
+          complementoServer: complementoVar,
+          bairroServer: bairroVar,
+          cidadeServer: cidadeVar,
+          estadoServer: estadoVar,
+          cepServer: cepVar
+        })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro na requisição: " + response.status);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1000);
+        })
+        .catch(error => {
+          console.error("Erro no cadastro:", error);
+        });
+
       return false;
     }
-
-    if (senhaVar !== confirmacao_senhaVar) {
-      return false;
-    }
-
-    fetch("/empresa/cadastrar-com-endereco", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        razaoSocialServer: razaoVar,
-        cnpjServer: cnpjVar,
-        nomeServer: nomeVar,
-        telefoneServer: telefoneVar,
-        setorServer: setorVar,
-        cargoServer: cargoVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        logradouroServer: logradouroVar,
-        numeroServer: numVar,
-        complementoServer: complementoVar,
-        bairroServer: bairroVar,
-        cidadeServer: cidadeVar,
-        estadoServer: estadoVar,
-        cepServer: cepVar
-      })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Erro na requisição: " + response.status);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setTimeout(() => {
-          window.location.href = "login.html";
-        }, 1000);
-      })
-      .catch(error => {
-        console.error("Erro no cadastro:", error);
-      });
-
-    return false;
   }
 
 
