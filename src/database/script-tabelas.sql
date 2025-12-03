@@ -54,11 +54,13 @@ fkEmpresa INT NOT NULL,
 CONSTRAINT fkEmpresaAlertas FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
+
 CREATE TABLE historicoRelatorios(
 idRelatorio INT PRIMARY KEY auto_increment,
 nome VARCHAR(100) NOT NULL,
 favorito TINYINT(1) NOT NULL,
 sqlRelatorio TEXT NOT NULL,
+dtHoraCriacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 fkEmpresa INT NOT NULL,
 CONSTRAINT fkRelatorioEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
@@ -75,7 +77,6 @@ numEmbarques INT NOT NULL,
 numDesembarques INT NOT NULL,
 numVoosTotais INT NOT NULL
 );
-
 CREATE TABLE cardsComparativos(
 idCards INT PRIMARY KEY auto_increment,
 nome VARCHAR(100) NOT NULL,
