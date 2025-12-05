@@ -18,6 +18,7 @@ header img {
     max-width: 900px;
     width: 90%; /* proporcional à tela */
     margin: auto;
+    margin-top: 5%;
     background: #fff;
     padding: 30px;
     border-radius: 12px;
@@ -35,6 +36,8 @@ header img {
     margin-bottom: 25px;
     color: #555;
   }
+  
+  
 
   .section {
     margin-top: 20px;
@@ -89,6 +92,7 @@ input, textarea, select {
     border-radius: 6px;
     box-sizing: border-box;
 }
+
 
 /* COLUNAS */
 .row {

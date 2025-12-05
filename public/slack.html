@@ -31,31 +31,51 @@
 
     <div class="containerSlack">
 
-  <h1>Parametrização – Integração Slack</h1>
-  <p>Configure como o sistema enviará notificações automáticas ao Slack.</p>
+  <h1>Configuração de Notificações – Integração com Slack</h1>
+  <p>Defina os critérios para o envio de notificações automáticas ao Slack.</p>
 
   <div class="section row">
     <div style="flex:1; min-width:260px;">
-      <h3>Filtros</h3>
-
-      <label>Companhia</label>
-      <input id="filterAirline" placeholder="Gol, Azul, LATAM" />
-
-      <label>Tipo de voo</label>
-      <input id="filterType" placeholder="doméstico, internacional" />
-
+      <h3>Parâmetros do Alerta</h3>
+    
       <label>Estado</label>
       <select id="estado">
-        <option value="">Todos</option>
-        <option value="SP">SP</option>
-        <option value="RJ">RJ</option>
-        <option value="MG">MG</option>
-        <option value="BA">BA</option>
-        <option value="ES">ES</option>
-        <option value="PR">PR</option>
-        <option value="SC">SC</option>
-        <option value="RS">RS</option>
+        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
       </select>
+      
+       <label>Demanda</label>
+        <select id="estado">
+          <option value="alta">Alta demanda</option>
+          <option value="baixa">Baixa demanda</option>
+          <option value="ambas">Alta e baixa demanda</option>
+        </select>
     </div>
 
     <div class="checkbox-group">
