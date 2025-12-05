@@ -207,12 +207,13 @@
         <div class="sidebar">
             <a href="info.html"><i class="fa-solid fa-user"></i></a>
             <a href="dashboard.html"><i class="fa-solid fa-clock"></i></a>
-            <a href="http://localhost:4200"><i class="fa-solid fa-envelope"></i></a>
+            <a id="link-angular" href="#"><i class="fa-solid fa-envelope"></i></a>
             <a href="comparativos.html" class="active"><i class="fa-solid fa-file-lines"></i></a>
             <a href="configuracoes.html"><i class="fa-solid fa-gear"></i></a>
             <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>
+      <script src="./js/link.js"></script>
 </body>
 </html>
 
@@ -225,7 +226,7 @@
     let cardSelecionadoId = null; 
     let modoEdicao = false;
 
-    // --- CONFIGURAÇÃO INICIAL DE BOTÕES ---
+    // --- CONFIGURAÇÃO INICIAL DE BOTÕES ---0
     const btnEditar = document.getElementById('btnEditarMain');
     const btnRemover = document.getElementById('btnRemoverMain');
     

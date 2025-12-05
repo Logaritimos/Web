@@ -3,17 +3,20 @@ const { param } = require("../routes/relatorios");
 
 
 function CriarRelatorios(req, res) {
-   
+  const { ano, mes, nome, fkEmpresa } = req.body;
 
- const { ano, mes, nome } = req.body;
+  console.log("Ano recebido:", ano);
+  console.log("Mes recebido:", mes);
+  console.log("Nome recebido:", nome);
+  console.log("fkEmpresa recebida:", fkEmpresa);
 
- console.log('Ano recebido:', ano);
-  console.log('Mes recebido:', mes);
-  console.log('Nome recebido:', nome);
-
-    relatoriosModal.CriarRelatorios(ano, mes, nome )
-        .then((dados) => res.status(200).json({ mensagem: dados }))
-        .catch(err => res.status(500).json({ erro: err.message }));
+  relatoriosModal
+    .CriarRelatorios(ano, mes, nome, fkEmpresa)
+    .then((dados) => res.status(200).json({ mensagem: dados }))
+    .catch((err) => {
+      console.error("Erro em CriarRelatorios controller:", err);
+      res.status(500).json({ erro: err.message });
+    });
 }
 
 function BuscarDadosVoo(req, res) {
@@ -29,16 +32,26 @@ function BuscarDadosVoo(req, res) {
 
 
 function ListarRelatorios(req, res) {
-    
-    const destino = req.query.destino
-    const dataInicio = req.query.dataInicio
-    const dataFim = req.query.dataFim
+  const destino = req.query.destino;
+  const dataInicio = req.query.dataInicio;
+  const dataFim = req.query.dataFim;
+  const fkEmpresa = req.query.fkEmpresa;
 
-    relatoriosModal.ListarRelatorios(destino, dataInicio, dataFim )
-        .then((dados) => res.status(200).json({ mensagem: dados }))
-        .catch(err => res.status(500).json({ erro: err.message }));
+  console.log("Filtros recebidos em ListarRelatorios:", {
+    destino,
+    dataInicio,
+    dataFim,
+    fkEmpresa,
+  });
+
+  relatoriosModal
+    .ListarRelatorios(destino, dataInicio, dataFim, fkEmpresa)
+    .then((dados) => res.status(200).json({ mensagem: dados }))
+    .catch((err) => {
+      console.error("Erro em ListarRelatorios controller:", err);
+      res.status(500).json({ erro: err.message });
+    });
 }
-
 function DeletarRelatorios(req, res) {
     
 

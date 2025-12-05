@@ -19,7 +19,7 @@ function atualizarEmail(idUsuario, novoEmail, emailAtual) {
 
 function login(email, senha) {
     const instrucaoSql = `
-        SELECT idUsuario, nome, email
+        SELECT idUsuario, nome, email, fkEmpresa
         FROM usuario
         WHERE email = '${email}' AND senha = '${senha}';
     `;

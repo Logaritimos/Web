@@ -133,8 +133,9 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
-                    // Se o usuário tiver vinculo com empresa, pode vir no json também:
-                    // sessionStorage.FK_EMPRESA = json.fkEmpresa; 
+                    sessionStorage.FK_EMPRESA = json.fkEmpresa; 
+                    localStorage.ID_USUARIO = json.idUsuario;
+                    localStorage.setItem('idUsuario', json.idUsuario);
 
                     setTimeout(() => {
                         window.location = "dashboard.html"; // Ou para onde o usuário deve ir
