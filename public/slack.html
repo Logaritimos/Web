@@ -71,7 +71,7 @@
       </select>
       
        <label>Demanda</label>
-        <select id="estado">
+        <select id="demanda">
           <option value="alta">Alta demanda</option>
           <option value="baixa">Baixa demanda</option>
           <option value="ambas">Alta e baixa demanda</option>
@@ -97,5 +97,45 @@
 
 </html>
 <script>
-   
+  
+function enviarSlack() {
+
+    var estado = document.getElementById("estado").value;
+    var demanda = document.getElementById("demanda").value;
+    var statusDiv = document.getElementById("status");
+
+    if (estado === "" || demanda === "") {
+        statusDiv.innerHTML = "⚠️ Preencha todos os campos!";
+        statusDiv.style.color = "red";
+        return;
+    }
+
+    fetch("http://localhost:3333/slack/selecionar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            estadoServer: estado,
+            demandaServer: demanda
+        })
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            statusDiv.innerHTML = "✔️ Configurações salvas com sucesso!";
+            statusDiv.style.color = "green";
+        } else {
+            statusDiv.innerHTML = "❌ Erro ao salvar!";
+            statusDiv.style.color = "red";
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro:", erro);
+        statusDiv.innerHTML = "❌ Erro no servidor!";
+        statusDiv.style.color = "red";
+    });
+}
+
+document.querySelector(".btn-success").addEventListener("click", enviarSlack);
+
 </script>
