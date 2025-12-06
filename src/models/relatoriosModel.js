@@ -1,30 +1,14 @@
 var database = require("../database/config");
 
 function CriarRelatorios(ano, mes, nome, fkEmpresa) {
-  console.log(
-    "Model.CriarRelatorios -> ano:",
-    ano,
-    "mes:",
-    mes,
-    "nome:",
-    nome,
-    "fkEmpresa:",
-    fkEmpresa
-  );
-
-
-  if (fkEmpresa === null || fkEmpresa === undefined || fkEmpresa === "") {
-    console.log(
-      "fkEmpresa não informada em CriarRelatorios → não criar relatório"
-    );
-    const sql = `SELECT * FROM historicoRelatorios WHERE 1 = 0`; 
+  if (!fkEmpresa) {
+    const sql = `SELECT * FROM historicoRelatorios WHERE 1 = 0`;
     return database.executar(sql);
   }
 
   const mesValido = mes !== null && mes !== undefined && mes !== "";
 
   let sqlRelatorio;
-
   if (mesValido) {
     sqlRelatorio = `SELECT * FROM voo WHERE ano = ${ano} AND mes = '${mes}'`;
   } else {
@@ -33,15 +17,11 @@ function CriarRelatorios(ano, mes, nome, fkEmpresa) {
 
   const sql = `
     INSERT INTO historicoRelatorios (nome, sqlRelatorio, favorito, fkEmpresa)
-    VALUES ('${nome}', '${sqlRelatorio}', 0, ${fkEmpresa})
+    VALUES (?, ?, 0, ?)
   `;
 
-  console.log("é pra criar");
-  console.log("SQL gerado:", sql);
-
-  return database.executar(sql);
+  return database.executar(sql, [nome, sqlRelatorio, fkEmpresa]);
 }
-
 
 
 
