@@ -51,9 +51,25 @@ function FavoritarRelatorios(id, favorito) {
      const sql = `
           UPDATE historicorelatorios SET favorito = ${favorito} WHERE idRelatorio = ${id}
         `;
-        console.log('è pra favoritar')
+        console.log('è pra Renomear')
         return database.executar(sql);
 }
+
+
+function RenomearRelatorios(id, nome) {
+  console.log(id, nome);
+
+  const sql = `
+    UPDATE historicorelatorios
+    SET nome = '${nome}'
+    WHERE idRelatorio = ${id}
+  `;
+
+  console.log("SQL renomear:", sql);
+  return database.executar(sql);
+}
+
+
 
 
 
@@ -105,7 +121,7 @@ function ListarRelatorios(destino, dataInicio, dataFim, fkEmpresa) {
 
   const orderBy = "ORDER BY favorito DESC, dtHoraCriacao DESC";
 
-  // Se não tiver fkEmpresa → usuário não logado → não retorna nada
+  // Se não tiver fkEmpresa → usuário não logado - não retorna nada
   if (!fkEmpresa) {
     console.log(
       "fkEmpresa não informada em ListarRelatorios → retornando vazio"
@@ -230,10 +246,10 @@ function ListarRelatorios(destino, dataInicio, dataFim, fkEmpresa) {
 }
 
 module.exports = {
-    ListarRelatorios,
-    DeletarRelatorios,
-    FavoritarRelatorios,
-    CriarRelatorios,
-    BuscarDadosVoo
-
+  ListarRelatorios,
+  DeletarRelatorios,
+  FavoritarRelatorios,
+  CriarRelatorios,
+  BuscarDadosVoo,
+  RenomearRelatorios,
 };

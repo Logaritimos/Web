@@ -77,10 +77,25 @@ console.log('Id:', id, 'novo favorito:', favorito);
         .catch(err => res.status(500).json({ erro: err.message }));
 }
 
-module.exports = {
-    ListarRelatorios,
-    DeletarRelatorios,
-    FavoritarRelatorios,
-    CriarRelatorios,
-    BuscarDadosVoo
+
+
+function RenomearRelatorios(req, res) {
+  const id = req.params.id;
+  const { nome } = req.body;
+
+  console.log("Id:", id, "novo nome:", nome);
+
+  relatoriosModal
+    .RenomearRelatorios(id, nome)
+    .then((dados) => res.status(200).json({ mensagem: dados }))
+    .catch((err) => res.status(500).json({ erro: err.message }));
 }
+
+module.exports = {
+  ListarRelatorios,
+  DeletarRelatorios,
+  FavoritarRelatorios,
+  CriarRelatorios,
+  BuscarDadosVoo,
+  RenomearRelatorios,
+};

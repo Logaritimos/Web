@@ -18,6 +18,9 @@ router.patch("/FavoritarRelatorios/:id", function (req, res) {
     relatoriosController.FavoritarRelatorios(req, res);
 });
 
+router.patch("/RenomearRelatorio/:id", function (req, res) {
+  relatoriosController.RenomearRelatorios(req, res);
+});
 
 router.post("/CriarRelatorio", function (req, res) {
     

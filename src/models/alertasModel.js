@@ -2,50 +2,80 @@ var database = require("../database/config");
 var database = require("../database/config");
 
 async function GerarAlertas(fkEmpresa) {
-  // Mantém uma validação simples igual você fazia
-  if (fkEmpresa === undefined || fkEmpresa == null || fkEmpresa === "") {
+  if (fkEmpresa == null || fkEmpresa === "" || fkEmpresa == 0) {
     console.log(
       fkEmpresa + " teste (fkEmpresa não informada), usando 1 como padrão"
     );
-    fkEmpresa = 1; // se quiser um padrão
+    fkEmpresa = 1;
   }
 
   const instrucaoLimpar = `
-        DELETE FROM alertas 
-        WHERE categoria = 'Informativo' 
-        AND fkEmpresa = ${fkEmpresa};
-    `;
+    DELETE FROM alertas 
+    WHERE categoria = 'Informativo' 
+      AND fkEmpresa = ${fkEmpresa};
+  `;
 
   try {
-        await database
-            .executar(instrucaoLimpar);
-        const instrucaoSql = `SELECT * FROM voo`;
-        const resultados = await database.executar(instrucaoSql);
-        const promises = resultados.map((voo) => {
-            const estado = voo.estado;
+    const resultadoLimpeza = await database.executar(instrucaoLimpar);
 
-            let resultadoBooleano = Math.random() < 0.5;
-            let tipoAlerta = "";
-
-            if (resultadoBooleano == true) {
-                tipoAlerta = "Redução na demanda por voos para o";
-            } else {
-                tipoAlerta = "Aumento na demanda por voos para o";
-            }
-
-            const instrucaoInserir = `
-                    INSERT INTO alertas (descricao, categoria, fkEmpresa)
-                    VALUES ('Alerta! ${tipoAlerta} estado de ${estado}', 'Informativo', ${fkEmpresa});
-                `;
-
-            return database.executar(instrucaoInserir);
-        });
-        return await Promise.all(promises);
-    } catch (erro) {
-        console.error("Erro ao buscar ou inserir alertas:", erro);
-
-        throw erro;
+    if (resultadoLimpeza && resultadoLimpeza.affectedRows >= 0) {
+      console.log(
+        "Alertas informativos antigos limpos para fkEmpresa =",
+        fkEmpresa
+      );
     }
+
+    const instrucaoSql = `SELECT * FROM voo`;
+    const resultados = await database.executar(instrucaoSql);
+
+    if (!resultados || resultados.length === 0) {
+      console.log("Nenhum voo encontrado, nenhum alerta gerado.");
+      return;
+    }
+
+    const values = resultados.map((voo) => {
+      const estado = voo.estado;
+
+      const resultadoBooleano = Math.random() < 0.5;
+      const isReducao = resultadoBooleano == true;
+
+      let tipoAlerta = "";
+
+      if (isReducao == true) {
+        tipoAlerta = "Redução na demanda por voos para o";
+      } else {
+        tipoAlerta = "Aumento na demanda por voos para o";
+      }
+
+      const descricao = `Alerta! ${tipoAlerta} estado de ${estado}`;
+
+      return `('${descricao}', 'Informativo', ${fkEmpresa})`;
+    });
+
+    if (!values || values.length === 0) {
+      console.log("Nenhum alerta para inserir.");
+      return;
+    }
+
+    const instrucaoInserir = `
+      INSERT INTO alertas (descricao, categoria, fkEmpresa)
+      VALUES ${values.join(", ")};
+    `;
+
+    const resultadoInserir = await database.executar(instrucaoInserir);
+
+    if (resultadoInserir && resultadoInserir.affectedRows > 0) {
+      console.log(
+        "Alertas gerados com sucesso:",
+        resultadoInserir.affectedRows
+      );
+    } else {
+      console.log("Nenhum alerta foi inserido.");
+    }
+  } catch (erro) {
+    console.error("Erro ao buscar ou inserir alertas:", erro);
+    throw erro;
+  }
 }
 
 function ListarAlertas(destino, dataInicio, dataFim, fkEmpresa) {
@@ -61,12 +91,12 @@ function ListarAlertas(destino, dataInicio, dataFim, fkEmpresa) {
     fkEmpresa,
   });
 
-  // Se não tiver fkEmpresa, considera não logado → retorna vazio
+ 
   if (!fkEmpresa) {
     console.log(
       "fkEmpresa não informada em ListarAlertas → usuário não logado, retornando vazio"
     );
-    const sql = `SELECT * FROM alertas WHERE 1 = 0`; // retorna 0 linhas
+    const sql = `SELECT * FROM alertas WHERE 1 = 0`; 
     return database.executar(sql);
   }
 
