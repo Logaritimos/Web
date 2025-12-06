@@ -3,6 +3,7 @@ var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
+
 require("dotenv").config({ path: caminho_env });
 
 var express = require("express");
@@ -18,6 +19,7 @@ var empresaRouter = require("./src/routes/empresa");
 var enderecoRouter = require("./src/routes/endereco");
 var usuarioRouter = require("./src/routes/usuario");
 var vooRouter = require("./src/routes/voo");
+var slackRouter = require("./src/routes/slack");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +32,7 @@ app.use("/empresa", empresaRouter);
 app.use("/endereco", enderecoRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/voo", vooRouter);
+app.use("/slack", slackRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
