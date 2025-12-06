@@ -17,7 +17,7 @@ function CriarRelatorios(ano, mes, nome, fkEmpresa) {
     console.log(
       "fkEmpresa não informada em CriarRelatorios → não criar relatório"
     );
-    const sql = `SELECT * FROM historicorelatorios WHERE 1 = 0`; 
+    const sql = `SELECT * FROM historicoRelatorios WHERE 1 = 0`; 
     return database.executar(sql);
   }
 
@@ -32,7 +32,7 @@ function CriarRelatorios(ano, mes, nome, fkEmpresa) {
   }
 
   const sql = `
-    INSERT INTO historicorelatorios (nome, sqlRelatorio, favorito, fkEmpresa)
+    INSERT INTO historicoRelatorios (nome, sqlRelatorio, favorito, fkEmpresa)
     VALUES ('${nome}', '${sqlRelatorio}', 0, ${fkEmpresa})
   `;
 
@@ -49,7 +49,7 @@ function FavoritarRelatorios(id, favorito) {
     console.log(id)
 
      const sql = `
-          UPDATE historicorelatorios SET favorito = ${favorito} WHERE idRelatorio = ${id}
+          UPDATE historicoRelatorios SET favorito = ${favorito} WHERE idRelatorio = ${id}
         `;
         console.log('è pra Renomear')
         return database.executar(sql);
@@ -60,7 +60,7 @@ function RenomearRelatorios(id, nome) {
   console.log(id, nome);
 
   const sql = `
-    UPDATE historicorelatorios
+    UPDATE historicoRelatorios
     SET nome = '${nome}'
     WHERE idRelatorio = ${id}
   `;
@@ -77,7 +77,7 @@ function DeletarRelatorios(id) {
     console.log(id)
 
      const sql = `
-           DELETE FROM historicorelatorios WHERE idRelatorio = ${id}
+           DELETE FROM historicoRelatorios WHERE idRelatorio = ${id}
         `;
         console.log('era pra ter excluido')
         return database.executar(sql);
