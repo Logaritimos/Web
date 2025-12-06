@@ -1,7 +1,21 @@
 var database = require("../database/config");
 
 function CriarRelatorios(ano, mes, nome, fkEmpresa) {
+  console.log(
+    "Model. CriarRelatorios -> ano:",
+    ano,
+    "mes:",
+    mes,
+    "nome:",
+    nome,
+    "fkEmpresa:",
+    fkEmpresa
+  );
+
   if (!fkEmpresa) {
+    console.log(
+      "fkEmpresa não informada em CriarRelatorios → não criar relatório"
+    );
     const sql = `SELECT * FROM historicoRelatorios WHERE 1 = 0`;
     return database.executar(sql);
   }
@@ -9,20 +23,27 @@ function CriarRelatorios(ano, mes, nome, fkEmpresa) {
   const mesValido = mes !== null && mes !== undefined && mes !== "";
 
   let sqlRelatorio;
+
   if (mesValido) {
     sqlRelatorio = `SELECT * FROM voo WHERE ano = ${ano} AND mes = '${mes}'`;
   } else {
     sqlRelatorio = `SELECT * FROM voo WHERE ano = ${ano}`;
   }
 
+
+  const nomeEscapado = nome.replace(/'/g, "''");
+  const sqlRelatorioEscapado = sqlRelatorio.replace(/'/g, "''");
+
   const sql = `
     INSERT INTO historicoRelatorios (nome, sqlRelatorio, favorito, fkEmpresa)
-    VALUES (?, ?, 0, ?)
+    VALUES ('${nomeEscapado}', '${sqlRelatorioEscapado}', 0, ${fkEmpresa})
   `;
 
-  return database.executar(sql, [nome, sqlRelatorio, fkEmpresa]);
-}
+  console.log("é pra criar");
+  console.log("SQL gerado:", sql);
 
+  return database.executar(sql);
+}
 
 
 function FavoritarRelatorios(id, favorito) {
