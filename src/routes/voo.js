@@ -11,6 +11,22 @@ router.get("/mensais", function (req, res) {
     vooController.buscarDadosMensais(req, res);
 });
 
+router.get("/KPI1", function (req, res) {
+    vooController.buscarDadosKPI1(req, res);
+});
+
+router.get("/KPI2", function (req, res) {
+    vooController.buscarDadosKPI2(req, res);
+});
+
+router.get("/KPI3", function (req, res) {
+    vooController.buscarDadosKPI3(req, res);
+});
+
+router.get("/KPI4", function (req, res) {
+    vooController.buscarDadosKPI4(req, res);
+});
+
 router.get("/destinos", function (req, res) {
     vooController.buscarDestinos(req, res);
 });

@@ -28,6 +28,62 @@ function buscarDadosMensais(req, res) {
         });
 }
 
+function buscarDadosKPI1(req, res) {
+    vooModel.buscarDadosKPI1()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarDadosKPI2(req, res) {
+    vooModel.buscarDadosKPI2()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarDadosKPI3(req, res) {
+    vooModel.buscarDadosKPI3()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarDadosKPI4(req, res) {
+    vooModel.buscarDadosKPI4()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function buscarDestinos(req, res) {
     vooModel.buscarDestinos()
         .then(function (resultado) {
@@ -75,5 +131,10 @@ module.exports = {
     buscarDadosAnuais,
     buscarDadosMensais,
     buscarDestinos,
-    buscarPorFiltro
+    buscarPorFiltro,
+    buscarDadosKPI1,
+    buscarDadosKPI2,
+    buscarDadosKPI3,
+    buscarDadosKPI4
+
 }
