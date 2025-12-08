@@ -237,6 +237,11 @@ hr {
     padding: 20px 0;
     gap: 30px;
 }  
+.sidebar img{
+  width: 42px;
+  height: 37px;
+  cursor: pointer;
+}
 
  .sidebar a {
     color: white;
