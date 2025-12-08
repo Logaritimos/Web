@@ -21,6 +21,8 @@ var relatoriosRouter = require("./src/routes/relatorios");
 var usuarioRouter = require("./src/routes/usuario");
 var vooRouter = require("./src/routes/voo");
 var cardRouter = require("./src/routes/cards");
+var slackRouter = require("./src/routes/slack");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +38,8 @@ app.use("/relatorios", relatoriosRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/voo", vooRouter);
 app.use("/cards", cardRouter);
+app.use("/slack", slackRouter);
+
 
 app.listen(PORTA_APP, function () {
     console.log(`

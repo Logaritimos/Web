@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/util.css">
+    <link rel="stylesheet" href="./CSS/slack.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <img src="./assets/imagem/logo.png" alt="">
+        </div>   
+    </header>
+    
+  <div class="sidebar">
+        <a href="#"><i class="fa-solid fa-user"onclick="window.location.href='../../info.html'"></i></a>
+        <a href="#" ><i class="fa-solid fa-clock" onclick="window.location.href='../../dashboard.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-file-lines" onclick="window.location.href='../../comparativos.html'"></i></a>
+        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
+        <a href="#" class="active"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack" ></a>
+        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+    </div>
+
+    <div class="containerSlack">
+
+  <h1>Configuração de Notificações – Integração com Slack</h1>
+  <p>Defina os critérios para o envio de notificações automáticas ao Slack.</p>
+
+  <div class="section row">
+    <div style="flex:1; min-width:260px;">
+      <h3>Parâmetros do Alerta</h3>
+    
+      <label>Estado</label>
+      <select id="estado">
+        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+      </select>
+      
+       <label>Demanda</label>
+        <select id="demanda">
+          <option value="alta">Alta demanda</option>
+          <option value="baixa">Baixa demanda</option>
+          <option value="ambas">Alta e baixa demanda</option>
+        </select>
+    </div>
+
+    <div class="checkbox-group">
+      <label class="toggle">
+        Ativar notificação
+        <input type="checkbox" id="ativarIntegracao" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section">
+    <button class="btn-success">Enviar</button>
+    <div id="status" class="status"></div>
+  </div>
+
+</div>
+</body>
+
+</html>
+<script>
+  
+function enviarSlack() {
+
+    var estado = document.getElementById("estado").value;
+    var demanda = document.getElementById("demanda").value;
+    var statusDiv = document.getElementById("status");
+
+    if (estado === "" || demanda === "") {
+        statusDiv.innerHTML = "⚠️ Preencha todos os campos!";
+        statusDiv.style.color = "red";
+        return;
+    }
+
+    fetch("http://localhost:3333/slack/selecionar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            estadoServer: estado,
+            demandaServer: demanda
+        })
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            statusDiv.innerHTML = "✔️ Configurações salvas com sucesso!";
+            statusDiv.style.color = "green";
+        } else {
+            statusDiv.innerHTML = "❌ Erro ao salvar!";
+            statusDiv.style.color = "red";
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro:", erro);
+        statusDiv.innerHTML = "❌ Erro no servidor!";
+        statusDiv.style.color = "red";
+    });
+}
+
+document.querySelector(".btn-success").addEventListener("click", enviarSlack);
+
+</script>
