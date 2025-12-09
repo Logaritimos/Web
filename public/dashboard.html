@@ -21,14 +21,36 @@
 
     <!--Sidebar-->
 
-      <div class="sidebar">
-         <a href="#"><i class="fa-solid fa-user"onclick="window.location.href='../../info.html'"></i></a>
-        <a href="#" class="active"><i class="fa-solid fa-clock"></i></a>
-        <a href="#"><i class="fa-solid fa-envelope" onclick="window.location.href='../../mensagem.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-file-lines" onclick="window.location.href='../../comparativos.html'"></i></a>
-        <a href="#"><i class="fa-solid fa-gear" onclick="window.location.href='../../configuracoes.html'"></i></a>
-        <a href="#"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack" onclick="window.location.href='../../slack.html'"></a>
-        <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
+       <div class="sidebar">
+        <!-- Informações -->
+        <a href="info.html">
+            <i class="fa-solid fa-user"></i>
+        </a>
+
+        <!-- Dashboard -->
+        <a href="dashboard.html" class="active">
+            <i class="fa-solid fa-clock"></i>
+        </a>
+
+        <!-- Angular -->
+        <a id="link-angular" href="#"><i class="fa-solid fa-envelope"></i></a>
+
+        <!-- Comparativos -->
+        <a href="comparativos.html">
+            <i class="fa-solid fa-file-lines"></i>
+        </a>
+
+        <!-- Configurações -->
+        <a href="configuracoes.html">
+            <i class="fa-solid fa-gear"></i>
+        </a>
+
+        <a href="slack.html"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack" ></a>
+
+        <!-- Logout -->
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
     </div>
 
 
