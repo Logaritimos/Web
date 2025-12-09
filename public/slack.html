@@ -100,7 +100,7 @@
         }
 
         function listarCanais() {
-            fetch(`logaritmos-web.duckdns.org:3333/slack/listar/${idEmpresa}`)
+            fetch(`/slack/listar/${idEmpresa}`)
                 .then(res => {
                     if (!res.ok) throw new Error("Erro na API");
                     return res.json();
@@ -167,7 +167,7 @@
             var novoStatus = novoCheck ? 'Ativo' : 'Inativo';
             var card = document.getElementById(`card_${idCanal}`);
 
-            fetch(`http://localhost:3333/slack/status/${idCanal}`, {
+            fetch(`/slack/status/${idCanal}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: novoStatus })
