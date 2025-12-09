@@ -100,7 +100,7 @@
         }
 
         function listarCanais() {
-            fetch(`/slack/listar/${idEmpresa}`)
+            fetch(`logaritmos-web.duckdns.org:3333/slack/listar/${idEmpresa}`)
                 .then(res => {
                     if (!res.ok) throw new Error("Erro na API");
                     return res.json();
