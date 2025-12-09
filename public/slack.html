@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/util.css">
-    <link rel="stylesheet" href="./CSS/slack.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/slack.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Configuração Slack</title>
 </head>
 
@@ -14,16 +16,16 @@
     <header>
         <div>
             <img src="./assets/imagem/logo.png" alt="Logo">
-        </div>   
+        </div>
     </header>
-    
+
     <div class="sidebar">
         <a href="info.html"><i class="fa-solid fa-user"></i></a>
         <a href="dashboard.html"><i class="fa-solid fa-clock"></i></a>
         <a id="link-angular" href="#"><i class="fa-solid fa-envelope"></i></a>
         <a href="comparativos.html"><i class="fa-solid fa-file-lines"></i></a>
-        <a href="configuracoes.html" class="active"><i class="fa-solid fa-gear"></i></a>
-        <a href="#"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack"></a>
+        <a href="configuracoes.html"><i class="fa-solid fa-gear"></i></a>
+        <a href="#" class="active"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack"></a>
         <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
     </div>
 
@@ -36,13 +38,36 @@
                 <label>Filtrar por Estado</label>
                 <select id="filtro_estado" onchange="filtrarLista()">
                     <option value="">Todos os Estados</option>
-                    <option value="São Paulo">São Paulo</option>
-                    <option value="Rio de Janeiro">Rio de Janeiro</option>
-                    <option value="Minas Gerais">Minas Gerais</option>
                     <option value="Acre">Acre</option>
-                    </select>
+                    <option value="Alagoas">Alagoas</option>
+                    <option value="Amapá">Amapá</option>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="Bahia">Bahia</option>
+                    <option value="Ceará">Ceará</option>
+                    <option value="Distrito Federal">Distrito Federal</option>
+                    <option value="Espírito Santo">Espírito Santo</option>
+                    <option value="Goiás">Goiás</option>
+                    <option value="Maranhão">Maranhão</option>
+                    <option value="Mato Grosso">Mato Grosso</option>
+                    <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                    <option value="Minas Gerais">Minas Gerais</option>
+                    <option value="Pará">Pará</option>
+                    <option value="Paraíba">Paraíba</option>
+                    <option value="Paraná">Paraná</option>
+                    <option value="Pernambuco">Pernambuco</option>
+                    <option value="Piauí">Piauí</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                    <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                    <option value="Rondônia">Rondônia</option>
+                    <option value="Roraima">Roraima</option>
+                    <option value="Santa Catarina">Santa Catarina</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Sergipe">Sergipe</option>
+                    <option value="Tocantins">Tocantins</option>
+                </select>
             </div>
-            
+
             <div class="campo">
                 <label>Filtrar por Demanda</label>
                 <select id="filtro_demanda" onchange="filtrarLista()">
@@ -66,11 +91,11 @@
     <script>
         // SIMULAÇÃO DE LOGIN: 
         // Em produção, use: var idEmpresa = sessionStorage.ID_EMPRESA;
-        var idEmpresa = 1; 
+        var idEmpresa = 1;
         var listaGlobal = []; // Guarda os dados para filtrar sem ir no banco toda hora
 
         // 1. CARREGAR DADOS AO ABRIR
-        window.onload = function() {
+        window.onload = function () {
             listarCanais();
         }
 
@@ -93,7 +118,7 @@
         // 2. DESENHAR OS CARDS NA TELA
         function renderizarCards(lista) {
             var container = document.getElementById("container_cards");
-            container.innerHTML = ""; 
+            container.innerHTML = "";
 
             if (lista.length === 0) {
                 container.innerHTML = "<p>Nenhum alerta encontrado com esse filtro.</p>";
@@ -147,22 +172,23 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: novoStatus })
             })
-            .then(res => {
-                if (res.ok) {
-                    if (novoCheck) {
-                        card.classList.add('ativo');
+                .then(res => {
+                    if (res.ok) {
+                        if (novoCheck) {
+                            card.classList.add('ativo');
+                        } else {
+                            card.classList.remove('ativo');
+                        }
+                        // Atualiza a memória local também
+                        var item = listaGlobal.find(i => i.idSlackCanal === idCanal);
+                        if (item) item.status = novoStatus;
                     } else {
-                        card.classList.remove('ativo');
+                        alert("Erro ao atualizar!");
+                        // Opcional: Reverter o checkbox visualmente aqui
                     }
-                    // Atualiza a memória local também
-                    var item = listaGlobal.find(i => i.idSlackCanal === idCanal);
-                    if(item) item.status = novoStatus;
-                } else {
-                    alert("Erro ao atualizar!");
-                    // Opcional: Reverter o checkbox visualmente aqui
-                }
-            });
+                });
         }
     </script>
 </body>
+
 </html>
