@@ -101,9 +101,13 @@
 
         function listarCanais() {
             fetch(`/slack/listar/${idEmpresa}`)
-                .then(res => {
+                .then(async res => {
+                    const texto = await res.text();
+                    console.log("RESPOSTA BRUTA:", texto);
+
                     if (!res.ok) throw new Error("Erro na API");
-                    return res.json();
+
+                    return texto ? JSON.parse(texto) : [];
                 })
                 .then(dados => {
                     listaGlobal = dados;
