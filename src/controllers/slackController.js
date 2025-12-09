@@ -1,26 +1,32 @@
 var slackModel = require("../models/slackModel");
 
-function selecionar(req, res) {
-    var estado = req.body.estadoServer;
-    var demanda = req.body.demandaServer;
+function listar(req, res) {
+    var idEmpresa = req.params.idEmpresa;
 
-    if (estado == undefined) {
-        res.status(400).send("O estado está undefined!");
-    } else if (demanda == undefined) {
-        res.status(400).send("A demanda está undefined!");
-    } else {
-        slackModel.selecionar(estado, demanda)
-            .then(function (resultado) {
-                res.json(resultado);
-            })
-            .catch(function (erro) {
-                console.log(erro);
-                console.log("\nHouve um erro ao registrar a demanda no Slack! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            });
-    }
+    slackModel.listar(idEmpresa)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
-module.exports = {
-    selecionar
+function atualizarStatus(req, res) {
+    var idSlackCanal = req.params.idSlackCanal;
+    var novoStatus = req.body.status; // Vem do JSON { "status": "Ativo" }
+
+    slackModel.atualizarStatus(idSlackCanal, novoStatus)
+        .then(function (resultado) {
+            res.json(resultado);
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
+
+module.exports = { listar, atualizarStatus };

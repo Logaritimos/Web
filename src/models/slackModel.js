@@ -1,13 +1,22 @@
 var database = require("../database/config");
 
-function selecionar(estado, demanda) {
+function listar(idEmpresa) {
+    // Busca tudo ordenado por Estado para ficar bonito na tela
     var instrucaoSql = `
-        INSERT INTO slackCanal (paramEstado, paramDemanda)
-        VALUES ('${estado}', '${demanda}');
+        SELECT idSlackCanal, canal, paramEstado, paramDemanda, status 
+        FROM slackCanal 
+        WHERE fkEmpresa = ${idEmpresa}
+        ORDER BY paramEstado, paramDemanda;
     `;
     return database.executar(instrucaoSql);
 }
 
-module.exports = {
-    selecionar
-};
+function atualizarStatus(idSlackCanal, novoStatus) {
+    // Apenas liga ou desliga
+    var instrucaoSql = `
+        UPDATE slackCanal SET status = '${novoStatus}' WHERE idSlackCanal = ${idSlackCanal};
+    `;
+    return database.executar(instrucaoSql);
+}
+
+module.exports = { listar, atualizarStatus };

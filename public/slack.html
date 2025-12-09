@@ -5,138 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/util.css">
-    <link rel="stylesheet" href="./CSS/slack.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <title>Document</title>
+    <link rel="stylesheet" href="./CSS/slack.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Configuração Slack</title>
 </head>
 
 <body>
 
     <header>
         <div>
-            <img src="./assets/imagem/logo.png" alt="">
+            <img src="./assets/imagem/logo.png" alt="Logo">
         </div>   
     </header>
     
-  <div class="sidebar">
-       <a href="info.html"><i class="fa-solid fa-user"></i></a>
+    <div class="sidebar">
+        <a href="info.html"><i class="fa-solid fa-user"></i></a>
         <a href="dashboard.html"><i class="fa-solid fa-clock"></i></a>
-          <a id="link-angular" href="#"><i class="fa-solid fa-envelope"></i></a>
- <a href="comparativos.html"><i class="fa-solid fa-file-lines"></i></a>
-        <a href="configuracoes.html"><i class="fa-solid fa-gear"></i></a>
-        <a href="#" class="active"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack" ></a>
+        <a id="link-angular" href="#"><i class="fa-solid fa-envelope"></i></a>
+        <a href="comparativos.html"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="configuracoes.html" class="active"><i class="fa-solid fa-gear"></i></a>
+        <a href="#"><img src="./assets/imagem/logoslack.png" alt="" class="logoSlack"></a>
         <a href="#"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
     </div>
 
     <div class="containerSlack">
+        <h1>Painel de Notificações</h1>
+        <p>Ative ou desative os alertas que sua empresa deseja receber no Slack.</p>
 
-  <h1>Configuração de Notificações – Integração com Slack</h1>
-  <p>Defina os critérios para o envio de notificações automáticas ao Slack.</p>
+        <div class="painel-busca">
+            <div class="campo">
+                <label>Filtrar por Estado</label>
+                <select id="filtro_estado" onchange="filtrarLista()">
+                    <option value="">Todos os Estados</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Minas Gerais">Minas Gerais</option>
+                    <option value="Acre">Acre</option>
+                    </select>
+            </div>
+            
+            <div class="campo">
+                <label>Filtrar por Demanda</label>
+                <select id="filtro_demanda" onchange="filtrarLista()">
+                    <option value="">Todas</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Ambas">Ambas</option>
+                </select>
+            </div>
+        </div>
 
-  <div class="section row">
-    <div style="flex:1; min-width:260px;">
-      <h3>Parâmetros do Alerta</h3>
-    
-      <label>Estado</label>
-      <select id="estado">
-        <option value="">Selecione</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-      </select>
-      
-       <label>Demanda</label>
-        <select id="demanda">
-          <option value="alta">Alta demanda</option>
-          <option value="baixa">Baixa demanda</option>
-          <option value="ambas">Alta e baixa demanda</option>
-        </select>
+        <hr>
+
+        <div id="container_cards" class="grid-cards">
+            <p style="text-align:center;">Carregando configurações...</p>
+        </div>
     </div>
 
-    <div class="checkbox-group">
-      <label class="toggle">
-        Ativar notificação
-        <input type="checkbox" id="ativarIntegracao" checked>
-        <span class="slider"></span>
-      </label>
-    </div>
-  </div>
+    <script src="./js/link.js"></script>
 
-  <div class="section">
-    <button class="btn-success">Enviar</button>
-    <div id="status" class="status"></div>
-  </div>
+    <script>
+        // SIMULAÇÃO DE LOGIN: 
+        // Em produção, use: var idEmpresa = sessionStorage.ID_EMPRESA;
+        var idEmpresa = 1; 
+        var listaGlobal = []; // Guarda os dados para filtrar sem ir no banco toda hora
 
-</div>
-   <script src="./js/link.js"></script>
-</body>
-
-</html>
-<script>
-  
-function enviarSlack() {
-
-    var estado = document.getElementById("estado").value;
-    var demanda = document.getElementById("demanda").value;
-    var statusDiv = document.getElementById("status");
-
-    if (estado === "" || demanda === "") {
-        statusDiv.innerHTML = "⚠️ Preencha todos os campos!";
-        statusDiv.style.color = "red";
-        return;
-    }
-
-    fetch("http://localhost:3333/slack/selecionar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            estadoServer: estado,
-            demandaServer: demanda
-        })
-    })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            statusDiv.innerHTML = "✔️ Configurações salvas com sucesso!";
-            statusDiv.style.color = "green";
-        } else {
-            statusDiv.innerHTML = "❌ Erro ao salvar!";
-            statusDiv.style.color = "red";
+        // 1. CARREGAR DADOS AO ABRIR
+        window.onload = function() {
+            listarCanais();
         }
-    })
-    .catch(function (erro) {
-        console.log("Erro:", erro);
-        statusDiv.innerHTML = "❌ Erro no servidor!";
-        statusDiv.style.color = "red";
-    });
-}
 
-document.querySelector(".btn-success").addEventListener("click", enviarSlack);
+        function listarCanais() {
+            fetch(`http://localhost:3333/slack/listar/${idEmpresa}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro na API");
+                    return res.json();
+                })
+                .then(dados => {
+                    listaGlobal = dados;
+                    renderizarCards(listaGlobal);
+                })
+                .catch(erro => {
+                    console.error("Erro:", erro);
+                    document.getElementById("container_cards").innerHTML = "<p>Nenhuma configuração encontrada.</p>";
+                });
+        }
 
-</script>
+        // 2. DESENHAR OS CARDS NA TELA
+        function renderizarCards(lista) {
+            var container = document.getElementById("container_cards");
+            container.innerHTML = ""; 
+
+            if (lista.length === 0) {
+                container.innerHTML = "<p>Nenhum alerta encontrado com esse filtro.</p>";
+                return;
+            }
+
+            lista.forEach(item => {
+                var isAtivo = item.status === 'Ativo';
+                var checkAttribute = isAtivo ? 'checked' : '';
+                var classeAtivo = isAtivo ? 'ativo' : '';
+
+                var cardHTML = `
+                    <div class="card-notificacao ${classeAtivo}" id="card_${item.idSlackCanal}">
+                        <div class="card-header">
+                            <h3>${item.paramEstado}</h3>
+                            <label class="switch">
+                                <input type="checkbox" ${checkAttribute} 
+                                    onchange="alterarStatus(${item.idSlackCanal}, this.checked)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <p><strong>Demanda:</strong> ${item.paramDemanda}</p>
+                        <p class="canal-info">Canal: ${item.canal}</p>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // 3. FILTRAR LOCALMENTE (Rápido)
+        function filtrarLista() {
+            var estadoBusca = document.getElementById("filtro_estado").value;
+            var demandaBusca = document.getElementById("filtro_demanda").value;
+
+            var listaFiltrada = listaGlobal.filter(item => {
+                var matchEstado = estadoBusca === "" || item.paramEstado === estadoBusca;
+                var matchDemanda = demandaBusca === "" || item.paramDemanda === demandaBusca;
+                return matchEstado && matchDemanda;
+            });
+
+            renderizarCards(listaFiltrada);
+        }
+
+        // 4. ATUALIZAR STATUS NO BANCO
+        function alterarStatus(idCanal, novoCheck) {
+            var novoStatus = novoCheck ? 'Ativo' : 'Inativo';
+            var card = document.getElementById(`card_${idCanal}`);
+
+            fetch(`http://localhost:3333/slack/status/${idCanal}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: novoStatus })
+            })
+            .then(res => {
+                if (res.ok) {
+                    if (novoCheck) {
+                        card.classList.add('ativo');
+                    } else {
+                        card.classList.remove('ativo');
+                    }
+                    // Atualiza a memória local também
+                    var item = listaGlobal.find(i => i.idSlackCanal === idCanal);
+                    if(item) item.status = novoStatus;
+                } else {
+                    alert("Erro ao atualizar!");
+                    // Opcional: Reverter o checkbox visualmente aqui
+                }
+            });
+        }
+    </script>
+</body>
+</html>
