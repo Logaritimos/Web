@@ -133,7 +133,7 @@ function validarFormularioEtapa2() {
   let valido = true;
 
   // CEP
-  if (cep.value.trim().length !== 9) {
+  if (cep.value.trim().length !== 9 || cep.value.trim().length !== 8) {
     cep.classList.add("erro");
     valido = false;
   } else {
